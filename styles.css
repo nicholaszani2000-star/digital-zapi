@@ -252,6 +252,7 @@ h3{font-size:1.22rem;}
   background:radial-gradient(50% 60% at 50% 0%,rgba(199,154,106,.2),transparent 70%);}
 .waitlist>*{position:relative;}
 .waitlist h2{margin-bottom:16px;}
+.wl-accent{color:var(--gold-light);font-style:italic;}
 .waitlist .lead{color:#cfc6bf;}
 .waitlist__form{margin-top:8px;}
 .field{display:flex;gap:10px;max-width:480px;margin:24px auto 0;}
