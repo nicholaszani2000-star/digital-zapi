@@ -114,7 +114,7 @@ Prima di pubblicare, verifica:
 - [ ] **Persona Responsabile UE** compilata (Reg. CE 1223/2009).
 - [ ] **Notifica CPNP** effettuata e numero/riferimento inserito.
 - [ ] **PAO** corretto (default 6M).
-- [ ] Pagine **Privacy**, **Termini**, **Resi** collegate nel footer del tema.
+- [ ] Pagine legali (**Privacy**, **Termini**, **Contatti**) collegate nel footer del tema.
 - [ ] **Prodotto** collegato e **prezzo/variante** corretti.
 - [ ] **Klaviyo** company_id + list_id inseriti e testati (iscrizione reale).
 - [ ] **Test checkout** completo (aggiungi al carrello → checkout → ordine test).

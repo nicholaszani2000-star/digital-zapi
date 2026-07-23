@@ -524,6 +524,7 @@
               {%- when 'ship' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17.5" cy="17" r="1.8"/></svg>
               {%- when 'pay' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
               {%- when 'formula' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+              {%- when 'peptide' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.4"/><circle cx="17" cy="8" r="2.4"/><circle cx="12" cy="16" r="2.4"/><path d="M9 9.4 11 14m4-4.6L13 14"/></svg>
               {%- else -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
             {%- endcase -%}
             <h3>{{ block.settings.title | escape }}</h3>
@@ -734,7 +735,7 @@
 
     { "type": "header", "content": "Barra annuncio" },
     { "type": "checkbox", "id": "show_announcement", "label": "Mostra barra annuncio", "default": true },
-    { "type": "text", "id": "announcement_text", "label": "Testo annuncio", "default": "Reso 30 giorni · Lascia la tua email e ottieni il 15% di benvenuto" },
+    { "type": "text", "id": "announcement_text", "label": "Testo annuncio", "default": "Lascia la tua email e ottieni il 15% di benvenuto · Accesso anticipato al lancio" },
 
     { "type": "header", "content": "Hero" },
     { "type": "text", "id": "hero_eyebrow", "label": "Occhiello", "default": "Siero Rimpolpante Labbra" },
@@ -788,16 +789,16 @@
     { "type": "textarea", "id": "card1_desc", "label": "Card 1 · descrizione", "default": "Un flacone. Il gesto quotidiano per labbra piene, morbide e idratate." },
     { "type": "text", "id": "card1_f1", "label": "Card 1 · voce 1", "default": "1× siero rimpolpante" },
     { "type": "text", "id": "card1_f2", "label": "Card 1 · voce 2", "default": "Peptidi GHK-Cu + Acido Ialuronico" },
-    { "type": "text", "id": "card1_f3", "label": "Card 1 · voce 3", "default": "Reso 30 giorni" },
+    { "type": "text", "id": "card1_f3", "label": "Card 1 · voce 3", "default": "Vegan e cruelty-free" },
     { "type": "text", "id": "card1_cta", "label": "Card 1 · pulsante", "default": "Aggiungi al carrello" },
     { "type": "text", "id": "card2_title", "label": "Card 2 · titolo", "default": "Il Duo" },
     { "type": "textarea", "id": "card2_desc", "label": "Card 2 · descrizione", "default": "Due flaconi: uno per te, uno per la borsa. Non restare mai senza." },
     { "type": "text", "id": "card2_f1", "label": "Card 2 · voce 1", "default": "2× siero rimpolpante" },
     { "type": "text", "id": "card2_f2", "label": "Card 2 · voce 2", "default": "Il formato preferito dalla community" },
-    { "type": "text", "id": "card2_f3", "label": "Card 2 · voce 3", "default": "Reso 30 giorni" },
+    { "type": "text", "id": "card2_f3", "label": "Card 2 · voce 3", "default": "Vegan e cruelty-free" },
     { "type": "text", "id": "card2_cta", "label": "Card 2 · pulsante", "default": "Aggiungi il Duo" },
     { "type": "text", "id": "card2_badge", "label": "Card 2 · badge", "default": "Più scelto" },
-    { "type": "text", "id": "buy_reassure", "label": "Riga rassicurazione", "default": "Reso 30 giorni · Pagamenti sicuri" },
+    { "type": "text", "id": "buy_reassure", "label": "Riga rassicurazione", "default": "Pagamenti sicuri · Vegan · Cruelty-free" },
 
     { "type": "header", "content": "Lista d'attesa (Klaviyo)" },
     { "type": "text", "id": "wl_eyebrow", "label": "Occhiello", "default": "Offerta di lancio" },
@@ -873,10 +874,11 @@
           { "value": "return", "label": "Reso" },
           { "value": "ship", "label": "Spedizione" },
           { "value": "pay", "label": "Pagamenti" },
-          { "value": "formula", "label": "Formula" }
+          { "value": "formula", "label": "Formula" },
+          { "value": "peptide", "label": "Peptidi" }
         ] },
-        { "type": "text", "id": "title", "label": "Titolo", "default": "Reso 30 giorni" },
-        { "type": "text", "id": "text", "label": "Testo", "default": "Cambio idea senza pensieri." }
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Pagamenti sicuri" },
+        { "type": "text", "id": "text", "label": "Testo", "default": "Transazioni crittografate." }
       ]
     },
     {
@@ -901,13 +903,13 @@
         { "type": "step", "settings": { "title": "Applica", "text": "Una piccola quantità sulle labbra, mattina e sera." } },
         { "type": "step", "settings": { "title": "Senti il comfort", "text": "Lascia assorbire: texture leggera, mai appiccicosa." } },
         { "type": "step", "settings": { "title": "Ripeti ogni giorno", "text": "La costanza è il segreto: usalo con regolarità." } },
-        { "type": "guarantee", "settings": { "icon": "return", "title": "Reso 30 giorni", "text": "Cambio idea senza pensieri." } },
+        { "type": "guarantee", "settings": { "icon": "peptide", "title": "Peptidi GHK-Cu", "text": "Copper Tripeptide-1 e Acido Ialuronico." } },
         { "type": "guarantee", "settings": { "icon": "pay", "title": "Pagamenti sicuri", "text": "Transazioni crittografate." } },
-        { "type": "guarantee", "settings": { "icon": "formula", "title": "Formula essenziale", "text": "Vegan, cruelty-free, con peptidi GHK-Cu." } },
+        { "type": "guarantee", "settings": { "icon": "formula", "title": "Vegan & cruelty-free", "text": "Senza test sugli animali." } },
         { "type": "faq", "settings": { "question": "Cosa sono i peptidi GHK-Cu?", "answer": "GHK-Cu (Copper Tripeptide-1) è un peptide di rame molto usato in cosmetica per l'affinità con la pelle. In PLUMPY accompagna un gesto di cura mirato per le labbra." } },
         { "type": "faq", "settings": { "question": "L'effetto è immediato?", "answer": "Comfort e idratazione si percepiscono fin da subito. L'effetto volume, otticamente più pieno, si apprezza al meglio con l'uso costante nel tempo: è un risultato progressivo." } },
         { "type": "faq", "settings": { "question": "È appiccicoso?", "answer": "No. La texture è setosa e a rapido assorbimento, per un finish naturale e piacevole sulle labbra." } },
-        { "type": "faq", "settings": { "question": "Come funziona il reso?", "answer": "Hai 30 giorni di tempo per cambiare idea e richiedere il reso." } }
+        { "type": "faq", "settings": { "question": "La formula è vegana?", "answer": "Sì: PLUMPY è vegano e cruelty-free, formulato con peptidi GHK-Cu (Copper Tripeptide-1) e Acido Ialuronico." } }
       ]
     }
   ]
