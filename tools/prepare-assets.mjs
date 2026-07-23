@@ -29,10 +29,11 @@ const CFG = {
   // Frazione della foto PRIMA/DOPO occupata in basso dalla fascia con le
   // scritte stampate (PRIMA / DOPO / PEPTIDE EFFECT). Va rimossa: la pagina
   // disegna le proprie etichette. Aumenta se resta un residuo di testo.
-  labelBandFrac: 0.11,
+  labelBandFrac: 0.15,
   // Quanto togliere dal bordo INTERNO di ogni metà per eliminare la linea
-  // divisoria bianca centrale (frazione della larghezza di ogni metà).
-  dividerTrimFrac: 0.02,
+  // divisoria bianca centrale e l'emblema "PEPTIDE EFFECT" (frazione della
+  // larghezza di ogni metà).
+  dividerTrimFrac: 0.04,
   // Dimensioni di output
   hero:   { w: 1120, h: 1480 },   // il flacone: fit "inside", niente crop
   split:  { w: 1000, h: 1250 },   // 4:5
@@ -56,8 +57,11 @@ const skip = [];
 async function hero() {
   const p = src('hero');
   if (!p) return skip.push('hero  → manca input/hero.jpg (tengo il placeholder)');
+  // "contain" su tela fissa 1120x1480 con fondo scuro = niente crop del flacone,
+  // dimensioni sempre coerenti con l'HTML (zero layout shift). Il padding è
+  // invisibile: stesso nero della sezione + la mask radiale sfuma i bordi.
   await sharp(p)
-    .resize({ width: CFG.hero.w, height: CFG.hero.h, fit: 'inside', withoutEnlargement: true })
+    .resize({ width: CFG.hero.w, height: CFG.hero.h, fit: 'contain', background: '#0e0b0d' })
     .webp({ quality: CFG.quality })
     .toFile(out('hero.webp'));
   ok.push('hero.webp');
