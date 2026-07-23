@@ -1,0 +1,12 @@
+# dipendenze
+node_modules/
+
+# foto ufficiali (mettile qui, non versionarle finché non decidi)
+input/*
+!input/.gitkeep
+!input/README.md
+
+# sistema
+.DS_Store
+*.log
+npm-debug.log*

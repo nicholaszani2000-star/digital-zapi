@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PLUMPY — Siero Rimpolpante Labbra con Peptidi GHK-Cu</title>
+<meta name="description" content="PLUMPY è il siero rimpolpante labbra con Copper Tripeptide-1 (GHK-Cu) e Acido Ialuronico. Comfort, idratazione ed effetto volume otticamente più pieno. Vegan e cruelty-free.">
+<meta name="theme-color" content="#0E0B0D">
+<link rel="canonical" href="https://plumpy.example/">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PLUMPY">
+<meta property="og:title" content="PLUMPY — Più piene, naturalmente.">
+<meta property="og:description" content="Siero rimpolpante labbra con peptidi GHK-Cu e Acido Ialuronico. Comfort, idratazione ed effetto volume otticamente più pieno.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PLUMPY — Più piene, naturalmente.">
+<meta name="twitter:description" content="Siero rimpolpante labbra con peptidi GHK-Cu e Acido Ialuronico.">
+<meta name="twitter:image" content="assets/og.jpg">
+
+<!-- Favicon -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<!-- SEO strutturato: Product SENZA aggregateRating finché non esistono recensioni reali.
+     Quando conosci prezzo/valuta e disponibilità, aggiungi qui un blocco "offers". -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "PLUMPY — Siero Rimpolpante Labbra",
+  "image": ["assets/hero.webp"],
+  "description": "Siero rimpolpante labbra con Copper Tripeptide-1 (GHK-Cu) e Acido Ialuronico. Comfort, idratazione ed effetto volume otticamente più pieno. Vegan e cruelty-free.",
+  "brand": { "@type": "Brand", "name": "PLUMPY" },
+  "category": "Cosmetici per labbra"
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<!-- 1 · ANNOUNCEMENT BAR ------------------------------------------------- -->
+<div class="announce">
+  <p>Spedizione 24/48h&nbsp;·&nbsp;Reso 30 giorni&nbsp;·&nbsp;Iscriviti per l'offerta di lancio</p>
+</div>
+
+<!-- 2 · HEADER ----------------------------------------------------------- -->
+<header class="header" id="site-header">
+  <div class="header__inner">
+    <a class="wordmark" href="#top" aria-label="PLUMPY — home">PLUMPY</a>
+    <nav class="nav" aria-label="Navigazione principale">
+      <a href="#prodotto">Prodotto</a>
+      <a href="#scienza">La scienza</a>
+      <a href="#lista">Lista d'attesa</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header__actions">
+      <button class="btn btn--sm btn--dark js-cart" type="button">Aggiungi al carrello</button>
+      <button class="nav-toggle" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- menu mobile -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <a href="#prodotto">Prodotto</a>
+    <a href="#scienza">La scienza</a>
+    <a href="#lista">Lista d'attesa</a>
+    <a href="#faq">FAQ</a>
+    <button class="btn btn--dark js-cart" type="button">Aggiungi al carrello</button>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- 3 · HERO ------------------------------------------------------------- -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__copy reveal">
+      <p class="eyebrow eyebrow--gold">Siero Rimpolpante Labbra</p>
+      <h1 class="hero__title" id="hero-title">Più piene,<br><em>naturalmente.</em></h1>
+      <p class="hero__sub">Il siero labbra con <strong>Copper Tripeptide-1 (GHK-Cu)</strong> e <strong>Acido Ialuronico</strong>: comfort, idratazione ed effetto volume otticamente più pieno, giorno dopo giorno.</p>
+      <div class="hero__cta">
+        <button class="btn btn--light js-cart" type="button">Aggiungi al carrello</button>
+        <a class="btn btn--ghost-light" href="#scienza">Scopri la scienza</a>
+      </div>
+      <p class="hero__micro">Vegan&nbsp;·&nbsp;Cruelty-free&nbsp;·&nbsp;Con peptidi GHK-Cu</p>
+    </div>
+    <div class="hero__media">
+      <!-- Foto ufficiale del flacone: mask radiale CSS → si fonde col fondo scuro, nessun bordo netto -->
+      <img class="hero__product" src="assets/hero.webp" width="1120" height="1480"
+           alt="Flacone PLUMPY, siero rimpolpante labbra, con pipetta dorata su fondo nero" fetchpriority="high" decoding="async">
+    </div>
+  </div>
+</section>
+
+<!-- 4 · USP BAR ---------------------------------------------------------- -->
+<section class="usp" aria-label="Punti di forza">
+  <ul class="usp__list">
+    <li class="usp__item reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 3.5 6 6.4 6 9.5A6 6 0 0 1 6 12.5C6 9.4 8.5 6.5 12 3Z"/><path d="M12 21v-3"/></svg>
+      <h3>Volume visibile</h3><p>Labbra otticamente più piene e definite.</p>
+    </li>
+    <li class="usp__item reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6 6 10a6 6 0 1 1-12 0c0-4 6-10 6-10Z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg>
+      <h3>Idrata a fondo</h3><p>Comfort e morbidezza con Acido Ialuronico.</p>
+    </li>
+    <li class="usp__item reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.4"/><circle cx="17" cy="8" r="2.4"/><circle cx="12" cy="16" r="2.4"/><path d="M9 9.4 11 14m4-4.6L13 14"/></svg>
+      <h3>Peptidi GHK-Cu</h3><p>Copper Tripeptide-1, per labbra coccolate.</p>
+    </li>
+    <li class="usp__item reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14c3-1 5-1 8 0s5 1 8 0"/><path d="M4 9c3-1 5-1 8 0s5 1 8 0"/><path d="M4 19c3-1 5-1 8 0s5 1 8 0"/></svg>
+      <h3>Non appiccicoso</h3><p>Texture setosa, finish naturale.</p>
+    </li>
+  </ul>
+</section>
+
+<!-- 5 · PRIMA / DOPO ----------------------------------------------------- -->
+<section class="section ba-section" aria-labelledby="ba-title">
+  <div class="container narrow center">
+    <p class="eyebrow">Il risultato</p>
+    <h2 id="ba-title" class="reveal">Il volume che si vede</h2>
+    <p class="lead reveal">Trascina il cursore per confrontare. L'effetto rimpolpante è progressivo e migliora con l'uso costante.</p>
+  </div>
+  <div class="container narrow">
+    <div class="ba reveal" style="--pos:50" data-ba aria-label="Confronto prima e dopo l'uso del siero">
+      <img class="ba__img" src="assets/after.webp" width="1000" height="1250"
+           alt="Labbra dopo l'uso del siero PLUMPY: più piene, idratate e luminose" loading="lazy" decoding="async">
+      <div class="ba__before" data-ba-before>
+        <img class="ba__img" src="assets/before.webp" width="1000" height="1250"
+             alt="Labbra prima dell'uso del siero PLUMPY" loading="lazy" decoding="async">
+      </div>
+      <span class="ba__tag ba__tag--before" aria-hidden="true">Prima</span>
+      <span class="ba__tag ba__tag--after" aria-hidden="true">Dopo</span>
+      <button class="ba__handle" type="button" data-ba-handle
+              role="slider" aria-label="Trascina per confrontare prima e dopo"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg>
+      </button>
+    </div>
+    <p class="disclaimer reveal">Immagini dimostrative. Risultati individuali variabili.</p>
+  </div>
+</section>
+
+<!-- 6 · LA SCIENZA ------------------------------------------------------- -->
+<section class="section science" id="scienza" aria-labelledby="sci-title">
+  <div class="container center">
+    <p class="eyebrow">La scienza</p>
+    <h2 id="sci-title" class="reveal">Due attivi, un solo obiettivo</h2>
+    <p class="lead reveal">Una formula essenziale, costruita attorno a due protagonisti che lavorano in sinergia sulla superficie delle labbra.</p>
+  </div>
+  <div class="container science__grid">
+    <article class="sci-card reveal">
+      <span class="sci-card__mol" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><circle cx="14" cy="16" r="4"/><circle cx="34" cy="16" r="4"/><circle cx="24" cy="32" r="4"/><path d="M17.5 18 24 28m7-9.5L24 28M18 16h12"/></svg>
+      </span>
+      <h3>Copper Tripeptide-1<span>(GHK-Cu)</span></h3>
+      <p>Un peptide di rame noto in cosmetica per l'affinità con la pelle. Nel siero contribuisce a un gesto di cura mirato, per labbra coccolate, curate e dall'aspetto sano.</p>
+    </article>
+    <article class="sci-card reveal">
+      <span class="sci-card__mol" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><path d="M24 8c8 6 12 11 12 17a12 12 0 1 1-24 0c0-6 4-11 12-17Z"/><path d="M18 27a6 6 0 0 0 6 6"/></svg>
+      </span>
+      <h3>Acido Ialuronico</h3>
+      <p>Umettante d'eccellenza: richiama e trattiene l'acqua negli strati superficiali, per labbra idratate, morbide e visivamente più piene.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 7 · COME SI USA ------------------------------------------------------ -->
+<section class="section howto" aria-labelledby="how-title">
+  <div class="container center">
+    <p class="eyebrow">Il rituale</p>
+    <h2 id="how-title" class="reveal">Come si usa</h2>
+  </div>
+  <div class="container steps">
+    <article class="step reveal">
+      <span class="step__n">1</span>
+      <h3>Applica</h3>
+      <p>Una piccola quantità sulle labbra, mattina e sera.</p>
+    </article>
+    <article class="step reveal">
+      <span class="step__n">2</span>
+      <h3>Senti il comfort</h3>
+      <p>Lascia assorbire: texture leggera, mai appiccicosa.</p>
+    </article>
+    <article class="step reveal">
+      <span class="step__n">3</span>
+      <h3>Ripeti ogni giorno</h3>
+      <p>La costanza è il segreto: usalo con regolarità.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 8 · PRODOTTO --------------------------------------------------------- -->
+<section class="section product" id="prodotto" aria-labelledby="prod-title">
+  <div class="container product__grid">
+    <div class="product__media reveal">
+      <img src="assets/texture.webp" width="1200" height="1200"
+           alt="Texture del siero PLUMPY: gel rosato e luminoso applicato sulla pelle" loading="lazy" decoding="async">
+    </div>
+    <div class="product__copy reveal">
+      <p class="eyebrow">Il prodotto</p>
+      <h2 id="prod-title">Un siero, un gesto</h2>
+      <p class="lead">Una texture setosa che avvolge le labbra e si assorbe in fretta, per un finish naturale e luminoso. Nessun eccesso, solo l'essenziale che serve.</p>
+      <ul class="ticks">
+        <li>Peptidi GHK-Cu (Copper Tripeptide-1)</li>
+        <li>Acido Ialuronico idratante</li>
+        <li>Formula vegana e cruelty-free</li>
+      </ul>
+      <button class="btn btn--dark js-cart" type="button">Aggiungi al carrello</button>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · ACQUISTO --------------------------------------------------------- -->
+<section class="section buy" id="offerta" aria-labelledby="buy-title">
+  <div class="container center">
+    <p class="eyebrow">Scegli il tuo formato</p>
+    <h2 id="buy-title" class="reveal">Porta a casa PLUMPY</h2>
+  </div>
+  <div class="container buy__grid">
+    <article class="buy-card reveal">
+      <h3>Il Siero</h3>
+      <p class="buy-card__desc">Un flacone. Il gesto quotidiano per labbra piene, morbide e idratate.</p>
+      <ul class="ticks">
+        <li>1× siero rimpolpante</li>
+        <li>Peptidi GHK-Cu + Acido Ialuronico</li>
+        <li>Reso 30 giorni</li>
+      </ul>
+      <button class="btn btn--dark btn--block js-cart" type="button">Aggiungi al carrello</button>
+    </article>
+    <article class="buy-card buy-card--featured reveal">
+      <span class="badge">Più scelto</span>
+      <h3>Il Duo</h3>
+      <p class="buy-card__desc">Due flaconi: uno per te, uno per la borsa. Non restare mai senza.</p>
+      <ul class="ticks">
+        <li>2× siero rimpolpante</li>
+        <li>Il formato preferito dalla community</li>
+        <li>Reso 30 giorni</li>
+      </ul>
+      <button class="btn btn--gold btn--block js-cart" type="button">Aggiungi il Duo</button>
+    </article>
+  </div>
+  <p class="buy__reassure reveal">Spedizione 24/48h&nbsp;·&nbsp;Reso 30 giorni&nbsp;·&nbsp;Pagamenti sicuri</p>
+</section>
+
+<!-- 10 · LISTA D'ATTESA -------------------------------------------------- -->
+<section class="section waitlist" id="lista" aria-labelledby="wl-title">
+  <div class="container narrow center">
+    <p class="eyebrow eyebrow--gold">Lista d'attesa</p>
+    <h2 id="wl-title" class="reveal">Entra tra i primi.</h2>
+    <p class="lead reveal">Iscriviti per sbloccare l'offerta di lancio, ricevere l'accesso anticipato ai nuovi prodotti e ai drop esclusivi dei gusti in edizione limitata.</p>
+    <form class="waitlist__form reveal" data-waitlist novalidate>
+      <div class="field">
+        <label class="sr-only" for="wl-email">Indirizzo email</label>
+        <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email"
+               placeholder="La tua email" required aria-describedby="wl-msg">
+        <button class="btn btn--light" type="submit">Avvisami</button>
+      </div>
+      <p class="waitlist__msg" id="wl-msg" role="status" aria-live="polite"></p>
+    </form>
+    <p class="waitlist__privacy">Iscrivendoti accetti di ricevere email di marketing. Puoi disiscriverti quando vuoi.</p>
+  </div>
+</section>
+
+<!-- 11 · RECENSIONI (vuota, pronta) -------------------------------------- -->
+<!--
+  SPAZIO RECENSIONI — collega qui la tua app recensioni di Shopify
+  (es. Judge.me, Loox, Yotpo, Shopify Product Reviews). Incolla lo snippet
+  dell'app dentro il contenitore .reviews__mount. NESSUNA recensione inventata:
+  finché non ci sono recensioni reali e verificate, resta l'empty-state.
+-->
+<section class="section reviews" aria-labelledby="rev-title">
+  <div class="container center">
+    <p class="eyebrow">Recensioni</p>
+    <h2 id="rev-title" class="reveal">La parola alle labbra</h2>
+    <div class="reviews__mount">
+      <div class="reviews__empty reveal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 2.3 4.7 5.2.8-3.8 3.6.9 5.1L12 16l-4.6 2.4.9-5.1L4.5 9.7l5.2-.8L12 4Z"/></svg>
+        <p>Le prime recensioni verificate compariranno qui dopo il lancio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · GARANZIE -------------------------------------------------------- -->
+<section class="section guarantees" aria-label="Garanzie">
+  <div class="container guarantees__grid">
+    <div class="guarantee reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <h3>Reso 30 giorni</h3><p>Cambio idea senza pensieri.</p>
+    </div>
+    <div class="guarantee reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17.5" cy="17" r="1.8"/></svg>
+      <h3>Spedizione 24/48h UE</h3><p>Consegna rapida e tracciata.</p>
+    </div>
+    <div class="guarantee reveal">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <h3>Pagamenti sicuri</h3><p>Transazioni crittografate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · FAQ ------------------------------------------------------------- -->
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="container narrow">
+    <p class="eyebrow center">Domande frequenti</p>
+    <h2 id="faq-title" class="center reveal">FAQ</h2>
+    <div class="faq__list">
+      <details class="faq__item reveal">
+        <summary>Cosa sono i peptidi GHK-Cu?<span class="faq__plus" aria-hidden="true"></span></summary>
+        <div class="faq__body"><p>GHK-Cu (Copper Tripeptide-1) è un peptide di rame molto usato in cosmetica per la sua affinità con la pelle. In PLUMPY accompagna un gesto di cura mirato per le labbra.</p></div>
+      </details>
+      <details class="faq__item reveal">
+        <summary>L'effetto è immediato?<span class="faq__plus" aria-hidden="true"></span></summary>
+        <div class="faq__body"><p>Comfort e idratazione si percepiscono fin da subito. L'effetto volume, otticamente più pieno, si apprezza al meglio con l'uso costante nel tempo: è un risultato progressivo.</p></div>
+      </details>
+      <details class="faq__item reveal">
+        <summary>È appiccicoso?<span class="faq__plus" aria-hidden="true"></span></summary>
+        <div class="faq__body"><p>No. La texture è setosa e a rapido assorbimento, per un finish naturale e piacevole sulle labbra.</p></div>
+      </details>
+      <details class="faq__item reveal">
+        <summary>Come funzionano spedizione e resi?<span class="faq__plus" aria-hidden="true"></span></summary>
+        <div class="faq__body"><p>Spediamo in 24/48h nell'Unione Europea, con tracciamento. Hai 30 giorni di tempo per il reso.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 14 · CTA FINALE ------------------------------------------------------ -->
+<section class="section final-cta" aria-labelledby="final-title">
+  <div class="final-cta__glow" aria-hidden="true"></div>
+  <div class="container narrow center">
+    <h2 id="final-title" class="reveal">Il tuo volume, naturale.</h2>
+    <div class="final-cta__actions reveal">
+      <button class="btn btn--light js-cart" type="button">Aggiungi al carrello</button>
+      <a class="btn btn--ghost-light" href="#lista">Entra nella lista d'attesa</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 15 · FOOTER ---------------------------------------------------------- -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <p class="wordmark wordmark--footer">PLUMPY</p>
+      <p class="footer__tag">Lip Plumping Peptide Serum</p>
+    </div>
+    <div class="footer__col">
+      <h4>Prodotto</h4>
+      <ul>
+        <li><a href="#prodotto">Il siero</a></li>
+        <li><a href="#scienza">La scienza</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#lista">Lista d'attesa</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Assistenza</h4>
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Termini</a></li>
+        <li><a href="#">Resi</a></li>
+      </ul>
+    </div>
+    <div class="footer__col footer__legal">
+      <h4>Informazioni legali</h4>
+      <ul>
+        <li>INCI: <span class="ph">[inserisci la lista ingredienti reale]</span></li>
+        <li>PAO: 6M</li>
+        <li>Persona Responsabile UE: <span class="ph">[placeholder — Reg. CE 1223/2009]</span></li>
+        <li>CPNP: <span class="ph">[placeholder]</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bar">
+    <p>© <span data-year>2026</span> PLUMPY. Tutti i diritti riservati.</p>
+    <p>Vegan&nbsp;·&nbsp;Cruelty-free</p>
+  </div>
+</footer>
+
+<!-- 16 · STICKY MOBILE BAR ----------------------------------------------- -->
+<div class="mobilebar" aria-hidden="false">
+  <div class="mobilebar__info">
+    <strong>PLUMPY</strong>
+    <span>Siero rimpolpante labbra</span>
+  </div>
+  <button class="btn btn--gold btn--sm js-cart" type="button">Aggiungi al carrello</button>
+</div>
+
+<!-- Toast -->
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

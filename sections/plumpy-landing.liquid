@@ -1,0 +1,913 @@
+{%- comment -%}
+  PLUMPY — Siero Rimpolpante Labbra · sezione Shopify Online Store 2.0
+  --------------------------------------------------------------------------
+  · Solo HTML + CSS + JS vanilla. Nessuna dipendenza.
+  · CSS e JS scoped su #plumpy-{{ section.id }} per non collidere col tema.
+  · Immagini: image_picker nel Theme Editor, con fallback ad asset_url
+    (setting testuale col nome del file caricato in "Assets").
+  · Pulsanti: collega un prodotto nel Theme Editor → aggiungono al carrello
+    la prima variante ({{ routes.cart_url }}/{{ variant.id }}:1). Senza
+    prodotto fanno scroll morbido alla sezione acquisto (mai link rotti).
+  · Klaviyo: imposta company_id e list_id nei settings; vengono iniettati nel
+    JS via | json.
+  · SPAZIO RECENSIONI: la sezione "Recensioni" ha un contenitore vuoto pronto
+    per l'app recensioni di Shopify (Judge.me / Loox / Yotpo / Shopify Product
+    Reviews). Incolla lì lo snippet dell'app. NESSUNA recensione inventata.
+{%- endcomment -%}
+
+{%- assign uid = section.id -%}
+{%- assign prod = section.settings.product -%}
+{%- if prod != blank -%}
+  {%- assign variant = prod.selected_or_first_available_variant -%}
+  {%- assign cart_single = routes.cart_url | append: '/' | append: variant.id | append: ':1' -%}
+  {%- assign cart_duo = routes.cart_url | append: '/' | append: variant.id | append: ':2' -%}
+{%- endif -%}
+
+{%- style -%}
+  {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+  {{ section.settings.heading_font | font_modify: 'weight', '400' | font_face: font_display: 'swap' }}
+  {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {{ section.settings.body_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+  {{ section.settings.body_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+
+  #plumpy-{{ uid }}{
+    --ink:#1A1615; --dark:#0E0B0D; --dark-2:#171214; --gold:#B8935A; --gold-light:#D9BC85;
+    --gold-deep:#8A6A38; --white:#fff; --warm:#F6F4F1; --blush:#E7A9C2; --muted:#6E6A67;
+    --line:#EAE3DC; --line-dark:rgba(255,255,255,.14); --radius:16px; --radius-sm:10px;
+    --ease:cubic-bezier(.22,.61,.36,1); --dur:.34s;
+    --font-serif:{{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
+    --font-sans:{{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
+    font-family:var(--font-sans); color:var(--ink); line-height:1.6;
+  }
+  #plumpy-{{ uid }} *,#plumpy-{{ uid }} *::before,#plumpy-{{ uid }} *::after{box-sizing:border-box;}
+  #plumpy-{{ uid }} h1,#plumpy-{{ uid }} h2,#plumpy-{{ uid }} h3,#plumpy-{{ uid }} h4{font-family:var(--font-serif);font-weight:600;line-height:1.14;margin:0;letter-spacing:-.01em;}
+  #plumpy-{{ uid }} p{margin:0;}
+  #plumpy-{{ uid }} img{max-width:100%;height:auto;display:block;}
+  #plumpy-{{ uid }} .pl-wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  #plumpy-{{ uid }} .pl-wrap.narrow{max-width:760px;}
+  #plumpy-{{ uid }} .center{text-align:center;}
+  #plumpy-{{ uid }} .pl-sec{padding:clamp(52px,8vw,104px) 0;}
+  #plumpy-{{ uid }} .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:600;color:var(--gold-deep);margin:0 0 14px;}
+  #plumpy-{{ uid }} .eyebrow.gold{color:var(--gold-light);}
+  #plumpy-{{ uid }} .lead{font-size:clamp(1rem,1.5vw,1.12rem);color:var(--muted);line-height:1.7;max-width:62ch;}
+  #plumpy-{{ uid }} .center .lead{margin-inline:auto;}
+  #plumpy-{{ uid }} h2{font-size:clamp(1.8rem,4.6vw,2.9rem);}
+  #plumpy-{{ uid }} .ico{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+
+  #plumpy-{{ uid }} .reveal{opacity:0;transform:translateY(20px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);}
+  #plumpy-{{ uid }} .reveal.is-visible{opacity:1;transform:none;}
+
+  /* Bottoni */
+  #plumpy-{{ uid }} .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.95rem;
+    padding:15px 28px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;white-space:nowrap;text-decoration:none;
+    transition:transform .18s var(--ease),background .2s,color .2s,border-color .2s,box-shadow .2s;font-family:inherit;}
+  #plumpy-{{ uid }} .btn:hover{transform:translateY(-2px);}
+  #plumpy-{{ uid }} .btn.block{width:100%;}
+  #plumpy-{{ uid }} .btn.sm{padding:11px 20px;font-size:.86rem;}
+  #plumpy-{{ uid }} .btn.dark{background:var(--ink);color:#fff;}
+  #plumpy-{{ uid }} .btn.dark:hover{background:#000;box-shadow:0 12px 24px -12px rgba(0,0,0,.5);}
+  #plumpy-{{ uid }} .btn.light{background:#fff;color:var(--ink);}
+  #plumpy-{{ uid }} .btn.light:hover{background:var(--warm);}
+  #plumpy-{{ uid }} .btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c14;}
+  #plumpy-{{ uid }} .btn.gold:hover{filter:brightness(1.04);box-shadow:0 12px 26px -12px rgba(184,147,90,.7);}
+  #plumpy-{{ uid }} .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5);}
+  #plumpy-{{ uid }} .btn.ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+  #plumpy-{{ uid }} .btn:focus-visible,#plumpy-{{ uid }} a:focus-visible,#plumpy-{{ uid }} input:focus-visible,#plumpy-{{ uid }} summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  /* Announcement */
+  #plumpy-{{ uid }} .pl-announce{background:var(--ink);color:#efe7dd;text-align:center;font-size:.8rem;letter-spacing:.03em;padding:9px 16px;}
+
+  /* Hero */
+  #plumpy-{{ uid }} .pl-hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;isolation:isolate;}
+  #plumpy-{{ uid }} .pl-hero__glow{position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(60% 50% at 72% 30%,rgba(199,154,106,.28),transparent 70%),radial-gradient(50% 40% at 50% 0%,rgba(231,169,194,.12),transparent 70%);}
+  #plumpy-{{ uid }} .pl-hero__inner{max-width:1180px;margin:0 auto;padding:52px 24px 60px;display:grid;gap:16px;align-items:center;}
+  #plumpy-{{ uid }} .pl-hero__title{font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.03;margin:0 0 22px;}
+  #plumpy-{{ uid }} .pl-hero__title em{font-style:italic;color:var(--blush);font-weight:500;}
+  #plumpy-{{ uid }} .pl-hero__sub{font-size:clamp(1rem,1.7vw,1.16rem);color:#d8cfc8;line-height:1.7;max-width:52ch;}
+  #plumpy-{{ uid }} .pl-hero__sub strong{color:#fff;}
+  #plumpy-{{ uid }} .pl-hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 20px;}
+  #plumpy-{{ uid }} .pl-hero__micro{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
+  #plumpy-{{ uid }} .pl-hero__media{display:flex;justify-content:center;}
+  #plumpy-{{ uid }} .plumpy__hero-img{width:100%;max-width:420px;height:auto;
+    -webkit-mask-image:radial-gradient(ellipse 60% 66% at 50% 47%,#000 52%,rgba(0,0,0,0) 82%);
+            mask-image:radial-gradient(ellipse 60% 66% at 50% 47%,#000 52%,rgba(0,0,0,0) 82%);}
+
+  /* USP */
+  #plumpy-{{ uid }} .pl-usp{background:var(--dark);color:#fff;padding:clamp(30px,4vw,44px) 0;border-top:1px solid var(--line-dark);}
+  #plumpy-{{ uid }} .pl-usp__list{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:26px 28px;grid-template-columns:1fr;}
+  #plumpy-{{ uid }} .pl-usp__item{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:start;}
+  #plumpy-{{ uid }} .pl-usp__item .ico{grid-row:span 2;color:var(--gold-light);width:30px;height:30px;}
+  #plumpy-{{ uid }} .pl-usp__item h3{font-family:var(--font-sans);font-size:.98rem;font-weight:600;margin:2px 0 0;}
+  #plumpy-{{ uid }} .pl-usp__item p{color:#b7ada6;font-size:.88rem;line-height:1.5;}
+
+  /* Prima/Dopo */
+  #plumpy-{{ uid }} .pl-ba-sec{background:#fff;}
+  #plumpy-{{ uid }} .pl-ba{position:relative;width:100%;max-width:560px;margin:34px auto 0;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;
+    user-select:none;-webkit-user-select:none;touch-action:pan-y;cursor:ew-resize;background:var(--warm);box-shadow:0 40px 70px -40px rgba(26,22,21,.45);}
+  #plumpy-{{ uid }} .pl-ba__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
+  #plumpy-{{ uid }} .pl-ba__before{position:absolute;inset:0;clip-path:inset(0 calc((100 - var(--pos)) * 1%) 0 0);will-change:clip-path;}
+  #plumpy-{{ uid }} .pl-ba__tag{position:absolute;top:14px;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+    background:rgba(14,11,13,.55);padding:6px 12px;border-radius:999px;}
+  #plumpy-{{ uid }} .pl-ba__tag.before{left:14px;}
+  #plumpy-{{ uid }} .pl-ba__tag.after{right:14px;}
+  #plumpy-{{ uid }} .pl-ba__handle{position:absolute;top:0;bottom:0;left:calc(var(--pos) * 1%);width:46px;transform:translateX(-50%);
+    display:grid;place-items:center;background:none;border:0;cursor:ew-resize;padding:0;}
+  #plumpy-{{ uid }} .pl-ba__handle::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:rgba(255,255,255,.92);box-shadow:0 0 12px rgba(0,0,0,.35);}
+  #plumpy-{{ uid }} .pl-ba__handle svg{position:relative;width:40px;height:40px;padding:9px;background:#fff;border-radius:50%;color:var(--ink);
+    box-shadow:0 4px 14px rgba(0,0,0,.28);stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  #plumpy-{{ uid }} .pl-ba__handle:focus-visible{outline:none;}
+  #plumpy-{{ uid }} .pl-ba__handle:focus-visible svg{outline:3px solid var(--gold);outline-offset:3px;}
+  #plumpy-{{ uid }} .pl-disclaimer{margin:20px auto 0;text-align:center;font-size:.8rem;color:var(--muted);max-width:46ch;}
+
+  /* Scienza */
+  #plumpy-{{ uid }} .pl-science{background:var(--warm);}
+  #plumpy-{{ uid }} .pl-science__grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:40px;}
+  #plumpy-{{ uid }} .pl-sci-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;}
+  #plumpy-{{ uid }} .pl-sci-card__mol{display:inline-flex;color:var(--gold);}
+  #plumpy-{{ uid }} .pl-sci-card__mol svg{width:46px;height:46px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  #plumpy-{{ uid }} .pl-sci-card h3{margin:18px 0 10px;font-size:1.32rem;}
+  #plumpy-{{ uid }} .pl-sci-card h3 span{display:block;font-family:var(--font-sans);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-top:6px;}
+  #plumpy-{{ uid }} .pl-sci-card p{color:var(--muted);line-height:1.72;}
+
+  /* Come si usa */
+  #plumpy-{{ uid }} .pl-howto{background:#fff;}
+  #plumpy-{{ uid }} .pl-steps{display:grid;gap:26px;grid-template-columns:1fr;margin-top:42px;}
+  #plumpy-{{ uid }} .pl-step__n{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;
+    border:1.5px solid var(--gold);color:var(--gold-deep);font-family:var(--font-serif);font-size:1.4rem;font-weight:600;margin-bottom:16px;}
+  #plumpy-{{ uid }} .pl-step h3{margin-bottom:8px;font-size:1.16rem;}
+  #plumpy-{{ uid }} .pl-step p{color:var(--muted);}
+
+  /* Prodotto */
+  #plumpy-{{ uid }} .pl-product{background:var(--warm);}
+  #plumpy-{{ uid }} .pl-product__grid{display:grid;gap:34px;grid-template-columns:1fr;align-items:center;}
+  #plumpy-{{ uid }} .pl-product__media img,#plumpy-{{ uid }} .pl-product__media .plumpy__img-ph{width:100%;border-radius:var(--radius);box-shadow:0 40px 70px -44px rgba(26,22,21,.4);}
+  #plumpy-{{ uid }} .pl-product__copy h2{margin:6px 0 18px;}
+  #plumpy-{{ uid }} .pl-ticks{display:grid;gap:12px;margin:22px 0 30px;}
+  #plumpy-{{ uid }} .pl-ticks li{position:relative;padding-left:30px;font-size:.98rem;list-style:none;}
+  #plumpy-{{ uid }} .pl-ticks li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:var(--gold);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat;}
+
+  /* Acquisto */
+  #plumpy-{{ uid }} .pl-buy{background:#fff;}
+  #plumpy-{{ uid }} .pl-buy__grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:42px;max-width:820px;margin-inline:auto;}
+  #plumpy-{{ uid }} .pl-buy-card{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;}
+  #plumpy-{{ uid }} .pl-buy-card.featured{border-color:var(--gold);box-shadow:0 30px 60px -40px rgba(184,147,90,.5);}
+  #plumpy-{{ uid }} .pl-buy-card h3{font-size:1.5rem;margin-bottom:8px;}
+  #plumpy-{{ uid }} .pl-buy-card__desc{color:var(--muted);margin-bottom:6px;}
+  #plumpy-{{ uid }} .pl-buy-card .pl-ticks{margin:18px 0 26px;}
+  #plumpy-{{ uid }} .pl-buy-card .btn{margin-top:auto;}
+  #plumpy-{{ uid }} .pl-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-light),var(--gold));
+    color:#3a2c14;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:999px;white-space:nowrap;}
+  #plumpy-{{ uid }} .pl-buy__reassure{text-align:center;margin-top:26px;font-size:.85rem;color:var(--muted);}
+
+  /* Lista d'attesa */
+  #plumpy-{{ uid }} .pl-waitlist{background:var(--dark);color:#fff;position:relative;overflow:hidden;}
+  #plumpy-{{ uid }} .pl-waitlist::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 60% at 50% 0%,rgba(199,154,106,.2),transparent 70%);}
+  #plumpy-{{ uid }} .pl-waitlist>*{position:relative;}
+  #plumpy-{{ uid }} .pl-waitlist h2{margin-bottom:16px;}
+  #plumpy-{{ uid }} .pl-waitlist .lead{color:#cfc6bf;}
+  #plumpy-{{ uid }} .pl-field{display:flex;gap:10px;max-width:480px;margin:24px auto 0;}
+  #plumpy-{{ uid }} .pl-field input{flex:1;min-width:0;padding:15px 18px;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07);color:#fff;font-size:1rem;font-family:inherit;}
+  #plumpy-{{ uid }} .pl-field input::placeholder{color:#aaa19a;}
+  #plumpy-{{ uid }} .pl-wl-msg{min-height:1.3em;margin-top:14px;font-size:.9rem;text-align:center;}
+  #plumpy-{{ uid }} .pl-wl-msg.ok{color:var(--gold-light);}
+  #plumpy-{{ uid }} .pl-wl-msg.err{color:#f2b8b8;}
+  #plumpy-{{ uid }} .pl-wl-privacy{margin-top:18px;text-align:center;font-size:.76rem;color:#8f8880;}
+
+  /* Recensioni */
+  #plumpy-{{ uid }} .pl-reviews{background:var(--warm);}
+  #plumpy-{{ uid }} .pl-reviews__mount{margin-top:36px;}
+  #plumpy-{{ uid }} .pl-reviews__empty{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:48px 28px;border:1px dashed var(--line);border-radius:var(--radius);background:#fff;max-width:560px;margin:0 auto;}
+  #plumpy-{{ uid }} .pl-reviews__empty svg{width:40px;height:40px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linejoin:round;}
+  #plumpy-{{ uid }} .pl-reviews__empty p{color:var(--muted);max-width:34ch;}
+
+  /* Garanzie */
+  #plumpy-{{ uid }} .pl-guarantees{background:#fff;}
+  #plumpy-{{ uid }} .pl-guar__grid{display:grid;gap:26px;grid-template-columns:1fr;text-align:center;}
+  #plumpy-{{ uid }} .pl-guar .ico{color:var(--gold);width:34px;height:34px;margin:0 auto 12px;}
+  #plumpy-{{ uid }} .pl-guar h3{font-family:var(--font-sans);font-size:1rem;font-weight:600;margin-bottom:6px;}
+  #plumpy-{{ uid }} .pl-guar p{color:var(--muted);font-size:.9rem;}
+
+  /* FAQ */
+  #plumpy-{{ uid }} .pl-faq{background:var(--warm);}
+  #plumpy-{{ uid }} .pl-faq h2{margin-bottom:34px;}
+  #plumpy-{{ uid }} .pl-faq__list{display:grid;gap:14px;}
+  #plumpy-{{ uid }} .pl-faq__item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;}
+  #plumpy-{{ uid }} .pl-faq__item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-family:var(--font-serif);font-size:1.08rem;font-weight:500;}
+  #plumpy-{{ uid }} .pl-faq__item summary::-webkit-details-marker{display:none;}
+  #plumpy-{{ uid }} .pl-plus{position:relative;flex:0 0 18px;width:18px;height:18px;}
+  #plumpy-{{ uid }} .pl-plus::before,#plumpy-{{ uid }} .pl-plus::after{content:"";position:absolute;background:var(--gold);border-radius:2px;transition:transform .25s var(--ease),opacity .25s;}
+  #plumpy-{{ uid }} .pl-plus::before{top:8px;left:0;width:18px;height:2px;}
+  #plumpy-{{ uid }} .pl-plus::after{left:8px;top:0;width:2px;height:18px;}
+  #plumpy-{{ uid }} .pl-faq__item[open] .pl-plus::after{transform:rotate(90deg);opacity:0;}
+  #plumpy-{{ uid }} .pl-faq__body{padding:0 22px 22px;color:var(--muted);line-height:1.7;}
+
+  /* CTA finale */
+  #plumpy-{{ uid }} .pl-final{position:relative;background:var(--dark);color:#fff;overflow:hidden;padding:clamp(64px,10vw,120px) 0;}
+  #plumpy-{{ uid }} .pl-final__glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 70% at 50% 40%,rgba(231,169,194,.16),transparent 70%),radial-gradient(60% 60% at 50% 120%,rgba(199,154,106,.24),transparent 70%);}
+  #plumpy-{{ uid }} .pl-final .pl-wrap{position:relative;}
+  #plumpy-{{ uid }} .pl-final h2{font-size:clamp(2rem,6vw,3.4rem);margin-bottom:30px;}
+  #plumpy-{{ uid }} .pl-final__actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+  /* Footer legale */
+  #plumpy-{{ uid }} .pl-legal{background:var(--dark-2);color:#a49b93;padding:44px 0;font-size:.84rem;}
+  #plumpy-{{ uid }} .pl-legal__grid{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:10px;}
+  #plumpy-{{ uid }} .pl-legal strong{color:#d9d0c8;font-weight:600;}
+  #plumpy-{{ uid }} .pl-legal .ph{color:#7d756e;font-style:italic;}
+
+  /* Sticky mobile */
+  #plumpy-{{ uid }} .pl-mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;gap:14px;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));background:rgba(255,255,255,.95);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line);box-shadow:0 -6px 24px -14px rgba(0,0,0,.3);}
+  #plumpy-{{ uid }} .pl-mobilebar__info{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+  #plumpy-{{ uid }} .pl-mobilebar__info strong{font-family:var(--font-serif);letter-spacing:.16em;font-size:.95rem;}
+  #plumpy-{{ uid }} .pl-mobilebar__info span{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #plumpy-{{ uid }} .pl-mobilebar .btn{margin-left:auto;flex:0 0 auto;}
+
+  /* Toast */
+  #plumpy-{{ uid }} .pl-toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(16px);z-index:80;background:var(--ink);color:#fff;
+    font-size:.9rem;padding:13px 20px;border-radius:999px;box-shadow:0 16px 34px -14px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s var(--ease);max-width:88vw;text-align:center;}
+  #plumpy-{{ uid }} .pl-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (prefers-reduced-motion:reduce){
+    #plumpy-{{ uid }} .reveal{opacity:1;transform:none;transition:none;}
+  }
+  @media (min-width:560px){
+    #plumpy-{{ uid }} .pl-usp__list{grid-template-columns:1fr 1fr;}
+    #plumpy-{{ uid }} .pl-guar__grid{grid-template-columns:repeat(3,1fr);}
+    #plumpy-{{ uid }} .pl-steps{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (min-width:768px){
+    #plumpy-{{ uid }} .pl-science__grid{grid-template-columns:1fr 1fr;}
+    #plumpy-{{ uid }} .pl-buy__grid{grid-template-columns:1fr 1fr;}
+    #plumpy-{{ uid }} .pl-legal__grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:767.98px){
+    #plumpy-{{ uid }} .pl-mobilebar{display:flex;}
+  }
+  @media (min-width:920px){
+    #plumpy-{{ uid }} .pl-usp__list{grid-template-columns:repeat(4,1fr);}
+    #plumpy-{{ uid }} .pl-hero__inner{grid-template-columns:1.05fr .95fr;gap:40px;padding:64px 24px 76px;}
+    #plumpy-{{ uid }} .pl-hero__media{order:2;}
+    #plumpy-{{ uid }} .pl-product__grid{grid-template-columns:1fr 1fr;gap:56px;}
+    #plumpy-{{ uid }} .pl-product__media{order:-1;}
+  }
+  @media (max-width:440px){
+    #plumpy-{{ uid }} .pl-field{flex-direction:column;}
+    #plumpy-{{ uid }} .pl-field .btn{width:100%;}
+    #plumpy-{{ uid }} .pl-hero__cta .btn{width:100%;}
+  }
+{%- endstyle -%}
+
+<div id="plumpy-{{ uid }}" class="plumpy" data-plumpy-root>
+
+  <script type="application/json" data-plumpy-config>
+    {
+      "klaviyo": {
+        "companyId": {{ section.settings.klaviyo_company_id | json }},
+        "listId": {{ section.settings.klaviyo_list_id | json }},
+        "revision": "2024-10-15"
+      },
+      "hasProduct": {% if prod != blank %}true{% else %}false{% endif %}
+    }
+  </script>
+
+  {%- if section.settings.show_announcement and section.settings.announcement_text != blank -%}
+    <div class="pl-announce">{{ section.settings.announcement_text | escape }}</div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <section class="pl-hero">
+    <div class="pl-hero__glow" aria-hidden="true"></div>
+    <div class="pl-hero__inner">
+      <div class="pl-hero__copy reveal">
+        {%- if section.settings.hero_eyebrow != blank -%}<p class="eyebrow gold">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
+        <h1 class="pl-hero__title">{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_em != blank %}<br><em>{{ section.settings.hero_title_em | escape }}</em>{% endif %}</h1>
+        <div class="pl-hero__sub">{{ section.settings.hero_subtitle }}</div>
+        <div class="pl-hero__cta">
+          {%- if prod != blank -%}
+            <a class="btn light" href="{{ cart_single }}">{{ section.settings.hero_cta_label | escape }}</a>
+          {%- else -%}
+            <button class="btn light" type="button" data-plumpy-scroll>{{ section.settings.hero_cta_label | escape }}</button>
+          {%- endif -%}
+          {%- if section.settings.hero_secondary_label != blank -%}
+            <button class="btn ghost" type="button" data-plumpy-scroll>{{ section.settings.hero_secondary_label | escape }}</button>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.hero_micro != blank -%}<p class="pl-hero__micro">{{ section.settings.hero_micro | escape }}</p>{%- endif -%}
+      </div>
+      <div class="pl-hero__media reveal">
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 1120 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'plumpy__hero-img', alt: section.settings.hero_image_alt, widths: '360,440,620,880,1120' }}
+        {%- elsif section.settings.hero_image_asset != blank -%}
+          <img class="plumpy__hero-img" src="{{ section.settings.hero_image_asset | asset_url }}" width="1120" height="1480" loading="eager" fetchpriority="high" alt="{{ section.settings.hero_image_alt | escape }}">
+        {%- else -%}
+          <div class="plumpy__hero-img" style="aspect-ratio:1120/1480;background:radial-gradient(circle at 50% 30%,#2a2320,#0E0B0D);" role="img" aria-label="{{ section.settings.hero_image_alt | escape }}"></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- USP (blocchi) ---------- {%- endcomment -%}
+  {%- assign usp_blocks = section.blocks | where: 'type', 'usp' -%}
+  {%- if usp_blocks.size > 0 -%}
+    <section class="pl-usp">
+      <ul class="pl-usp__list">
+        {%- for block in usp_blocks -%}
+          <li class="pl-usp__item reveal" {{ block.shopify_attributes }}>
+            {%- case block.settings.icon -%}
+              {%- when 'volume' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 3.5 6 6.4 6 9.5A6 6 0 0 1 6 12.5C6 9.4 8.5 6.5 12 3Z"/><path d="M12 21v-3"/></svg>
+              {%- when 'hydra' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6 6 10a6 6 0 1 1-12 0c0-4 6-10 6-10Z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg>
+              {%- when 'peptide' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.4"/><circle cx="17" cy="8" r="2.4"/><circle cx="12" cy="16" r="2.4"/><path d="M9 9.4 11 14m4-4.6L13 14"/></svg>
+              {%- else -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14c3-1 5-1 8 0s5 1 8 0"/><path d="M4 9c3-1 5-1 8 0s5 1 8 0"/><path d="M4 19c3-1 5-1 8 0s5 1 8 0"/></svg>
+            {%- endcase -%}
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- PRIMA / DOPO ---------- {%- endcomment -%}
+  <section class="pl-sec pl-ba-sec">
+    <div class="pl-wrap narrow center">
+      {%- if section.settings.ba_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.ba_eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="reveal">{{ section.settings.ba_title | escape }}</h2>
+      {%- if section.settings.ba_lead != blank -%}<p class="lead reveal">{{ section.settings.ba_lead | escape }}</p>{%- endif -%}
+    </div>
+    <div class="pl-wrap narrow">
+      <div class="pl-ba reveal" style="--pos:50" data-plumpy-ba aria-label="Confronto prima e dopo l'uso del siero">
+        {%- if section.settings.ba_after_image != blank -%}
+          {{ section.settings.ba_after_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'pl-ba__img', alt: section.settings.ba_after_label, widths: '500,760,1000' }}
+        {%- elsif section.settings.ba_after_asset != blank -%}
+          <img class="pl-ba__img" src="{{ section.settings.ba_after_asset | asset_url }}" width="1000" height="1250" loading="lazy" alt="Dopo l'uso del siero PLUMPY">
+        {%- else -%}
+          <div class="pl-ba__img" style="background:linear-gradient(#e79ec0,#d67ea4);" aria-hidden="true"></div>
+        {%- endif -%}
+        <div class="pl-ba__before" data-plumpy-ba-before>
+          {%- if section.settings.ba_before_image != blank -%}
+            {{ section.settings.ba_before_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'pl-ba__img', alt: section.settings.ba_before_label, widths: '500,760,1000' }}
+          {%- elsif section.settings.ba_before_asset != blank -%}
+            <img class="pl-ba__img" src="{{ section.settings.ba_before_asset | asset_url }}" width="1000" height="1250" loading="lazy" alt="Prima dell'uso del siero PLUMPY">
+          {%- else -%}
+            <div class="pl-ba__img" style="background:linear-gradient(#e8cdbc,#d9b19c);" aria-hidden="true"></div>
+          {%- endif -%}
+        </div>
+        <span class="pl-ba__tag before" aria-hidden="true">{{ section.settings.ba_before_label | escape }}</span>
+        <span class="pl-ba__tag after" aria-hidden="true">{{ section.settings.ba_after_label | escape }}</span>
+        <button class="pl-ba__handle" type="button" data-plumpy-ba-handle role="slider"
+                aria-label="Trascina per confrontare prima e dopo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg>
+        </button>
+      </div>
+      {%- if section.settings.ba_disclaimer != blank -%}<p class="pl-disclaimer reveal">{{ section.settings.ba_disclaimer | escape }}</p>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- LA SCIENZA (blocchi) ---------- {%- endcomment -%}
+  {%- assign sci_blocks = section.blocks | where: 'type', 'science' -%}
+  <section class="pl-sec pl-science">
+    <div class="pl-wrap center">
+      {%- if section.settings.science_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.science_eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="reveal">{{ section.settings.science_title | escape }}</h2>
+      {%- if section.settings.science_lead != blank -%}<p class="lead reveal">{{ section.settings.science_lead | escape }}</p>{%- endif -%}
+    </div>
+    <div class="pl-wrap pl-science__grid">
+      {%- for block in sci_blocks -%}
+        <article class="pl-sci-card reveal" {{ block.shopify_attributes }}>
+          <span class="pl-sci-card__mol" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="14" cy="16" r="4"/><circle cx="34" cy="16" r="4"/><circle cx="24" cy="32" r="4"/><path d="M17.5 18 24 28m7-9.5L24 28M18 16h12"/></svg></span>
+          <h3>{{ block.settings.title | escape }}{% if block.settings.subtitle != blank %}<span>{{ block.settings.subtitle | escape }}</span>{% endif %}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- COME SI USA (blocchi step) ---------- {%- endcomment -%}
+  {%- assign step_blocks = section.blocks | where: 'type', 'step' -%}
+  {%- if step_blocks.size > 0 -%}
+    <section class="pl-sec pl-howto">
+      <div class="pl-wrap center">
+        {%- if section.settings.howto_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.howto_eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="reveal">{{ section.settings.howto_title | escape }}</h2>
+      </div>
+      <div class="pl-wrap pl-steps">
+        {%- for block in step_blocks -%}
+          <article class="pl-step reveal" {{ block.shopify_attributes }}>
+            <span class="pl-step__n">{{ forloop.index }}</span>
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- PRODOTTO ---------- {%- endcomment -%}
+  <section class="pl-sec pl-product" id="plumpy-prodotto-{{ uid }}">
+    <div class="pl-wrap pl-product__grid">
+      <div class="pl-product__media reveal">
+        {%- if section.settings.product_image != blank -%}
+          {{ section.settings.product_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.product_image_alt, widths: '500,760,1000,1200' }}
+        {%- elsif section.settings.product_asset != blank -%}
+          <img src="{{ section.settings.product_asset | asset_url }}" width="1200" height="1200" loading="lazy" alt="{{ section.settings.product_image_alt | escape }}">
+        {%- else -%}
+          <div class="plumpy__img-ph" style="aspect-ratio:1/1;background:linear-gradient(135deg,#efdccf,#e3c4b2);" role="img" aria-label="{{ section.settings.product_image_alt | escape }}"></div>
+        {%- endif -%}
+      </div>
+      <div class="pl-product__copy reveal">
+        {%- if section.settings.product_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.product_eyebrow | escape }}</p>{%- endif -%}
+        <h2>{{ section.settings.product_title | escape }}</h2>
+        <div class="lead">{{ section.settings.product_lead }}</div>
+        <ul class="pl-ticks">
+          {%- if section.settings.product_b1 != blank -%}<li>{{ section.settings.product_b1 | escape }}</li>{%- endif -%}
+          {%- if section.settings.product_b2 != blank -%}<li>{{ section.settings.product_b2 | escape }}</li>{%- endif -%}
+          {%- if section.settings.product_b3 != blank -%}<li>{{ section.settings.product_b3 | escape }}</li>{%- endif -%}
+        </ul>
+        {%- if prod != blank -%}
+          <a class="btn dark" href="{{ cart_single }}">{{ section.settings.product_cta_label | escape }}</a>
+        {%- else -%}
+          <button class="btn dark" type="button" data-plumpy-scroll>{{ section.settings.product_cta_label | escape }}</button>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- ACQUISTO ---------- {%- endcomment -%}
+  <section class="pl-sec pl-buy" data-plumpy-buy id="plumpy-offerta-{{ uid }}">
+    <div class="pl-wrap center">
+      {%- if section.settings.buy_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.buy_eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="reveal">{{ section.settings.buy_title | escape }}</h2>
+    </div>
+    <div class="pl-wrap pl-buy__grid">
+      <article class="pl-buy-card reveal">
+        <h3>{{ section.settings.card1_title | escape }}</h3>
+        <p class="pl-buy-card__desc">{{ section.settings.card1_desc | escape }}</p>
+        <ul class="pl-ticks">
+          {%- if section.settings.card1_f1 != blank -%}<li>{{ section.settings.card1_f1 | escape }}</li>{%- endif -%}
+          {%- if section.settings.card1_f2 != blank -%}<li>{{ section.settings.card1_f2 | escape }}</li>{%- endif -%}
+          {%- if section.settings.card1_f3 != blank -%}<li>{{ section.settings.card1_f3 | escape }}</li>{%- endif -%}
+        </ul>
+        {%- if prod != blank -%}
+          <a class="btn dark block" href="{{ cart_single }}">{{ section.settings.card1_cta | escape }}</a>
+        {%- else -%}
+          <button class="btn dark block" type="button" data-plumpy-scroll>{{ section.settings.card1_cta | escape }}</button>
+        {%- endif -%}
+      </article>
+      <article class="pl-buy-card featured reveal">
+        {%- if section.settings.card2_badge != blank -%}<span class="pl-badge">{{ section.settings.card2_badge | escape }}</span>{%- endif -%}
+        <h3>{{ section.settings.card2_title | escape }}</h3>
+        <p class="pl-buy-card__desc">{{ section.settings.card2_desc | escape }}</p>
+        <ul class="pl-ticks">
+          {%- if section.settings.card2_f1 != blank -%}<li>{{ section.settings.card2_f1 | escape }}</li>{%- endif -%}
+          {%- if section.settings.card2_f2 != blank -%}<li>{{ section.settings.card2_f2 | escape }}</li>{%- endif -%}
+          {%- if section.settings.card2_f3 != blank -%}<li>{{ section.settings.card2_f3 | escape }}</li>{%- endif -%}
+        </ul>
+        {%- if prod != blank -%}
+          <a class="btn gold block" href="{{ cart_duo }}">{{ section.settings.card2_cta | escape }}</a>
+        {%- else -%}
+          <button class="btn gold block" type="button" data-plumpy-scroll>{{ section.settings.card2_cta | escape }}</button>
+        {%- endif -%}
+      </article>
+    </div>
+    {%- if section.settings.buy_reassure != blank -%}<p class="pl-buy__reassure reveal">{{ section.settings.buy_reassure | escape }}</p>{%- endif -%}
+  </section>
+
+  {%- comment -%} ---------- LISTA D'ATTESA (Klaviyo) ---------- {%- endcomment -%}
+  <section class="pl-sec pl-waitlist">
+    <div class="pl-wrap narrow center">
+      {%- if section.settings.wl_eyebrow != blank -%}<p class="eyebrow gold">{{ section.settings.wl_eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="reveal">{{ section.settings.wl_title | escape }}</h2>
+      {%- if section.settings.wl_text != blank -%}<p class="lead reveal">{{ section.settings.wl_text | escape }}</p>{%- endif -%}
+      <form class="reveal" data-plumpy-waitlist novalidate>
+        <div class="pl-field">
+          <label class="pl-sr-only" for="plumpy-wl-{{ uid }}" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Indirizzo email</label>
+          <input id="plumpy-wl-{{ uid }}" name="email" type="email" inputmode="email" autocomplete="email" placeholder="La tua email" required>
+          <button class="btn light" type="submit">{{ section.settings.wl_button | escape }}</button>
+        </div>
+        <p class="pl-wl-msg" role="status" aria-live="polite"></p>
+      </form>
+      {%- if section.settings.wl_privacy != blank -%}<p class="pl-wl-privacy">{{ section.settings.wl_privacy | escape }}</p>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%}
+    ---------- RECENSIONI ----------
+    Incolla qui, dentro .pl-reviews__mount, lo snippet della tua app recensioni
+    (Judge.me / Loox / Yotpo / Shopify Product Reviews). Finché non ci sono
+    recensioni reali, resta l'empty-state. NESSUNA recensione inventata.
+  {%- endcomment -%}
+  <section class="pl-sec pl-reviews">
+    <div class="pl-wrap center">
+      {%- if section.settings.reviews_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.reviews_eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="reveal">{{ section.settings.reviews_title | escape }}</h2>
+      <div class="pl-reviews__mount">
+        <div class="pl-reviews__empty reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 2.3 4.7 5.2.8-3.8 3.6.9 5.1L12 16l-4.6 2.4.9-5.1L4.5 9.7l5.2-.8L12 4Z"/></svg>
+          <p>{{ section.settings.reviews_empty | escape }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- GARANZIE (blocchi) ---------- {%- endcomment -%}
+  {%- assign guar_blocks = section.blocks | where: 'type', 'guarantee' -%}
+  {%- if guar_blocks.size > 0 -%}
+    <section class="pl-sec pl-guarantees">
+      <div class="pl-wrap pl-guar__grid">
+        {%- for block in guar_blocks -%}
+          <div class="pl-guar reveal" {{ block.shopify_attributes }}>
+            {%- case block.settings.icon -%}
+              {%- when 'ship' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17.5" cy="17" r="1.8"/></svg>
+              {%- when 'pay' -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              {%- else -%}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            {%- endcase -%}
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FAQ (blocchi) ---------- {%- endcomment -%}
+  {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+  {%- if faq_blocks.size > 0 -%}
+    <section class="pl-sec pl-faq">
+      <div class="pl-wrap narrow">
+        {%- if section.settings.faq_eyebrow != blank -%}<p class="eyebrow center">{{ section.settings.faq_eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="center reveal">{{ section.settings.faq_title | escape }}</h2>
+        <div class="pl-faq__list">
+          {%- for block in faq_blocks -%}
+            <details class="pl-faq__item reveal" {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.question | escape }}<span class="pl-plus" aria-hidden="true"></span></summary>
+              <div class="pl-faq__body"><p>{{ block.settings.answer | escape }}</p></div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CTA FINALE ---------- {%- endcomment -%}
+  <section class="pl-final">
+    <div class="pl-final__glow" aria-hidden="true"></div>
+    <div class="pl-wrap narrow center">
+      <h2 class="reveal">{{ section.settings.final_title | escape }}</h2>
+      <div class="pl-final__actions reveal">
+        {%- if prod != blank -%}
+          <a class="btn light" href="{{ cart_single }}">{{ section.settings.final_cta_label | escape }}</a>
+        {%- else -%}
+          <button class="btn light" type="button" data-plumpy-scroll>{{ section.settings.final_cta_label | escape }}</button>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FOOTER LEGALE ---------- {%- endcomment -%}
+  <section class="pl-legal">
+    <div class="pl-legal__grid">
+      {%- if section.settings.footer_tagline != blank -%}<p><strong>PLUMPY</strong> — {{ section.settings.footer_tagline | escape }}</p>{%- endif -%}
+      {%- if section.settings.footer_inci != blank -%}<p><strong>INCI:</strong> {{ section.settings.footer_inci | escape }}</p>{%- endif -%}
+      <p><strong>PAO:</strong> {{ section.settings.footer_pao | escape }}</p>
+      {%- if section.settings.footer_responsible != blank -%}<p><strong>Persona Responsabile UE:</strong> <span class="ph">{{ section.settings.footer_responsible | escape }}</span> — Reg. CE 1223/2009</p>{%- endif -%}
+      {%- if section.settings.footer_cpnp != blank -%}<p><strong>CPNP:</strong> <span class="ph">{{ section.settings.footer_cpnp | escape }}</span></p>{%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} ---------- STICKY MOBILE ---------- {%- endcomment -%}
+  <div class="pl-mobilebar">
+    <div class="pl-mobilebar__info">
+      <strong>{{ section.settings.sticky_title | escape }}</strong>
+      <span>{{ section.settings.sticky_sub | escape }}</span>
+    </div>
+    {%- if prod != blank -%}
+      <a class="btn gold sm" href="{{ cart_single }}">{{ section.settings.sticky_cta | escape }}</a>
+    {%- else -%}
+      <button class="btn gold sm" type="button" data-plumpy-scroll>{{ section.settings.sticky_cta | escape }}</button>
+    {%- endif -%}
+  </div>
+
+  <div class="pl-toast" role="status" aria-live="polite" data-plumpy-toast></div>
+</div>
+
+{%- comment -%} ---------- JS (vanilla, scoped per istanza) ---------- {%- endcomment -%}
+{%- javascript -%}
+  (function () {
+    var roots = document.querySelectorAll('[data-plumpy-root]');
+    roots.forEach(function (root) {
+      if (root.dataset.plumpyReady) return;
+      root.dataset.plumpyReady = '1';
+
+      var cfg = {};
+      try { cfg = JSON.parse(root.querySelector('[data-plumpy-config]').textContent); } catch (e) {}
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var q = function (s) { return root.querySelector(s); };
+      var qa = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+
+      /* Reveal */
+      var reveals = qa('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('is-visible'); });
+      } else {
+        var seen = new Map();
+        reveals.forEach(function (el) {
+          var p = el.parentElement, i = seen.get(p) || 0;
+          if (i) el.style.transitionDelay = (Math.min(i, 6) * 70) + 'ms';
+          seen.set(p, i + 1);
+        });
+        var io = new IntersectionObserver(function (ents, ob) {
+          ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-visible'); ob.unobserve(en.target); } });
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el) { io.observe(el); });
+      }
+
+      /* Slider prima/dopo */
+      var ba = q('[data-plumpy-ba]');
+      if (ba) {
+        var handle = q('[data-plumpy-ba-handle]');
+        var dragging = false;
+        var setPos = function (pct) {
+          var p = Math.max(0, Math.min(100, pct));
+          ba.style.setProperty('--pos', p);
+          handle.setAttribute('aria-valuenow', Math.round(p));
+        };
+        var fromEvent = function (e) {
+          var rect = ba.getBoundingClientRect();
+          var cx = e.touches ? e.touches[0].clientX : e.clientX;
+          setPos(((cx - rect.left) / rect.width) * 100);
+        };
+        ba.addEventListener('pointerdown', function (e) { dragging = true; if (ba.setPointerCapture) ba.setPointerCapture(e.pointerId); fromEvent(e); });
+        ba.addEventListener('pointermove', function (e) { if (dragging) { fromEvent(e); e.preventDefault(); } });
+        window.addEventListener('pointerup', function () { dragging = false; });
+        ba.addEventListener('click', function (e) { if (e.target !== handle && !handle.contains(e.target)) fromEvent(e); });
+        handle.addEventListener('keydown', function (e) {
+          var cur = parseFloat(ba.style.getPropertyValue('--pos')) || 50;
+          var step = e.shiftKey ? 10 : 2;
+          var map = { ArrowLeft: -step, ArrowRight: step, ArrowDown: -step, ArrowUp: step, Home: -100, End: 100 };
+          if (e.key in map) { e.preventDefault(); setPos(cur + map[e.key]); }
+        });
+      }
+
+      /* Toast */
+      var toastEl = q('[data-plumpy-toast]'), toastT;
+      var toast = function (msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        clearTimeout(toastT);
+        toastT = setTimeout(function () { toastEl.classList.remove('show'); }, 4200);
+      };
+
+      /* Scroll fallback (senza prodotto collegato) */
+      qa('[data-plumpy-scroll]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var target = q('[data-plumpy-buy]');
+          if (target) target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          if (!cfg.hasProduct) toast('Collega un prodotto nel Theme Editor per attivare il carrello.');
+        });
+      });
+
+      /* Form Klaviyo */
+      var form = q('[data-plumpy-waitlist]');
+      if (form) {
+        var input = form.querySelector('input[type="email"]');
+        var msg = form.querySelector('.pl-wl-msg');
+        var btn = form.querySelector('button[type="submit"]');
+        var emailOK = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); };
+        var say = function (t, ok) {
+          msg.textContent = t;
+          msg.classList.toggle('ok', ok === true);
+          msg.classList.toggle('err', ok === false);
+        };
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = (input.value || '').trim();
+          if (!emailOK(email)) { say('Inserisci un indirizzo email valido.', false); input.focus(); return; }
+          var k = cfg.klaviyo || {};
+          if (!k.companyId || !k.listId) {
+            say('Grazie! Sei in lista: ti avviseremo al lancio.', true);
+            form.reset();
+            return;
+          }
+          btn.disabled = true;
+          var prev = btn.textContent; btn.textContent = 'Invio…';
+          fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(k.companyId), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', revision: k.revision || '2024-10-15' },
+            body: JSON.stringify({
+              data: {
+                type: 'subscription',
+                attributes: { profile: { data: { type: 'profile', attributes: { email: email } } } },
+                relationships: { list: { data: { type: 'list', id: k.listId } } }
+              }
+            })
+          }).then(function (res) {
+            if (res.ok || res.status === 202) { say('Grazie! Sei in lista: ti avviseremo al lancio.', true); form.reset(); }
+            else { say('Ops, qualcosa è andato storto. Riprova tra poco.', false); }
+          }).catch(function () {
+            say('Connessione non riuscita. Controlla la rete e riprova.', false);
+          }).finally(function () { btn.disabled = false; btn.textContent = prev; });
+        });
+      }
+    });
+  })();
+{%- endjavascript -%}
+
+{% schema %}
+{
+  "name": "PLUMPY — Landing",
+  "tag": "section",
+  "class": "plumpy-landing-section",
+  "max_blocks": 50,
+  "settings": [
+    { "type": "header", "content": "Aspetto" },
+    { "type": "font_picker", "id": "heading_font", "label": "Font titoli", "default": "playfair_display_n7" },
+    { "type": "font_picker", "id": "body_font", "label": "Font testo", "default": "work_sans_n4" },
+
+    { "type": "header", "content": "Prodotto & carrello" },
+    { "type": "product", "id": "product", "label": "Prodotto da collegare", "info": "I pulsanti aggiungono al carrello la prima variante di questo prodotto. Senza prodotto fanno scroll alla sezione acquisto." },
+
+    { "type": "header", "content": "Barra annuncio" },
+    { "type": "checkbox", "id": "show_announcement", "label": "Mostra barra annuncio", "default": true },
+    { "type": "text", "id": "announcement_text", "label": "Testo annuncio", "default": "Spedizione 24/48h · Reso 30 giorni · Iscriviti per l'offerta di lancio" },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Occhiello", "default": "Siero Rimpolpante Labbra" },
+    { "type": "text", "id": "hero_title", "label": "Titolo (riga 1)", "default": "Più piene," },
+    { "type": "text", "id": "hero_title_em", "label": "Titolo (riga 2, corsivo blush)", "default": "naturalmente." },
+    { "type": "richtext", "id": "hero_subtitle", "label": "Sottotitolo", "default": "<p>Il siero labbra con <strong>Copper Tripeptide-1 (GHK-Cu)</strong> e <strong>Acido Ialuronico</strong>: comfort, idratazione ed effetto volume otticamente più pieno, giorno dopo giorno.</p>" },
+    { "type": "text", "id": "hero_cta_label", "label": "Etichetta CTA", "default": "Aggiungi al carrello" },
+    { "type": "text", "id": "hero_secondary_label", "label": "Etichetta CTA secondaria", "default": "Scopri la scienza" },
+    { "type": "text", "id": "hero_micro", "label": "Microcopy", "default": "Vegan · Cruelty-free · Con peptidi GHK-Cu" },
+    { "type": "image_picker", "id": "hero_image", "label": "Foto flacone (hero)" },
+    { "type": "text", "id": "hero_image_asset", "label": "…oppure nome file in Assets", "info": "Es. hero.webp — usato se non selezioni un'immagine sopra.", "default": "hero.webp" },
+    { "type": "text", "id": "hero_image_alt", "label": "Alt hero", "default": "Flacone PLUMPY, siero rimpolpante labbra, su fondo nero" },
+
+    { "type": "header", "content": "Prima / Dopo" },
+    { "type": "text", "id": "ba_eyebrow", "label": "Occhiello", "default": "Il risultato" },
+    { "type": "text", "id": "ba_title", "label": "Titolo", "default": "Il volume che si vede" },
+    { "type": "textarea", "id": "ba_lead", "label": "Testo", "default": "Trascina il cursore per confrontare. L'effetto rimpolpante è progressivo e migliora con l'uso costante." },
+    { "type": "image_picker", "id": "ba_before_image", "label": "Foto PRIMA (metà sinistra già ritagliata)" },
+    { "type": "text", "id": "ba_before_asset", "label": "…oppure nome file PRIMA in Assets", "default": "before.webp" },
+    { "type": "image_picker", "id": "ba_after_image", "label": "Foto DOPO (metà destra già ritagliata)" },
+    { "type": "text", "id": "ba_after_asset", "label": "…oppure nome file DOPO in Assets", "default": "after.webp" },
+    { "type": "text", "id": "ba_before_label", "label": "Etichetta PRIMA", "default": "Prima" },
+    { "type": "text", "id": "ba_after_label", "label": "Etichetta DOPO", "default": "Dopo" },
+    { "type": "text", "id": "ba_disclaimer", "label": "Nota", "default": "Immagini dimostrative. Risultati individuali variabili." },
+
+    { "type": "header", "content": "La scienza (intro)" },
+    { "type": "text", "id": "science_eyebrow", "label": "Occhiello", "default": "La scienza" },
+    { "type": "text", "id": "science_title", "label": "Titolo", "default": "Due attivi, un solo obiettivo" },
+    { "type": "textarea", "id": "science_lead", "label": "Testo", "default": "Una formula essenziale, costruita attorno a due protagonisti che lavorano in sinergia sulla superficie delle labbra." },
+
+    { "type": "header", "content": "Come si usa (intro)" },
+    { "type": "text", "id": "howto_eyebrow", "label": "Occhiello", "default": "Il rituale" },
+    { "type": "text", "id": "howto_title", "label": "Titolo", "default": "Come si usa" },
+
+    { "type": "header", "content": "Prodotto" },
+    { "type": "text", "id": "product_eyebrow", "label": "Occhiello", "default": "Il prodotto" },
+    { "type": "text", "id": "product_title", "label": "Titolo", "default": "Un siero, un gesto" },
+    { "type": "richtext", "id": "product_lead", "label": "Testo", "default": "<p>Una texture setosa che avvolge le labbra e si assorbe in fretta, per un finish naturale e luminoso. Nessun eccesso, solo l'essenziale che serve.</p>" },
+    { "type": "image_picker", "id": "product_image", "label": "Foto texture" },
+    { "type": "text", "id": "product_asset", "label": "…oppure nome file in Assets", "default": "texture.webp" },
+    { "type": "text", "id": "product_image_alt", "label": "Alt texture", "default": "Texture del siero PLUMPY: gel rosato e luminoso sulla pelle" },
+    { "type": "text", "id": "product_b1", "label": "Bullet 1", "default": "Peptidi GHK-Cu (Copper Tripeptide-1)" },
+    { "type": "text", "id": "product_b2", "label": "Bullet 2", "default": "Acido Ialuronico idratante" },
+    { "type": "text", "id": "product_b3", "label": "Bullet 3", "default": "Formula vegana e cruelty-free" },
+    { "type": "text", "id": "product_cta_label", "label": "Etichetta CTA", "default": "Aggiungi al carrello" },
+
+    { "type": "header", "content": "Acquisto" },
+    { "type": "text", "id": "buy_eyebrow", "label": "Occhiello", "default": "Scegli il tuo formato" },
+    { "type": "text", "id": "buy_title", "label": "Titolo", "default": "Porta a casa PLUMPY" },
+    { "type": "text", "id": "card1_title", "label": "Card 1 · titolo", "default": "Il Siero" },
+    { "type": "textarea", "id": "card1_desc", "label": "Card 1 · descrizione", "default": "Un flacone. Il gesto quotidiano per labbra piene, morbide e idratate." },
+    { "type": "text", "id": "card1_f1", "label": "Card 1 · voce 1", "default": "1× siero rimpolpante" },
+    { "type": "text", "id": "card1_f2", "label": "Card 1 · voce 2", "default": "Peptidi GHK-Cu + Acido Ialuronico" },
+    { "type": "text", "id": "card1_f3", "label": "Card 1 · voce 3", "default": "Reso 30 giorni" },
+    { "type": "text", "id": "card1_cta", "label": "Card 1 · pulsante", "default": "Aggiungi al carrello" },
+    { "type": "text", "id": "card2_title", "label": "Card 2 · titolo", "default": "Il Duo" },
+    { "type": "textarea", "id": "card2_desc", "label": "Card 2 · descrizione", "default": "Due flaconi: uno per te, uno per la borsa. Non restare mai senza." },
+    { "type": "text", "id": "card2_f1", "label": "Card 2 · voce 1", "default": "2× siero rimpolpante" },
+    { "type": "text", "id": "card2_f2", "label": "Card 2 · voce 2", "default": "Il formato preferito dalla community" },
+    { "type": "text", "id": "card2_f3", "label": "Card 2 · voce 3", "default": "Reso 30 giorni" },
+    { "type": "text", "id": "card2_cta", "label": "Card 2 · pulsante", "default": "Aggiungi il Duo" },
+    { "type": "text", "id": "card2_badge", "label": "Card 2 · badge", "default": "Più scelto" },
+    { "type": "text", "id": "buy_reassure", "label": "Riga rassicurazione", "default": "Spedizione 24/48h · Reso 30 giorni · Pagamenti sicuri" },
+
+    { "type": "header", "content": "Lista d'attesa (Klaviyo)" },
+    { "type": "text", "id": "wl_eyebrow", "label": "Occhiello", "default": "Lista d'attesa" },
+    { "type": "text", "id": "wl_title", "label": "Titolo", "default": "Entra tra i primi." },
+    { "type": "textarea", "id": "wl_text", "label": "Testo", "default": "Iscriviti per sbloccare l'offerta di lancio, ricevere l'accesso anticipato ai nuovi prodotti e ai drop esclusivi dei gusti in edizione limitata." },
+    { "type": "text", "id": "wl_button", "label": "Etichetta pulsante", "default": "Avvisami" },
+    { "type": "text", "id": "wl_privacy", "label": "Nota privacy", "default": "Iscrivendoti accetti di ricevere email di marketing. Puoi disiscriverti quando vuoi." },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo · Public API Key (Site ID)", "info": "Settings → API keys → Public API key" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo · List ID", "info": "Audience → Lists → apri la lista → Settings → List ID" },
+
+    { "type": "header", "content": "Recensioni" },
+    { "type": "text", "id": "reviews_eyebrow", "label": "Occhiello", "default": "Recensioni" },
+    { "type": "text", "id": "reviews_title", "label": "Titolo", "default": "La parola alle labbra" },
+    { "type": "textarea", "id": "reviews_empty", "label": "Testo empty-state", "default": "Le prime recensioni verificate compariranno qui dopo il lancio." },
+
+    { "type": "header", "content": "FAQ (intro)" },
+    { "type": "text", "id": "faq_eyebrow", "label": "Occhiello", "default": "Domande frequenti" },
+    { "type": "text", "id": "faq_title", "label": "Titolo", "default": "FAQ" },
+
+    { "type": "header", "content": "CTA finale" },
+    { "type": "text", "id": "final_title", "label": "Titolo", "default": "Il tuo volume, naturale." },
+    { "type": "text", "id": "final_cta_label", "label": "Etichetta CTA", "default": "Aggiungi al carrello" },
+
+    { "type": "header", "content": "Footer legale" },
+    { "type": "text", "id": "footer_tagline", "label": "Tagline", "default": "Lip Plumping Peptide Serum" },
+    { "type": "textarea", "id": "footer_inci", "label": "INCI (lista ingredienti reale)", "default": "[inserisci la lista ingredienti reale]" },
+    { "type": "text", "id": "footer_pao", "label": "PAO", "default": "6M" },
+    { "type": "text", "id": "footer_responsible", "label": "Persona Responsabile UE", "default": "[placeholder]" },
+    { "type": "text", "id": "footer_cpnp", "label": "CPNP", "default": "[placeholder]" },
+
+    { "type": "header", "content": "Sticky mobile" },
+    { "type": "text", "id": "sticky_title", "label": "Titolo", "default": "PLUMPY" },
+    { "type": "text", "id": "sticky_sub", "label": "Sottotitolo", "default": "Siero rimpolpante labbra" },
+    { "type": "text", "id": "sticky_cta", "label": "Etichetta CTA", "default": "Aggiungi al carrello" }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icona", "default": "volume", "options": [
+          { "value": "volume", "label": "Volume" },
+          { "value": "hydra", "label": "Idratazione" },
+          { "value": "peptide", "label": "Peptidi" },
+          { "value": "texture", "label": "Texture" }
+        ] },
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Volume visibile" },
+        { "type": "text", "id": "text", "label": "Testo", "default": "Labbra otticamente più piene e definite." }
+      ]
+    },
+    {
+      "type": "science",
+      "name": "Card scienza",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Copper Tripeptide-1" },
+        { "type": "text", "id": "subtitle", "label": "Sottotitolo", "default": "(GHK-Cu)" },
+        { "type": "textarea", "id": "text", "label": "Testo", "default": "Un peptide di rame noto in cosmetica per l'affinità con la pelle. Contribuisce a un gesto di cura mirato, per labbra coccolate e curate." }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Applica" },
+        { "type": "textarea", "id": "text", "label": "Testo", "default": "Una piccola quantità sulle labbra, mattina e sera." }
+      ]
+    },
+    {
+      "type": "guarantee",
+      "name": "Garanzia",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icona", "default": "return", "options": [
+          { "value": "return", "label": "Reso" },
+          { "value": "ship", "label": "Spedizione" },
+          { "value": "pay", "label": "Pagamenti" }
+        ] },
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Reso 30 giorni" },
+        { "type": "text", "id": "text", "label": "Testo", "default": "Cambio idea senza pensieri." }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Domanda", "default": "Cosa sono i peptidi GHK-Cu?" },
+        { "type": "textarea", "id": "answer", "label": "Risposta", "default": "GHK-Cu (Copper Tripeptide-1) è un peptide di rame molto usato in cosmetica per l'affinità con la pelle." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PLUMPY — Landing",
+      "blocks": [
+        { "type": "usp", "settings": { "icon": "volume", "title": "Volume visibile", "text": "Labbra otticamente più piene e definite." } },
+        { "type": "usp", "settings": { "icon": "hydra", "title": "Idrata a fondo", "text": "Comfort e morbidezza con Acido Ialuronico." } },
+        { "type": "usp", "settings": { "icon": "peptide", "title": "Peptidi GHK-Cu", "text": "Copper Tripeptide-1, per labbra coccolate." } },
+        { "type": "usp", "settings": { "icon": "texture", "title": "Non appiccicoso", "text": "Texture setosa, finish naturale." } },
+        { "type": "science", "settings": { "title": "Copper Tripeptide-1", "subtitle": "(GHK-Cu)", "text": "Un peptide di rame noto in cosmetica per l'affinità con la pelle. Contribuisce a un gesto di cura mirato, per labbra coccolate, curate e dall'aspetto sano." } },
+        { "type": "science", "settings": { "title": "Acido Ialuronico", "subtitle": "", "text": "Umettante d'eccellenza: richiama e trattiene l'acqua negli strati superficiali, per labbra idratate, morbide e visivamente più piene." } },
+        { "type": "step", "settings": { "title": "Applica", "text": "Una piccola quantità sulle labbra, mattina e sera." } },
+        { "type": "step", "settings": { "title": "Senti il comfort", "text": "Lascia assorbire: texture leggera, mai appiccicosa." } },
+        { "type": "step", "settings": { "title": "Ripeti ogni giorno", "text": "La costanza è il segreto: usalo con regolarità." } },
+        { "type": "guarantee", "settings": { "icon": "return", "title": "Reso 30 giorni", "text": "Cambio idea senza pensieri." } },
+        { "type": "guarantee", "settings": { "icon": "ship", "title": "Spedizione 24/48h UE", "text": "Consegna rapida e tracciata." } },
+        { "type": "guarantee", "settings": { "icon": "pay", "title": "Pagamenti sicuri", "text": "Transazioni crittografate." } },
+        { "type": "faq", "settings": { "question": "Cosa sono i peptidi GHK-Cu?", "answer": "GHK-Cu (Copper Tripeptide-1) è un peptide di rame molto usato in cosmetica per l'affinità con la pelle. In PLUMPY accompagna un gesto di cura mirato per le labbra." } },
+        { "type": "faq", "settings": { "question": "L'effetto è immediato?", "answer": "Comfort e idratazione si percepiscono fin da subito. L'effetto volume, otticamente più pieno, si apprezza al meglio con l'uso costante nel tempo: è un risultato progressivo." } },
+        { "type": "faq", "settings": { "question": "È appiccicoso?", "answer": "No. La texture è setosa e a rapido assorbimento, per un finish naturale e piacevole sulle labbra." } },
+        { "type": "faq", "settings": { "question": "Come funzionano spedizione e resi?", "answer": "Spediamo in 24/48h nell'Unione Europea, con tracciamento. Hai 30 giorni di tempo per il reso." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
