@@ -10,50 +10,39 @@ con claim solo cosmetici. Peptidi **GHK-Cu** (Copper Tripeptide-1) e
 ## Struttura
 
 ```
-index.html                     Landing statica (apri in locale o pubblica)
-styles.css                     Design system + tutte le sezioni
-script.js                      Interazioni (slider, form Klaviyo, sticky, reveal)
-assets/                        Immagini (hero, before, after, texture, og, favicon)
-input/                         ← metti qui le 3 foto ufficiali (vedi input/README.md)
-tools/
-  make-placeholders.mjs        Genera i placeholder eleganti (già eseguito)
-  prepare-assets.mjs           Ritaglia le foto reali da input/ → assets/
-  serve.mjs                    Micro server statico per l'anteprima locale
-sections/plumpy-landing.liquid Sezione Shopify OS 2.0 (schema completo, Theme Check VALID)
-SHOPIFY.md                     Guida passo-passo per pubblicare su Shopify
+index.html                      Landing (apri in un browser o pubblica)
+styles.css                      Design system + tutte le sezioni
+script.js                       Interazioni (slider, form -15%, sticky, reveal)
+assets/                         Immagini finali del prodotto
+  hero.webp                     Flacone PLUMPY (hero, si sfuma nel fondo scuro)
+  before.webp · after.webp      Prima / Dopo (slider comparativo)
+  texture.webp                  Swatch del siero
+  og.jpg · favicon.*            Social + favicon
+sections/plumpy-landing.liquid  Sezione Shopify OS 2.0 (Theme Check VALID)
+SHOPIFY.md                      Guida passo-passo per pubblicare su Shopify
 ```
-
-## Immagini: placeholder → foto reali (swap 1:1)
-
-Le immagini in `assets/` sono **placeholder eleganti** con gli **stessi nomi e
-proporzioni** delle foto finali (etichetta discreta "ESEMPIO"). Per usare le
-foto ufficiali:
-
-```bash
-npm install                 # una volta (installa sharp)
-# metti hero.jpg, before-after.jpg, texture.jpg in ./input
-npm run assets              # sovrascrive i placeholder con i ritagli reali
-```
-
-Lo script divide `before-after.jpg` in due metà 4:5 allineate rimuovendo la
-fascia con le scritte, e ritaglia la texture 1:1. **L'HTML non va toccato.**
 
 ## Anteprima locale
 
-```bash
-npm run serve               # http://localhost:4321
-```
+Apri direttamente **`index.html`** nel browser (è un sito statico), oppure
+servilo con un qualsiasi server statico e visita l'indirizzo locale.
 
-## Configurare Klaviyo (lista d'attesa)
+## Offerta -15% (lista email)
 
-In `script.js`, in cima, imposta:
+La sezione "Offerta di lancio" raccoglie l'email e sblocca uno sconto del 15%.
 
-```js
-const KLAVIYO = { companyId: 'TUO_SITE_ID', listId: 'TUA_LISTA', revision: '2024-10-15' };
-```
+- **Landing statica:** configura Klaviyo in cima a `script.js` nell'oggetto
+  `KLAVIYO` (`companyId` = Public API Key / Site ID, `listId` = List ID).
+  Se vuoto, la form valida l'email e mostra una conferma locale.
+- **Shopify:** gli stessi valori si impostano dal Theme Editor (gruppo
+  "Lista d'attesa (Klaviyo)"). Il codice sconto va creato in Shopify e inviato
+  con un Flow di benvenuto Klaviyo. Tutti i dettagli in `SHOPIFY.md`.
 
-Se vuoti, la form valida l'email e mostra una conferma locale.
-(Nella sezione Shopify gli stessi valori si impostano dal Theme Editor.)
+## Pubblicare su Shopify
+
+Segui **`SHOPIFY.md`**: carichi le immagini negli Assets del tema, incolli
+`sections/plumpy-landing.liquid`, crei la pagina e la sezione (già popolata),
+colleghi il prodotto e Klaviyo.
 
 ## Qualità
 
@@ -69,16 +58,4 @@ Se vuoti, la form valida l'email e mostra una conferma locale.
 Prodotto cosmetico (UE, Reg. CE 1223/2009): prima della vendita completa
 **INCI reale**, **Persona Responsabile UE**, **notifica CPNP** e **PAO**.
 Queste informazioni si gestiscono in Shopify (descrizione/metafield del
-prodotto e pagine Policy), non più in un riquadro della landing.
-Claim solo cosmetici; nessuna recensione inventata.
-
----
-
-## ⚠️ Da sapere (stato attuale)
-
-- Le **3 foto ufficiali non erano leggibili come file** in questa sessione
-  (in chat le immagini non arrivano come file su disco), quindi la pagina usa
-  **placeholder** con nomi/proporzioni identici. Segui lo swap 1:1 qui sopra.
-- Sul flacone della foto ufficiale compare la scritta **"PUMPLY"**: nel brand e
-  in tutti i testi il nome corretto è **"PLUMPY"**. Verifica l'etichetta reale
-  prima del lancio.
+prodotto e pagine Policy). Claim solo cosmetici; nessuna recensione inventata.

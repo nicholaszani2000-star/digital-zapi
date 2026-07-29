@@ -13,9 +13,9 @@ funzionanti. Tempo stimato: ~20 minuti.
 ## 0) Cosa ti serve
 
 - Un tema Online Store 2.0 (Dawn o qualsiasi tema moderno).
-- Le 3 foto ufficiali ritagliate (vedi `README.md` → `npm run assets`):
+- Le 4 immagini finali già pronte nella cartella `assets/`:
   `hero.webp`, `before.webp`, `after.webp`, `texture.webp`.
-- Un account Klaviyo (per la lista d'attesa) — opzionale ma consigliato.
+- Un account Klaviyo (per la lista email / offerta -15%) — consigliato.
 
 ---
 
