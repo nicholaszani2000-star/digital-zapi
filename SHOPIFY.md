@@ -110,10 +110,8 @@ esatto), oppure usa il blocco/app-embed dell'app nel Theme Editor.
 
 Prima di pubblicare, verifica:
 
-- [ ] **INCI reale** inserito (gruppo "Footer legale" → INCI). Obbligatorio.
-- [ ] **Persona Responsabile UE** compilata (Reg. CE 1223/2009).
-- [ ] **Notifica CPNP** effettuata e numero/riferimento inserito.
-- [ ] **PAO** corretto (default 6M).
+- [ ] **INCI**, **PAO**, **Persona Responsabile UE** (Reg. CE 1223/2009) e **notifica CPNP**:
+      gestiti in Shopify (descrizione/metafield del prodotto e pagine Policy), non più nella sezione.
 - [ ] Pagine legali (**Privacy**, **Termini**, **Contatti**) collegate nel footer del tema.
 - [ ] **Prodotto** collegato e **prezzo/variante** corretti.
 - [ ] **Klaviyo** company_id + list_id inseriti e testati (iscrizione reale).

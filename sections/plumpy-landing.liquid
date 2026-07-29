@@ -211,11 +211,6 @@
   #plumpy-{{ uid }} .pl-final h2{font-size:clamp(2rem,6vw,3.4rem);margin-bottom:30px;}
   #plumpy-{{ uid }} .pl-final__actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
 
-  /* Footer legale */
-  #plumpy-{{ uid }} .pl-legal{background:var(--dark-2);color:#a49b93;padding:44px 0;font-size:.84rem;}
-  #plumpy-{{ uid }} .pl-legal__grid{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:10px;}
-  #plumpy-{{ uid }} .pl-legal strong{color:#d9d0c8;font-weight:600;}
-  #plumpy-{{ uid }} .pl-legal .ph{color:#7d756e;font-style:italic;}
 
   /* Sticky mobile */
   #plumpy-{{ uid }} .pl-mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;gap:14px;
@@ -242,7 +237,6 @@
   @media (min-width:768px){
     #plumpy-{{ uid }} .pl-science__grid{grid-template-columns:1fr 1fr;}
     #plumpy-{{ uid }} .pl-buy__grid{grid-template-columns:1fr 1fr;}
-    #plumpy-{{ uid }} .pl-legal__grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:767.98px){
     #plumpy-{{ uid }} .pl-mobilebar{display:flex;}
@@ -569,17 +563,6 @@
     </div>
   </section>
 
-  {%- comment -%} ---------- FOOTER LEGALE ---------- {%- endcomment -%}
-  <section class="pl-legal">
-    <div class="pl-legal__grid">
-      {%- if section.settings.footer_tagline != blank -%}<p><strong>PLUMPY</strong> — {{ section.settings.footer_tagline | escape }}</p>{%- endif -%}
-      {%- if section.settings.footer_inci != blank -%}<p><strong>INCI:</strong> {{ section.settings.footer_inci | escape }}</p>{%- endif -%}
-      <p><strong>PAO:</strong> {{ section.settings.footer_pao | escape }}</p>
-      {%- if section.settings.footer_responsible != blank -%}<p><strong>Persona Responsabile UE:</strong> <span class="ph">{{ section.settings.footer_responsible | escape }}</span> — Reg. CE 1223/2009</p>{%- endif -%}
-      {%- if section.settings.footer_cpnp != blank -%}<p><strong>CPNP:</strong> <span class="ph">{{ section.settings.footer_cpnp | escape }}</span></p>{%- endif -%}
-    </div>
-  </section>
-
   {%- comment -%} ---------- STICKY MOBILE ---------- {%- endcomment -%}
   <div class="pl-mobilebar">
     <div class="pl-mobilebar__info">
@@ -822,12 +805,6 @@
     { "type": "text", "id": "final_title", "label": "Titolo", "default": "Il tuo volume, naturale." },
     { "type": "text", "id": "final_cta_label", "label": "Etichetta CTA", "default": "Aggiungi al carrello" },
 
-    { "type": "header", "content": "Footer legale" },
-    { "type": "text", "id": "footer_tagline", "label": "Tagline", "default": "Lip Plumping Peptide Serum" },
-    { "type": "textarea", "id": "footer_inci", "label": "INCI (lista ingredienti reale)", "default": "[inserisci la lista ingredienti reale]" },
-    { "type": "text", "id": "footer_pao", "label": "PAO", "default": "6M" },
-    { "type": "text", "id": "footer_responsible", "label": "Persona Responsabile UE", "default": "[placeholder]" },
-    { "type": "text", "id": "footer_cpnp", "label": "CPNP", "default": "[placeholder]" },
 
     { "type": "header", "content": "Sticky mobile" },
     { "type": "text", "id": "sticky_title", "label": "Titolo", "default": "PLUMPY" },

@@ -67,8 +67,9 @@ Se vuoti, la form valida l'email e mostra una conferma locale.
 ## Note di compliance
 
 Prodotto cosmetico (UE, Reg. CE 1223/2009): prima della vendita completa
-**INCI reale**, **Persona Responsabile UE**, **notifica CPNP**, **PAO**, e le
-pagine legali. I segnaposto `[placeholder]` nel footer vanno compilati.
+**INCI reale**, **Persona Responsabile UE**, **notifica CPNP** e **PAO**.
+Queste informazioni si gestiscono in Shopify (descrizione/metafield del
+prodotto e pagine Policy), non più in un riquadro della landing.
 Claim solo cosmetici; nessuna recensione inventata.
 
 ---
