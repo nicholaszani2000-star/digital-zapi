@@ -214,6 +214,18 @@
   #plumpy-{{ uid }} .pl-final__actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
 
 
+  /* Footer */
+  #plumpy-{{ uid }} .pl-footer{background:var(--dark);color:#c9c0b8;padding:64px 0 28px;}
+  #plumpy-{{ uid }} .pl-footer__grid{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:34px;grid-template-columns:1fr;}
+  #plumpy-{{ uid }} .pl-footer__mark{font-family:var(--font-serif);font-weight:700;font-size:1.5rem;letter-spacing:.3em;color:#fff;margin:0 0 8px;padding-left:.3em;}
+  #plumpy-{{ uid }} .pl-footer__tag{color:var(--gold-light);font-size:.86rem;letter-spacing:.06em;}
+  #plumpy-{{ uid }} .pl-footer__col h4{font-family:var(--font-sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:#8f8880;margin:0 0 14px;font-weight:600;}
+  #plumpy-{{ uid }} .pl-footer__col ul{display:grid;gap:10px;font-size:.9rem;list-style:none;margin:0;padding:0;}
+  #plumpy-{{ uid }} .pl-footer__col a{color:#c9c0b8;text-decoration:none;transition:color .2s;}
+  #plumpy-{{ uid }} .pl-footer__col a:hover{color:#fff;}
+  #plumpy-{{ uid }} .pl-footer__bar{max-width:1180px;margin:44px auto 0;padding:22px 24px 0;border-top:1px solid var(--line-dark);
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.78rem;color:#8f8880;}
+
   /* Sticky mobile */
   #plumpy-{{ uid }} .pl-mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;gap:14px;
     padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));background:rgba(255,255,255,.95);
@@ -235,6 +247,7 @@
     #plumpy-{{ uid }} .pl-usp__list{grid-template-columns:1fr 1fr;}
     #plumpy-{{ uid }} .pl-guar__grid{grid-template-columns:repeat(3,1fr);}
     #plumpy-{{ uid }} .pl-steps{grid-template-columns:repeat(3,1fr);}
+    #plumpy-{{ uid }} .pl-footer__grid{grid-template-columns:1.6fr 1fr 1fr;}
   }
   @media (min-width:768px){
     #plumpy-{{ uid }} .pl-science__grid{grid-template-columns:1fr 1fr;}
@@ -365,7 +378,7 @@
 
   {%- comment -%} ---------- LA SCIENZA (blocchi) ---------- {%- endcomment -%}
   {%- assign sci_blocks = section.blocks | where: 'type', 'science' -%}
-  <section class="pl-sec pl-science">
+  <section class="pl-sec pl-science" id="plumpy-scienza-{{ uid }}">
     <div class="pl-wrap center">
       {%- if section.settings.science_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.science_eyebrow | escape }}</p>{%- endif -%}
       <h2 class="reveal">{{ section.settings.science_title | escape }}</h2>
@@ -473,7 +486,7 @@
   </section>
 
   {%- comment -%} ---------- LISTA D'ATTESA (Klaviyo) ---------- {%- endcomment -%}
-  <section class="pl-sec pl-waitlist">
+  <section class="pl-sec pl-waitlist" id="plumpy-lista-{{ uid }}">
     <div class="pl-wrap narrow center">
       {%- if section.settings.wl_eyebrow != blank -%}<p class="eyebrow gold">{{ section.settings.wl_eyebrow | escape }}</p>{%- endif -%}
       <h2 class="reveal">{{ section.settings.wl_title | escape }}</h2>
@@ -534,7 +547,7 @@
   {%- comment -%} ---------- FAQ (blocchi) ---------- {%- endcomment -%}
   {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
   {%- if faq_blocks.size > 0 -%}
-    <section class="pl-sec pl-faq">
+    <section class="pl-sec pl-faq" id="plumpy-faq-{{ uid }}">
       <div class="pl-wrap narrow">
         {%- if section.settings.faq_eyebrow != blank -%}<p class="eyebrow center">{{ section.settings.faq_eyebrow | escape }}</p>{%- endif -%}
         <h2 class="center reveal">{{ section.settings.faq_title | escape }}</h2>
@@ -561,9 +574,45 @@
         {%- else -%}
           <button class="btn light" type="button" data-plumpy-scroll>{{ section.settings.final_cta_label | escape }}</button>
         {%- endif -%}
+        {%- if section.settings.final_cta_secondary != blank -%}
+          <a class="btn ghost" href="#plumpy-lista-{{ uid }}">{{ section.settings.final_cta_secondary | escape }}</a>
+        {%- endif -%}
       </div>
     </div>
   </section>
+
+  {%- comment -%} ---------- FOOTER ---------- {%- endcomment -%}
+  {%- if section.settings.show_footer -%}
+    <footer class="pl-footer">
+      <div class="pl-footer__grid">
+        <div>
+          <p class="pl-footer__mark">{{ section.settings.footer_brand | escape }}</p>
+          {%- if section.settings.footer_tagline != blank -%}<p class="pl-footer__tag">{{ section.settings.footer_tagline | escape }}</p>{%- endif -%}
+        </div>
+        <div class="pl-footer__col">
+          <h4>{{ section.settings.footer_col1_title | escape }}</h4>
+          <ul>
+            {%- if section.settings.footer_l1 != blank -%}<li><a href="#plumpy-prodotto-{{ uid }}">{{ section.settings.footer_l1 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l2 != blank -%}<li><a href="#plumpy-scienza-{{ uid }}">{{ section.settings.footer_l2 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l3 != blank -%}<li><a href="#plumpy-faq-{{ uid }}">{{ section.settings.footer_l3 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l4 != blank -%}<li><a href="#plumpy-lista-{{ uid }}">{{ section.settings.footer_l4 | escape }}</a></li>{%- endif -%}
+          </ul>
+        </div>
+        <div class="pl-footer__col">
+          <h4>{{ section.settings.footer_col2_title | escape }}</h4>
+          <ul>
+            {%- if section.settings.footer_s1 != blank -%}<li><a href="{{ section.settings.footer_s1_url | default: '#' }}">{{ section.settings.footer_s1 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_s2 != blank -%}<li><a href="{{ section.settings.footer_s2_url | default: '#' }}">{{ section.settings.footer_s2 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_s3 != blank -%}<li><a href="{{ section.settings.footer_s3_url | default: '#' }}">{{ section.settings.footer_s3 | escape }}</a></li>{%- endif -%}
+          </ul>
+        </div>
+      </div>
+      <div class="pl-footer__bar">
+        <p>{{ section.settings.footer_copyright | escape }}</p>
+        <p>{{ section.settings.footer_note | escape }}</p>
+      </div>
+    </footer>
+  {%- endif -%}
 
   {%- comment -%} ---------- STICKY MOBILE ---------- {%- endcomment -%}
   <div class="pl-mobilebar">
@@ -807,6 +856,26 @@
     { "type": "header", "content": "CTA finale" },
     { "type": "text", "id": "final_title", "label": "Titolo", "default": "Il tuo volume, naturale." },
     { "type": "text", "id": "final_cta_label", "label": "Etichetta CTA", "default": "Aggiungi al carrello" },
+    { "type": "text", "id": "final_cta_secondary", "label": "Etichetta CTA secondaria", "default": "Entra nella lista d'attesa" },
+
+    { "type": "header", "content": "Footer" },
+    { "type": "checkbox", "id": "show_footer", "label": "Mostra il footer PLUMPY", "info": "Disattivalo se preferisci usare solo il footer del tuo tema.", "default": true },
+    { "type": "text", "id": "footer_brand", "label": "Wordmark", "default": "PLUMPY" },
+    { "type": "text", "id": "footer_tagline", "label": "Tagline", "default": "Lip Plumping Peptide Serum" },
+    { "type": "text", "id": "footer_col1_title", "label": "Colonna 1 · titolo", "default": "Prodotto" },
+    { "type": "text", "id": "footer_l1", "label": "Colonna 1 · link 1 (va al Prodotto)", "default": "Il siero" },
+    { "type": "text", "id": "footer_l2", "label": "Colonna 1 · link 2 (va alla Scienza)", "default": "La scienza" },
+    { "type": "text", "id": "footer_l3", "label": "Colonna 1 · link 3 (va alle FAQ)", "default": "FAQ" },
+    { "type": "text", "id": "footer_l4", "label": "Colonna 1 · link 4 (va all'offerta)", "default": "Lista d'attesa" },
+    { "type": "text", "id": "footer_col2_title", "label": "Colonna 2 · titolo", "default": "Assistenza" },
+    { "type": "text", "id": "footer_s1", "label": "Colonna 2 · link 1", "default": "Privacy" },
+    { "type": "url", "id": "footer_s1_url", "label": "Colonna 2 · link 1 · destinazione" },
+    { "type": "text", "id": "footer_s2", "label": "Colonna 2 · link 2", "default": "Termini" },
+    { "type": "url", "id": "footer_s2_url", "label": "Colonna 2 · link 2 · destinazione" },
+    { "type": "text", "id": "footer_s3", "label": "Colonna 2 · link 3", "default": "Contatti" },
+    { "type": "url", "id": "footer_s3_url", "label": "Colonna 2 · link 3 · destinazione" },
+    { "type": "text", "id": "footer_copyright", "label": "Copyright", "default": "© 2026 PLUMPY. Tutti i diritti riservati." },
+    { "type": "text", "id": "footer_note", "label": "Nota a destra", "default": "Vegan · Cruelty-free" },
 
 
     { "type": "header", "content": "Sticky mobile" },
