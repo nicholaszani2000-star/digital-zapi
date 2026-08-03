@@ -158,6 +158,10 @@
   #plumpy-{{ uid }} .pl-buy-card.featured{border-color:var(--gold);box-shadow:0 30px 60px -40px rgba(184,147,90,.5);}
   #plumpy-{{ uid }} .pl-buy-card h3{font-size:1.5rem;margin-bottom:8px;}
   #plumpy-{{ uid }} .pl-buy-card__desc{color:var(--muted);margin-bottom:6px;}
+  #plumpy-{{ uid }} .pl-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:16px 0 2px;}
+  #plumpy-{{ uid }} .pl-price__now{font-family:var(--font-serif);font-size:2.1rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+  #plumpy-{{ uid }} .pl-price__was{font-size:1rem;color:var(--muted);text-decoration:line-through;}
+  #plumpy-{{ uid }} .pl-price__save{width:100%;font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);margin-top:2px;}
   #plumpy-{{ uid }} .pl-buy-card .pl-ticks{margin:18px 0 26px;}
   #plumpy-{{ uid }} .pl-buy-card .btn{margin-top:auto;}
   #plumpy-{{ uid }} .pl-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-light),var(--gold));
@@ -455,6 +459,12 @@
       <article class="pl-buy-card reveal">
         <h3>{{ section.settings.card1_title | escape }}</h3>
         <p class="pl-buy-card__desc">{{ section.settings.card1_desc | escape }}</p>
+        {%- if section.settings.card1_price != blank -%}
+          <div class="pl-price">
+            <span class="pl-price__now">{{ section.settings.card1_price | escape }}</span>
+            {%- if section.settings.card1_compare != blank -%}<span class="pl-price__was">{{ section.settings.card1_compare | escape }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
         <ul class="pl-ticks">
           {%- if section.settings.card1_f1 != blank -%}<li>{{ section.settings.card1_f1 | escape }}</li>{%- endif -%}
           {%- if section.settings.card1_f2 != blank -%}<li>{{ section.settings.card1_f2 | escape }}</li>{%- endif -%}
@@ -470,6 +480,13 @@
         {%- if section.settings.card2_badge != blank -%}<span class="pl-badge">{{ section.settings.card2_badge | escape }}</span>{%- endif -%}
         <h3>{{ section.settings.card2_title | escape }}</h3>
         <p class="pl-buy-card__desc">{{ section.settings.card2_desc | escape }}</p>
+        {%- if section.settings.card2_price != blank -%}
+          <div class="pl-price">
+            <span class="pl-price__now">{{ section.settings.card2_price | escape }}</span>
+            {%- if section.settings.card2_compare != blank -%}<span class="pl-price__was">{{ section.settings.card2_compare | escape }}</span>{%- endif -%}
+            {%- if section.settings.card2_save != blank -%}<span class="pl-price__save">{{ section.settings.card2_save | escape }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
         <ul class="pl-ticks">
           {%- if section.settings.card2_f1 != blank -%}<li>{{ section.settings.card2_f1 | escape }}</li>{%- endif -%}
           {%- if section.settings.card2_f2 != blank -%}<li>{{ section.settings.card2_f2 | escape }}</li>{%- endif -%}
@@ -825,12 +842,17 @@
     { "type": "text", "id": "card1_f1", "label": "Card 1 · voce 1", "default": "1× siero rimpolpante" },
     { "type": "text", "id": "card1_f2", "label": "Card 1 · voce 2", "default": "Peptidi GHK-Cu + Acido Ialuronico" },
     { "type": "text", "id": "card1_f3", "label": "Card 1 · voce 3", "default": "Vegan e cruelty-free" },
+    { "type": "text", "id": "card1_price", "label": "Card 1 · prezzo", "info": "Deve coincidere col prezzo del prodotto Shopify collegato. Lascia vuoto per non mostrarlo.", "default": "€ 34,90" },
+    { "type": "text", "id": "card1_compare", "label": "Card 1 · prezzo barrato", "info": "Solo se è un prezzo realmente praticato negli ultimi 30 giorni (direttiva Omnibus)." },
     { "type": "text", "id": "card1_cta", "label": "Card 1 · pulsante", "default": "Aggiungi al carrello" },
     { "type": "text", "id": "card2_title", "label": "Card 2 · titolo", "default": "Il Duo" },
     { "type": "textarea", "id": "card2_desc", "label": "Card 2 · descrizione", "default": "Due flaconi: uno per te, uno per la borsa. Non restare mai senza." },
     { "type": "text", "id": "card2_f1", "label": "Card 2 · voce 1", "default": "2× siero rimpolpante" },
     { "type": "text", "id": "card2_f2", "label": "Card 2 · voce 2", "default": "Il formato preferito dalla community" },
     { "type": "text", "id": "card2_f3", "label": "Card 2 · voce 3", "default": "Vegan e cruelty-free" },
+    { "type": "text", "id": "card2_price", "label": "Card 2 · prezzo", "info": "Il Duo aggiunge 2 unità al carrello: imposta questo prezzo con uno sconto quantità in Shopify, altrimenti il carrello mostrerà il doppio del singolo.", "default": "€ 54,90" },
+    { "type": "text", "id": "card2_compare", "label": "Card 2 · prezzo barrato", "default": "€ 69,80" },
+    { "type": "text", "id": "card2_save", "label": "Card 2 · risparmio", "default": "Risparmi € 14,90" },
     { "type": "text", "id": "card2_cta", "label": "Card 2 · pulsante", "default": "Aggiungi il Duo" },
     { "type": "text", "id": "card2_badge", "label": "Card 2 · badge", "default": "Più scelto" },
     { "type": "text", "id": "buy_reassure", "label": "Riga rassicurazione", "default": "Pagamenti sicuri · Vegan · Cruelty-free" },

@@ -240,6 +240,10 @@ h3{font-size:1.22rem;}
 .buy-card--featured{border-color:var(--gold);box-shadow:0 30px 60px -40px rgba(184,147,90,.5);}
 .buy-card h3{font-size:1.5rem;margin-bottom:8px;}
 .buy-card__desc{color:var(--muted);margin-bottom:6px;}
+.price{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:16px 0 2px;}
+.price__now{font-family:var(--font-serif);font-size:2.1rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.price__was{font-size:1rem;color:var(--muted);text-decoration:line-through;}
+.price__save{width:100%;font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);margin-top:2px;}
 .buy-card .ticks{margin:18px 0 26px;}
 .buy-card .btn{margin-top:auto;}
 .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-light),var(--gold));
