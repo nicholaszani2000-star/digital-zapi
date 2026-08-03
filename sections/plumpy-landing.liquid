@@ -54,8 +54,10 @@
   #plumpy-{{ uid }} h2{font-size:clamp(1.8rem,4.6vw,2.9rem);}
   #plumpy-{{ uid }} .ico{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 
-  #plumpy-{{ uid }} .reveal{opacity:0;transform:translateY(20px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);}
-  #plumpy-{{ uid }} .reveal.is-visible{opacity:1;transform:none;}
+  {%- comment -%} I contenuti sono VISIBILI di default. L'animazione si attiva
+     solo se il JS aggiunge .plumpy-anim: se il JS non parte, si vede tutto. {%- endcomment -%}
+  #plumpy-{{ uid }}.plumpy-anim .reveal{opacity:0;transform:translateY(20px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);}
+  #plumpy-{{ uid }}.plumpy-anim .reveal.is-visible{opacity:1;transform:none;}
 
   /* Bottoni */
   #plumpy-{{ uid }} .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.95rem;
@@ -227,7 +229,7 @@
   #plumpy-{{ uid }} .pl-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   @media (prefers-reduced-motion:reduce){
-    #plumpy-{{ uid }} .reveal{opacity:1;transform:none;transition:none;}
+    #plumpy-{{ uid }}.plumpy-anim .reveal{opacity:1;transform:none;transition:none;}
   }
   @media (min-width:560px){
     #plumpy-{{ uid }} .pl-usp__list{grid-template-columns:1fr 1fr;}
@@ -580,7 +582,7 @@
 </div>
 
 {%- comment -%} ---------- JS (vanilla, scoped per istanza) ---------- {%- endcomment -%}
-{%- javascript -%}
+<script>
   (function () {
     var roots = document.querySelectorAll('[data-plumpy-root]');
     roots.forEach(function (root) {
@@ -593,11 +595,11 @@
       var q = function (s) { return root.querySelector(s); };
       var qa = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
 
-      /* Reveal */
+      /* Reveal — i contenuti sono già visibili via CSS. L'animazione si attiva
+         solo qui, e un failsafe mostra comunque tutto dopo 1,5s. */
       var reveals = qa('.reveal');
-      if (reduce || !('IntersectionObserver' in window)) {
-        reveals.forEach(function (el) { el.classList.add('is-visible'); });
-      } else {
+      if (!reduce && 'IntersectionObserver' in window) {
+        root.classList.add('plumpy-anim');
         var seen = new Map();
         reveals.forEach(function (el) {
           var p = el.parentElement, i = seen.get(p) || 0;
@@ -608,6 +610,7 @@
           ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-visible'); ob.unobserve(en.target); } });
         }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
         reveals.forEach(function (el) { io.observe(el); });
+        setTimeout(function () { reveals.forEach(function (el) { el.classList.add('is-visible'); }); }, 1500);
       }
 
       /* Slider prima/dopo */
@@ -700,7 +703,7 @@
       }
     });
   })();
-{%- endjavascript -%}
+</script>
 
 {% schema %}
 {
