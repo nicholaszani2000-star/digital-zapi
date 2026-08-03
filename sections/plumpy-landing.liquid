@@ -447,9 +447,6 @@
           {%- if section.settings.product_b2 != blank -%}<li>{{ section.settings.product_b2 | escape }}</li>{%- endif -%}
           {%- if section.settings.product_b3 != blank -%}<li>{{ section.settings.product_b3 | escape }}</li>{%- endif -%}
         </ul>
-        {%- if section.settings.card1_price != blank -%}
-          <div class="pl-price"><span class="pl-price__now">{{ section.settings.card1_price | escape }}</span></div>
-        {%- endif -%}
         {%- if prod != blank -%}
           <a class="btn dark" href="{{ cart_single }}">{{ section.settings.product_cta_label | escape }}</a>
         {%- else -%}
