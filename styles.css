@@ -159,6 +159,10 @@ h3{font-size:1.22rem;}
 .hero__sub strong{color:#fff;font-weight:600;}
 .hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 20px;}
 .hero__micro{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
+.hero__price{display:flex;align-items:baseline;gap:10px;margin:26px 0 0;}
+.hero__price b{font-family:var(--font-serif);font-size:2rem;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1;}
+.hero__price span{font-size:.84rem;color:#b7ada6;}
+.mobilebar__price{color:var(--ink);font-weight:700;}
 .hero__media{position:relative;display:flex;justify-content:center;}
 .hero__product{
   width:100%;max-width:440px;height:auto;

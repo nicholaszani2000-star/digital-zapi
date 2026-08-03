@@ -90,6 +90,9 @@
   #plumpy-{{ uid }} .pl-hero__sub strong{color:#fff;}
   #plumpy-{{ uid }} .pl-hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 20px;}
   #plumpy-{{ uid }} .pl-hero__micro{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
+  #plumpy-{{ uid }} .pl-hero__price{display:flex;align-items:baseline;gap:10px;margin:26px 0 0;}
+  #plumpy-{{ uid }} .pl-hero__price b{font-family:var(--font-serif);font-size:2rem;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1;}
+  #plumpy-{{ uid }} .pl-hero__price span{font-size:.84rem;color:#b7ada6;}
   #plumpy-{{ uid }} .pl-hero__media{display:flex;justify-content:center;}
   #plumpy-{{ uid }} .plumpy__hero-img{width:100%;max-width:420px;height:auto;
     -webkit-mask-image:radial-gradient(ellipse 60% 66% at 50% 47%,#000 52%,rgba(0,0,0,0) 82%);
@@ -237,6 +240,7 @@
   #plumpy-{{ uid }} .pl-mobilebar__info{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
   #plumpy-{{ uid }} .pl-mobilebar__info strong{font-family:var(--font-serif);letter-spacing:.16em;font-size:.95rem;}
   #plumpy-{{ uid }} .pl-mobilebar__info span{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #plumpy-{{ uid }} .pl-mobilebar__price{color:var(--ink);font-weight:700;}
   #plumpy-{{ uid }} .pl-mobilebar .btn{margin-left:auto;flex:0 0 auto;}
 
   /* Toast */
@@ -299,6 +303,9 @@
         {%- if section.settings.hero_eyebrow != blank -%}<p class="eyebrow gold">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
         <h1 class="pl-hero__title">{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_em != blank %}<br><em>{{ section.settings.hero_title_em | escape }}</em>{% endif %}</h1>
         <div class="pl-hero__sub">{{ section.settings.hero_subtitle }}</div>
+        {%- if section.settings.card1_price != blank -%}
+          <p class="pl-hero__price"><b>{{ section.settings.card1_price | escape }}</b><span>{{ section.settings.price_note | escape }}</span></p>
+        {%- endif -%}
         <div class="pl-hero__cta">
           {%- if prod != blank -%}
             <a class="btn light" href="{{ cart_single }}">{{ section.settings.hero_cta_label | escape }}</a>
@@ -440,6 +447,9 @@
           {%- if section.settings.product_b2 != blank -%}<li>{{ section.settings.product_b2 | escape }}</li>{%- endif -%}
           {%- if section.settings.product_b3 != blank -%}<li>{{ section.settings.product_b3 | escape }}</li>{%- endif -%}
         </ul>
+        {%- if section.settings.card1_price != blank -%}
+          <div class="pl-price"><span class="pl-price__now">{{ section.settings.card1_price | escape }}</span></div>
+        {%- endif -%}
         {%- if prod != blank -%}
           <a class="btn dark" href="{{ cart_single }}">{{ section.settings.product_cta_label | escape }}</a>
         {%- else -%}
@@ -635,7 +645,7 @@
   <div class="pl-mobilebar">
     <div class="pl-mobilebar__info">
       <strong>{{ section.settings.sticky_title | escape }}</strong>
-      <span>{{ section.settings.sticky_sub | escape }}</span>
+      <span>{% if section.settings.card1_price != blank %}<b class="pl-mobilebar__price">{{ section.settings.card1_price | escape }}</b> · {% endif %}{{ section.settings.sticky_sub | escape }}</span>
     </div>
     {%- if prod != blank -%}
       <a class="btn gold sm" href="{{ cart_single }}">{{ section.settings.sticky_cta | escape }}</a>
@@ -842,7 +852,8 @@
     { "type": "text", "id": "card1_f1", "label": "Card 1 · voce 1", "default": "1× siero rimpolpante" },
     { "type": "text", "id": "card1_f2", "label": "Card 1 · voce 2", "default": "Peptidi GHK-Cu + Acido Ialuronico" },
     { "type": "text", "id": "card1_f3", "label": "Card 1 · voce 3", "default": "Vegan e cruelty-free" },
-    { "type": "text", "id": "card1_price", "label": "Card 1 · prezzo", "info": "Deve coincidere col prezzo del prodotto Shopify collegato. Lascia vuoto per non mostrarlo.", "default": "€ 34,90" },
+    { "type": "text", "id": "card1_price", "label": "Card 1 · prezzo", "info": "Prezzo del singolo. Compare anche nell'hero, nella sezione prodotto e nella barra mobile. Deve coincidere col prezzo del prodotto Shopify. Lascia vuoto per nasconderlo ovunque.", "default": "€ 34,90" },
+    { "type": "text", "id": "price_note", "label": "Nota accanto al prezzo (hero)", "default": "IVA inclusa" },
     { "type": "text", "id": "card1_compare", "label": "Card 1 · prezzo barrato", "info": "Solo se è un prezzo realmente praticato negli ultimi 30 giorni (direttiva Omnibus)." },
     { "type": "text", "id": "card1_cta", "label": "Card 1 · pulsante", "default": "Aggiungi al carrello" },
     { "type": "text", "id": "card2_title", "label": "Card 2 · titolo", "default": "Il Duo" },
