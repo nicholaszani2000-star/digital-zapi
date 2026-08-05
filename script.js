@@ -1,5 +1,5 @@
 /* =========================================================================
-   PLUMPY — interazioni landing
+   PUMPLY — interazioni landing
    Header blur · menu mobile · reveal · slider prima/dopo · form Klaviyo · toast
    ========================================================================= */
 (() => {
@@ -150,7 +150,7 @@
       const configured = KLAVIYO.companyId && KLAVIYO.listId;
       if (!configured) {
         // Nessuna config: conferma locale (email validata lato client)
-        console.info('[PLUMPY] Klaviyo non configurato: imposta companyId e listId in script.js per raccogliere le iscrizioni reali.');
+        console.info('[PUMPLY] Klaviyo non configurato: imposta companyId e listId in script.js per raccogliere le iscrizioni reali.');
         say('Grazie! Sei in lista: ti avviseremo al lancio.', true);
         form.reset();
         return;

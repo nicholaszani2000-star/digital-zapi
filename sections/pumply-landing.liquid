@@ -1,8 +1,8 @@
 {%- comment -%}
-  PLUMPY — Siero Rimpolpante Labbra · sezione Shopify Online Store 2.0
+  PUMPLY — Siero Rimpolpante Labbra · sezione Shopify Online Store 2.0
   --------------------------------------------------------------------------
   · Solo HTML + CSS + JS vanilla. Nessuna dipendenza.
-  · CSS e JS scoped su #plumpy-{{ section.id }} per non collidere col tema.
+  · CSS e JS scoped su #pumply-{{ section.id }} per non collidere col tema.
   · Immagini: image_picker nel Theme Editor, con fallback ad asset_url
     (setting testuale col nome del file caricato in "Assets").
   · Pulsanti: collega un prodotto nel Theme Editor → aggiungono al carrello
@@ -30,7 +30,7 @@
   {{ section.settings.body_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
   {{ section.settings.body_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
 
-  #plumpy-{{ uid }}{
+  #pumply-{{ uid }}{
     --ink:#1A1615; --dark:#0E0B0D; --dark-2:#171214; --gold:#B8935A; --gold-light:#D9BC85;
     --gold-deep:#8A6A38; --white:#fff; --warm:#F6F4F1; --blush:#E7A9C2; --muted:#6E6A67;
     --line:#EAE3DC; --line-dark:rgba(255,255,255,.14); --radius:16px; --radius-sm:10px;
@@ -39,248 +39,248 @@
     --font-sans:{{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
     font-family:var(--font-sans); color:var(--ink); line-height:1.6;
   }
-  #plumpy-{{ uid }} *,#plumpy-{{ uid }} *::before,#plumpy-{{ uid }} *::after{box-sizing:border-box;}
-  #plumpy-{{ uid }} h1,#plumpy-{{ uid }} h2,#plumpy-{{ uid }} h3,#plumpy-{{ uid }} h4{font-family:var(--font-serif);font-weight:600;line-height:1.14;margin:0;letter-spacing:-.01em;}
-  #plumpy-{{ uid }} p{margin:0;}
-  #plumpy-{{ uid }} img{max-width:100%;height:auto;display:block;}
-  #plumpy-{{ uid }} .pl-wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
-  #plumpy-{{ uid }} .pl-wrap.narrow{max-width:760px;}
-  #plumpy-{{ uid }} .center{text-align:center;}
-  #plumpy-{{ uid }} .pl-sec{padding:clamp(52px,8vw,104px) 0;}
-  #plumpy-{{ uid }} .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:600;color:var(--gold-deep);margin:0 0 14px;}
-  #plumpy-{{ uid }} .eyebrow.gold{color:var(--gold-light);}
-  #plumpy-{{ uid }} .lead{font-size:clamp(1rem,1.5vw,1.12rem);color:var(--muted);line-height:1.7;max-width:62ch;}
-  #plumpy-{{ uid }} .center .lead{margin-inline:auto;}
-  #plumpy-{{ uid }} h2{font-size:clamp(1.8rem,4.6vw,2.9rem);}
-  #plumpy-{{ uid }} .ico{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  #pumply-{{ uid }} *,#pumply-{{ uid }} *::before,#pumply-{{ uid }} *::after{box-sizing:border-box;}
+  #pumply-{{ uid }} h1,#pumply-{{ uid }} h2,#pumply-{{ uid }} h3,#pumply-{{ uid }} h4{font-family:var(--font-serif);font-weight:600;line-height:1.14;margin:0;letter-spacing:-.01em;}
+  #pumply-{{ uid }} p{margin:0;}
+  #pumply-{{ uid }} img{max-width:100%;height:auto;display:block;}
+  #pumply-{{ uid }} .pl-wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  #pumply-{{ uid }} .pl-wrap.narrow{max-width:760px;}
+  #pumply-{{ uid }} .center{text-align:center;}
+  #pumply-{{ uid }} .pl-sec{padding:clamp(52px,8vw,104px) 0;}
+  #pumply-{{ uid }} .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:600;color:var(--gold-deep);margin:0 0 14px;}
+  #pumply-{{ uid }} .eyebrow.gold{color:var(--gold-light);}
+  #pumply-{{ uid }} .lead{font-size:clamp(1rem,1.5vw,1.12rem);color:var(--muted);line-height:1.7;max-width:62ch;}
+  #pumply-{{ uid }} .center .lead{margin-inline:auto;}
+  #pumply-{{ uid }} h2{font-size:clamp(1.8rem,4.6vw,2.9rem);}
+  #pumply-{{ uid }} .ico{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 
   {%- comment -%} I contenuti sono VISIBILI di default. L'animazione si attiva
-     solo se il JS aggiunge .plumpy-anim: se il JS non parte, si vede tutto. {%- endcomment -%}
-  #plumpy-{{ uid }}.plumpy-anim .reveal{opacity:0;transform:translateY(20px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);}
-  #plumpy-{{ uid }}.plumpy-anim .reveal.is-visible{opacity:1;transform:none;}
+     solo se il JS aggiunge .pumply-anim: se il JS non parte, si vede tutto. {%- endcomment -%}
+  #pumply-{{ uid }}.pumply-anim .reveal{opacity:0;transform:translateY(20px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);}
+  #pumply-{{ uid }}.pumply-anim .reveal.is-visible{opacity:1;transform:none;}
 
   /* Bottoni */
-  #plumpy-{{ uid }} .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.95rem;
+  #pumply-{{ uid }} .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.95rem;
     padding:15px 28px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;white-space:nowrap;text-decoration:none;
     transition:transform .18s var(--ease),background .2s,color .2s,border-color .2s,box-shadow .2s;font-family:inherit;}
-  #plumpy-{{ uid }} .btn:hover{transform:translateY(-2px);}
-  #plumpy-{{ uid }} .btn.block{width:100%;}
-  #plumpy-{{ uid }} .btn.sm{padding:11px 20px;font-size:.86rem;}
-  #plumpy-{{ uid }} .btn.dark{background:var(--ink);color:#fff;}
-  #plumpy-{{ uid }} .btn.dark:hover{background:#000;box-shadow:0 12px 24px -12px rgba(0,0,0,.5);}
-  #plumpy-{{ uid }} .btn.light{background:#fff;color:var(--ink);}
-  #plumpy-{{ uid }} .btn.light:hover{background:var(--warm);}
-  #plumpy-{{ uid }} .btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c14;}
-  #plumpy-{{ uid }} .btn.gold:hover{filter:brightness(1.04);box-shadow:0 12px 26px -12px rgba(184,147,90,.7);}
-  #plumpy-{{ uid }} .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5);}
-  #plumpy-{{ uid }} .btn.ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;}
-  #plumpy-{{ uid }} .btn:focus-visible,#plumpy-{{ uid }} a:focus-visible,#plumpy-{{ uid }} input:focus-visible,#plumpy-{{ uid }} summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+  #pumply-{{ uid }} .btn:hover{transform:translateY(-2px);}
+  #pumply-{{ uid }} .btn.block{width:100%;}
+  #pumply-{{ uid }} .btn.sm{padding:11px 20px;font-size:.86rem;}
+  #pumply-{{ uid }} .btn.dark{background:var(--ink);color:#fff;}
+  #pumply-{{ uid }} .btn.dark:hover{background:#000;box-shadow:0 12px 24px -12px rgba(0,0,0,.5);}
+  #pumply-{{ uid }} .btn.light{background:#fff;color:var(--ink);}
+  #pumply-{{ uid }} .btn.light:hover{background:var(--warm);}
+  #pumply-{{ uid }} .btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#3a2c14;}
+  #pumply-{{ uid }} .btn.gold:hover{filter:brightness(1.04);box-shadow:0 12px 26px -12px rgba(184,147,90,.7);}
+  #pumply-{{ uid }} .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5);}
+  #pumply-{{ uid }} .btn.ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+  #pumply-{{ uid }} .btn:focus-visible,#pumply-{{ uid }} a:focus-visible,#pumply-{{ uid }} input:focus-visible,#pumply-{{ uid }} summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 
   /* Announcement */
-  #plumpy-{{ uid }} .pl-announce{background:var(--ink);color:#efe7dd;text-align:center;font-size:.8rem;letter-spacing:.03em;padding:9px 16px;}
+  #pumply-{{ uid }} .pl-announce{background:var(--ink);color:#efe7dd;text-align:center;font-size:.8rem;letter-spacing:.03em;padding:9px 16px;}
 
   /* Hero */
-  #plumpy-{{ uid }} .pl-hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;isolation:isolate;}
-  #plumpy-{{ uid }} .pl-hero__glow{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  #pumply-{{ uid }} .pl-hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;isolation:isolate;}
+  #pumply-{{ uid }} .pl-hero__glow{position:absolute;inset:0;z-index:-1;pointer-events:none;
     background:radial-gradient(60% 50% at 72% 30%,rgba(199,154,106,.28),transparent 70%),radial-gradient(50% 40% at 50% 0%,rgba(231,169,194,.12),transparent 70%);}
-  #plumpy-{{ uid }} .pl-hero__inner{max-width:1180px;margin:0 auto;padding:52px 24px 60px;display:grid;gap:16px;align-items:center;}
-  #plumpy-{{ uid }} .pl-hero__title{font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.03;margin:0 0 22px;}
-  #plumpy-{{ uid }} .pl-hero__title em{font-style:italic;color:var(--blush);font-weight:500;}
-  #plumpy-{{ uid }} .pl-hero__sub{font-size:clamp(1rem,1.7vw,1.16rem);color:#d8cfc8;line-height:1.7;max-width:52ch;}
-  #plumpy-{{ uid }} .pl-hero__sub strong{color:#fff;}
-  #plumpy-{{ uid }} .pl-hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 20px;}
-  #plumpy-{{ uid }} .pl-hero__micro{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
-  #plumpy-{{ uid }} .pl-hero__price{display:flex;align-items:baseline;gap:10px;margin:26px 0 0;}
-  #plumpy-{{ uid }} .pl-hero__price b{font-family:var(--font-serif);font-size:2rem;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1;}
-  #plumpy-{{ uid }} .pl-hero__price span{font-size:.84rem;color:#b7ada6;}
-  #plumpy-{{ uid }} .pl-hero__media{display:flex;justify-content:center;}
-  #plumpy-{{ uid }} .plumpy__hero-img{width:100%;max-width:420px;height:auto;
+  #pumply-{{ uid }} .pl-hero__inner{max-width:1180px;margin:0 auto;padding:52px 24px 60px;display:grid;gap:16px;align-items:center;}
+  #pumply-{{ uid }} .pl-hero__title{font-size:clamp(2.6rem,9vw,4.4rem);line-height:1.03;margin:0 0 22px;}
+  #pumply-{{ uid }} .pl-hero__title em{font-style:italic;color:var(--blush);font-weight:500;}
+  #pumply-{{ uid }} .pl-hero__sub{font-size:clamp(1rem,1.7vw,1.16rem);color:#d8cfc8;line-height:1.7;max-width:52ch;}
+  #pumply-{{ uid }} .pl-hero__sub strong{color:#fff;}
+  #pumply-{{ uid }} .pl-hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 20px;}
+  #pumply-{{ uid }} .pl-hero__micro{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
+  #pumply-{{ uid }} .pl-hero__price{display:flex;align-items:baseline;gap:10px;margin:26px 0 0;}
+  #pumply-{{ uid }} .pl-hero__price b{font-family:var(--font-serif);font-size:2rem;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1;}
+  #pumply-{{ uid }} .pl-hero__price span{font-size:.84rem;color:#b7ada6;}
+  #pumply-{{ uid }} .pl-hero__media{display:flex;justify-content:center;}
+  #pumply-{{ uid }} .pumply__hero-img{width:100%;max-width:420px;height:auto;
     -webkit-mask-image:radial-gradient(ellipse 60% 66% at 50% 47%,#000 52%,rgba(0,0,0,0) 82%);
             mask-image:radial-gradient(ellipse 60% 66% at 50% 47%,#000 52%,rgba(0,0,0,0) 82%);}
 
   /* USP */
-  #plumpy-{{ uid }} .pl-usp{background:var(--dark);color:#fff;padding:clamp(30px,4vw,44px) 0;border-top:1px solid var(--line-dark);}
-  #plumpy-{{ uid }} .pl-usp__list{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:26px 28px;grid-template-columns:1fr;}
-  #plumpy-{{ uid }} .pl-usp__item{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:start;}
-  #plumpy-{{ uid }} .pl-usp__item .ico{grid-row:span 2;color:var(--gold-light);width:30px;height:30px;}
-  #plumpy-{{ uid }} .pl-usp__item h3{font-family:var(--font-sans);font-size:.98rem;font-weight:600;margin:2px 0 0;}
-  #plumpy-{{ uid }} .pl-usp__item p{color:#b7ada6;font-size:.88rem;line-height:1.5;}
+  #pumply-{{ uid }} .pl-usp{background:var(--dark);color:#fff;padding:clamp(30px,4vw,44px) 0;border-top:1px solid var(--line-dark);}
+  #pumply-{{ uid }} .pl-usp__list{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:26px 28px;grid-template-columns:1fr;}
+  #pumply-{{ uid }} .pl-usp__item{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:start;}
+  #pumply-{{ uid }} .pl-usp__item .ico{grid-row:span 2;color:var(--gold-light);width:30px;height:30px;}
+  #pumply-{{ uid }} .pl-usp__item h3{font-family:var(--font-sans);font-size:.98rem;font-weight:600;margin:2px 0 0;}
+  #pumply-{{ uid }} .pl-usp__item p{color:#b7ada6;font-size:.88rem;line-height:1.5;}
 
   /* Prima/Dopo */
-  #plumpy-{{ uid }} .pl-ba-sec{background:#fff;}
-  #plumpy-{{ uid }} .pl-ba{position:relative;width:100%;max-width:560px;margin:34px auto 0;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;
+  #pumply-{{ uid }} .pl-ba-sec{background:#fff;}
+  #pumply-{{ uid }} .pl-ba{position:relative;width:100%;max-width:560px;margin:34px auto 0;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;
     user-select:none;-webkit-user-select:none;touch-action:pan-y;cursor:ew-resize;background:var(--warm);box-shadow:0 40px 70px -40px rgba(26,22,21,.45);}
-  #plumpy-{{ uid }} .pl-ba__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
-  #plumpy-{{ uid }} .pl-ba__before{position:absolute;inset:0;clip-path:inset(0 calc((100 - var(--pos)) * 1%) 0 0);will-change:clip-path;}
-  #plumpy-{{ uid }} .pl-ba__tag{position:absolute;top:14px;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+  #pumply-{{ uid }} .pl-ba__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
+  #pumply-{{ uid }} .pl-ba__before{position:absolute;inset:0;clip-path:inset(0 calc((100 - var(--pos)) * 1%) 0 0);will-change:clip-path;}
+  #pumply-{{ uid }} .pl-ba__tag{position:absolute;top:14px;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;
     background:rgba(14,11,13,.55);padding:6px 12px;border-radius:999px;}
-  #plumpy-{{ uid }} .pl-ba__tag.before{left:14px;}
-  #plumpy-{{ uid }} .pl-ba__tag.after{right:14px;}
-  #plumpy-{{ uid }} .pl-ba__handle{position:absolute;top:0;bottom:0;left:calc(var(--pos) * 1%);width:46px;transform:translateX(-50%);
+  #pumply-{{ uid }} .pl-ba__tag.before{left:14px;}
+  #pumply-{{ uid }} .pl-ba__tag.after{right:14px;}
+  #pumply-{{ uid }} .pl-ba__handle{position:absolute;top:0;bottom:0;left:calc(var(--pos) * 1%);width:46px;transform:translateX(-50%);
     display:grid;place-items:center;background:none;border:0;cursor:ew-resize;padding:0;}
-  #plumpy-{{ uid }} .pl-ba__handle::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:rgba(255,255,255,.92);box-shadow:0 0 12px rgba(0,0,0,.35);}
-  #plumpy-{{ uid }} .pl-ba__handle svg{position:relative;width:40px;height:40px;padding:9px;background:#fff;border-radius:50%;color:var(--ink);
+  #pumply-{{ uid }} .pl-ba__handle::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:rgba(255,255,255,.92);box-shadow:0 0 12px rgba(0,0,0,.35);}
+  #pumply-{{ uid }} .pl-ba__handle svg{position:relative;width:40px;height:40px;padding:9px;background:#fff;border-radius:50%;color:var(--ink);
     box-shadow:0 4px 14px rgba(0,0,0,.28);stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-  #plumpy-{{ uid }} .pl-ba__handle:focus-visible{outline:none;}
-  #plumpy-{{ uid }} .pl-ba__handle:focus-visible svg{outline:3px solid var(--gold);outline-offset:3px;}
-  #plumpy-{{ uid }} .pl-disclaimer{margin:20px auto 0;text-align:center;font-size:.8rem;color:var(--muted);max-width:46ch;}
+  #pumply-{{ uid }} .pl-ba__handle:focus-visible{outline:none;}
+  #pumply-{{ uid }} .pl-ba__handle:focus-visible svg{outline:3px solid var(--gold);outline-offset:3px;}
+  #pumply-{{ uid }} .pl-disclaimer{margin:20px auto 0;text-align:center;font-size:.8rem;color:var(--muted);max-width:46ch;}
 
   /* Scienza */
-  #plumpy-{{ uid }} .pl-science{background:var(--warm);}
-  #plumpy-{{ uid }} .pl-science__grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:40px;}
-  #plumpy-{{ uid }} .pl-sci-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;}
-  #plumpy-{{ uid }} .pl-sci-card__mol{display:inline-flex;color:var(--gold);}
-  #plumpy-{{ uid }} .pl-sci-card__mol svg{width:46px;height:46px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-  #plumpy-{{ uid }} .pl-sci-card h3{margin:18px 0 10px;font-size:1.32rem;}
-  #plumpy-{{ uid }} .pl-sci-card h3 span{display:block;font-family:var(--font-sans);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-top:6px;}
-  #plumpy-{{ uid }} .pl-sci-card p{color:var(--muted);line-height:1.72;}
+  #pumply-{{ uid }} .pl-science{background:var(--warm);}
+  #pumply-{{ uid }} .pl-science__grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:40px;}
+  #pumply-{{ uid }} .pl-sci-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;}
+  #pumply-{{ uid }} .pl-sci-card__mol{display:inline-flex;color:var(--gold);}
+  #pumply-{{ uid }} .pl-sci-card__mol svg{width:46px;height:46px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  #pumply-{{ uid }} .pl-sci-card h3{margin:18px 0 10px;font-size:1.32rem;}
+  #pumply-{{ uid }} .pl-sci-card h3 span{display:block;font-family:var(--font-sans);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-top:6px;}
+  #pumply-{{ uid }} .pl-sci-card p{color:var(--muted);line-height:1.72;}
 
   /* Come si usa */
-  #plumpy-{{ uid }} .pl-howto{background:#fff;}
-  #plumpy-{{ uid }} .pl-steps{display:grid;gap:26px;grid-template-columns:1fr;margin-top:42px;}
-  #plumpy-{{ uid }} .pl-step__n{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;
+  #pumply-{{ uid }} .pl-howto{background:#fff;}
+  #pumply-{{ uid }} .pl-steps{display:grid;gap:26px;grid-template-columns:1fr;margin-top:42px;}
+  #pumply-{{ uid }} .pl-step__n{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;
     border:1.5px solid var(--gold);color:var(--gold-deep);font-family:var(--font-serif);font-size:1.4rem;font-weight:600;margin-bottom:16px;}
-  #plumpy-{{ uid }} .pl-step h3{margin-bottom:8px;font-size:1.16rem;}
-  #plumpy-{{ uid }} .pl-step p{color:var(--muted);}
+  #pumply-{{ uid }} .pl-step h3{margin-bottom:8px;font-size:1.16rem;}
+  #pumply-{{ uid }} .pl-step p{color:var(--muted);}
 
   /* Prodotto */
-  #plumpy-{{ uid }} .pl-product{background:var(--warm);}
-  #plumpy-{{ uid }} .pl-product__grid{display:grid;gap:34px;grid-template-columns:1fr;align-items:center;}
-  #plumpy-{{ uid }} .pl-product__media img,#plumpy-{{ uid }} .pl-product__media .plumpy__img-ph{width:100%;border-radius:var(--radius);box-shadow:0 40px 70px -44px rgba(26,22,21,.4);}
-  #plumpy-{{ uid }} .pl-product__copy h2{margin:6px 0 18px;}
-  #plumpy-{{ uid }} .pl-ticks{display:grid;gap:12px;margin:22px 0 30px;}
-  #plumpy-{{ uid }} .pl-ticks li{position:relative;padding-left:30px;font-size:.98rem;list-style:none;}
-  #plumpy-{{ uid }} .pl-ticks li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:var(--gold);
+  #pumply-{{ uid }} .pl-product{background:var(--warm);}
+  #pumply-{{ uid }} .pl-product__grid{display:grid;gap:34px;grid-template-columns:1fr;align-items:center;}
+  #pumply-{{ uid }} .pl-product__media img,#pumply-{{ uid }} .pl-product__media .pumply__img-ph{width:100%;border-radius:var(--radius);box-shadow:0 40px 70px -44px rgba(26,22,21,.4);}
+  #pumply-{{ uid }} .pl-product__copy h2{margin:6px 0 18px;}
+  #pumply-{{ uid }} .pl-ticks{display:grid;gap:12px;margin:22px 0 30px;}
+  #pumply-{{ uid }} .pl-ticks li{position:relative;padding-left:30px;font-size:.98rem;list-style:none;}
+  #pumply-{{ uid }} .pl-ticks li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:var(--gold);
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat;
             mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat;}
 
   /* Acquisto */
-  #plumpy-{{ uid }} .pl-buy{background:#fff;}
-  #plumpy-{{ uid }} .pl-buy__grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:42px;max-width:820px;margin-inline:auto;}
-  #plumpy-{{ uid }} .pl-buy-card{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;}
-  #plumpy-{{ uid }} .pl-buy-card.featured{border-color:var(--gold);box-shadow:0 30px 60px -40px rgba(184,147,90,.5);}
-  #plumpy-{{ uid }} .pl-buy-card h3{font-size:1.5rem;margin-bottom:8px;}
-  #plumpy-{{ uid }} .pl-buy-card__desc{color:var(--muted);margin-bottom:6px;}
-  #plumpy-{{ uid }} .pl-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:16px 0 2px;}
-  #plumpy-{{ uid }} .pl-price__now{font-family:var(--font-serif);font-size:2.1rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1;}
-  #plumpy-{{ uid }} .pl-price__was{font-size:1rem;color:var(--muted);text-decoration:line-through;}
-  #plumpy-{{ uid }} .pl-price__save{width:100%;font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);margin-top:2px;}
-  #plumpy-{{ uid }} .pl-buy-card .pl-ticks{margin:18px 0 26px;}
-  #plumpy-{{ uid }} .pl-buy-card .btn{margin-top:auto;}
-  #plumpy-{{ uid }} .pl-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  #pumply-{{ uid }} .pl-buy{background:#fff;}
+  #pumply-{{ uid }} .pl-buy__grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:42px;max-width:820px;margin-inline:auto;}
+  #pumply-{{ uid }} .pl-buy-card{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;}
+  #pumply-{{ uid }} .pl-buy-card.featured{border-color:var(--gold);box-shadow:0 30px 60px -40px rgba(184,147,90,.5);}
+  #pumply-{{ uid }} .pl-buy-card h3{font-size:1.5rem;margin-bottom:8px;}
+  #pumply-{{ uid }} .pl-buy-card__desc{color:var(--muted);margin-bottom:6px;}
+  #pumply-{{ uid }} .pl-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:16px 0 2px;}
+  #pumply-{{ uid }} .pl-price__now{font-family:var(--font-serif);font-size:2.1rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+  #pumply-{{ uid }} .pl-price__was{font-size:1rem;color:var(--muted);text-decoration:line-through;}
+  #pumply-{{ uid }} .pl-price__save{width:100%;font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);margin-top:2px;}
+  #pumply-{{ uid }} .pl-buy-card .pl-ticks{margin:18px 0 26px;}
+  #pumply-{{ uid }} .pl-buy-card .btn{margin-top:auto;}
+  #pumply-{{ uid }} .pl-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-light),var(--gold));
     color:#3a2c14;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:999px;white-space:nowrap;}
-  #plumpy-{{ uid }} .pl-buy__reassure{text-align:center;margin-top:26px;font-size:.85rem;color:var(--muted);}
+  #pumply-{{ uid }} .pl-buy__reassure{text-align:center;margin-top:26px;font-size:.85rem;color:var(--muted);}
 
   /* Lista d'attesa */
-  #plumpy-{{ uid }} .pl-waitlist{background:var(--dark);color:#fff;position:relative;overflow:hidden;}
-  #plumpy-{{ uid }} .pl-waitlist::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 60% at 50% 0%,rgba(199,154,106,.2),transparent 70%);}
-  #plumpy-{{ uid }} .pl-waitlist>*{position:relative;}
-  #plumpy-{{ uid }} .pl-waitlist h2{margin-bottom:16px;}
-  #plumpy-{{ uid }} .pl-waitlist .lead{color:#cfc6bf;}
-  #plumpy-{{ uid }} .pl-field{display:flex;gap:10px;max-width:480px;margin:24px auto 0;}
-  #plumpy-{{ uid }} .pl-field input{flex:1;min-width:0;padding:15px 18px;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07);color:#fff;font-size:1rem;font-family:inherit;}
-  #plumpy-{{ uid }} .pl-field input::placeholder{color:#aaa19a;}
-  #plumpy-{{ uid }} .pl-wl-msg{min-height:1.3em;margin-top:14px;font-size:.9rem;text-align:center;}
-  #plumpy-{{ uid }} .pl-wl-msg.ok{color:var(--gold-light);}
-  #plumpy-{{ uid }} .pl-wl-msg.err{color:#f2b8b8;}
-  #plumpy-{{ uid }} .pl-wl-privacy{margin-top:18px;text-align:center;font-size:.76rem;color:#8f8880;}
+  #pumply-{{ uid }} .pl-waitlist{background:var(--dark);color:#fff;position:relative;overflow:hidden;}
+  #pumply-{{ uid }} .pl-waitlist::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 60% at 50% 0%,rgba(199,154,106,.2),transparent 70%);}
+  #pumply-{{ uid }} .pl-waitlist>*{position:relative;}
+  #pumply-{{ uid }} .pl-waitlist h2{margin-bottom:16px;}
+  #pumply-{{ uid }} .pl-waitlist .lead{color:#cfc6bf;}
+  #pumply-{{ uid }} .pl-field{display:flex;gap:10px;max-width:480px;margin:24px auto 0;}
+  #pumply-{{ uid }} .pl-field input{flex:1;min-width:0;padding:15px 18px;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07);color:#fff;font-size:1rem;font-family:inherit;}
+  #pumply-{{ uid }} .pl-field input::placeholder{color:#aaa19a;}
+  #pumply-{{ uid }} .pl-wl-msg{min-height:1.3em;margin-top:14px;font-size:.9rem;text-align:center;}
+  #pumply-{{ uid }} .pl-wl-msg.ok{color:var(--gold-light);}
+  #pumply-{{ uid }} .pl-wl-msg.err{color:#f2b8b8;}
+  #pumply-{{ uid }} .pl-wl-privacy{margin-top:18px;text-align:center;font-size:.76rem;color:#8f8880;}
 
   /* Recensioni */
-  #plumpy-{{ uid }} .pl-reviews{background:var(--warm);}
-  #plumpy-{{ uid }} .pl-reviews__mount{margin-top:36px;}
-  #plumpy-{{ uid }} .pl-reviews__empty{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:48px 28px;border:1px dashed var(--line);border-radius:var(--radius);background:#fff;max-width:560px;margin:0 auto;}
-  #plumpy-{{ uid }} .pl-reviews__empty svg{width:40px;height:40px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linejoin:round;}
-  #plumpy-{{ uid }} .pl-reviews__empty p{color:var(--muted);max-width:34ch;}
+  #pumply-{{ uid }} .pl-reviews{background:var(--warm);}
+  #pumply-{{ uid }} .pl-reviews__mount{margin-top:36px;}
+  #pumply-{{ uid }} .pl-reviews__empty{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:48px 28px;border:1px dashed var(--line);border-radius:var(--radius);background:#fff;max-width:560px;margin:0 auto;}
+  #pumply-{{ uid }} .pl-reviews__empty svg{width:40px;height:40px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linejoin:round;}
+  #pumply-{{ uid }} .pl-reviews__empty p{color:var(--muted);max-width:34ch;}
 
   /* Garanzie */
-  #plumpy-{{ uid }} .pl-guarantees{background:#fff;}
-  #plumpy-{{ uid }} .pl-guar__grid{display:grid;gap:26px;grid-template-columns:1fr;text-align:center;}
-  #plumpy-{{ uid }} .pl-guar .ico{color:var(--gold);width:34px;height:34px;margin:0 auto 12px;}
-  #plumpy-{{ uid }} .pl-guar h3{font-family:var(--font-sans);font-size:1rem;font-weight:600;margin-bottom:6px;}
-  #plumpy-{{ uid }} .pl-guar p{color:var(--muted);font-size:.9rem;}
+  #pumply-{{ uid }} .pl-guarantees{background:#fff;}
+  #pumply-{{ uid }} .pl-guar__grid{display:grid;gap:26px;grid-template-columns:1fr;text-align:center;}
+  #pumply-{{ uid }} .pl-guar .ico{color:var(--gold);width:34px;height:34px;margin:0 auto 12px;}
+  #pumply-{{ uid }} .pl-guar h3{font-family:var(--font-sans);font-size:1rem;font-weight:600;margin-bottom:6px;}
+  #pumply-{{ uid }} .pl-guar p{color:var(--muted);font-size:.9rem;}
 
   /* FAQ */
-  #plumpy-{{ uid }} .pl-faq{background:var(--warm);}
-  #plumpy-{{ uid }} .pl-faq h2{margin-bottom:34px;}
-  #plumpy-{{ uid }} .pl-faq__list{display:grid;gap:14px;}
-  #plumpy-{{ uid }} .pl-faq__item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;}
-  #plumpy-{{ uid }} .pl-faq__item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-family:var(--font-serif);font-size:1.08rem;font-weight:500;}
-  #plumpy-{{ uid }} .pl-faq__item summary::-webkit-details-marker{display:none;}
-  #plumpy-{{ uid }} .pl-plus{position:relative;flex:0 0 18px;width:18px;height:18px;}
-  #plumpy-{{ uid }} .pl-plus::before,#plumpy-{{ uid }} .pl-plus::after{content:"";position:absolute;background:var(--gold);border-radius:2px;transition:transform .25s var(--ease),opacity .25s;}
-  #plumpy-{{ uid }} .pl-plus::before{top:8px;left:0;width:18px;height:2px;}
-  #plumpy-{{ uid }} .pl-plus::after{left:8px;top:0;width:2px;height:18px;}
-  #plumpy-{{ uid }} .pl-faq__item[open] .pl-plus::after{transform:rotate(90deg);opacity:0;}
-  #plumpy-{{ uid }} .pl-faq__body{padding:0 22px 22px;color:var(--muted);line-height:1.7;}
+  #pumply-{{ uid }} .pl-faq{background:var(--warm);}
+  #pumply-{{ uid }} .pl-faq h2{margin-bottom:34px;}
+  #pumply-{{ uid }} .pl-faq__list{display:grid;gap:14px;}
+  #pumply-{{ uid }} .pl-faq__item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;}
+  #pumply-{{ uid }} .pl-faq__item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-family:var(--font-serif);font-size:1.08rem;font-weight:500;}
+  #pumply-{{ uid }} .pl-faq__item summary::-webkit-details-marker{display:none;}
+  #pumply-{{ uid }} .pl-plus{position:relative;flex:0 0 18px;width:18px;height:18px;}
+  #pumply-{{ uid }} .pl-plus::before,#pumply-{{ uid }} .pl-plus::after{content:"";position:absolute;background:var(--gold);border-radius:2px;transition:transform .25s var(--ease),opacity .25s;}
+  #pumply-{{ uid }} .pl-plus::before{top:8px;left:0;width:18px;height:2px;}
+  #pumply-{{ uid }} .pl-plus::after{left:8px;top:0;width:2px;height:18px;}
+  #pumply-{{ uid }} .pl-faq__item[open] .pl-plus::after{transform:rotate(90deg);opacity:0;}
+  #pumply-{{ uid }} .pl-faq__body{padding:0 22px 22px;color:var(--muted);line-height:1.7;}
 
   /* CTA finale */
-  #plumpy-{{ uid }} .pl-final{position:relative;background:var(--dark);color:#fff;overflow:hidden;padding:clamp(64px,10vw,120px) 0;}
-  #plumpy-{{ uid }} .pl-final__glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 70% at 50% 40%,rgba(231,169,194,.16),transparent 70%),radial-gradient(60% 60% at 50% 120%,rgba(199,154,106,.24),transparent 70%);}
-  #plumpy-{{ uid }} .pl-final .pl-wrap{position:relative;}
-  #plumpy-{{ uid }} .pl-final h2{font-size:clamp(2rem,6vw,3.4rem);margin-bottom:30px;}
-  #plumpy-{{ uid }} .pl-final__actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+  #pumply-{{ uid }} .pl-final{position:relative;background:var(--dark);color:#fff;overflow:hidden;padding:clamp(64px,10vw,120px) 0;}
+  #pumply-{{ uid }} .pl-final__glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 70% at 50% 40%,rgba(231,169,194,.16),transparent 70%),radial-gradient(60% 60% at 50% 120%,rgba(199,154,106,.24),transparent 70%);}
+  #pumply-{{ uid }} .pl-final .pl-wrap{position:relative;}
+  #pumply-{{ uid }} .pl-final h2{font-size:clamp(2rem,6vw,3.4rem);margin-bottom:30px;}
+  #pumply-{{ uid }} .pl-final__actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
 
 
   /* Footer */
-  #plumpy-{{ uid }} .pl-footer{background:var(--dark);color:#c9c0b8;padding:64px 0 28px;}
-  #plumpy-{{ uid }} .pl-footer__grid{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:34px;grid-template-columns:1fr;}
-  #plumpy-{{ uid }} .pl-footer__mark{font-family:var(--font-serif);font-weight:700;font-size:1.5rem;letter-spacing:.3em;color:#fff;margin:0 0 8px;padding-left:.3em;}
-  #plumpy-{{ uid }} .pl-footer__tag{color:var(--gold-light);font-size:.86rem;letter-spacing:.06em;}
-  #plumpy-{{ uid }} .pl-footer__col h4{font-family:var(--font-sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:#8f8880;margin:0 0 14px;font-weight:600;}
-  #plumpy-{{ uid }} .pl-footer__col ul{display:grid;gap:10px;font-size:.9rem;list-style:none;margin:0;padding:0;}
-  #plumpy-{{ uid }} .pl-footer__col a{color:#c9c0b8;text-decoration:none;transition:color .2s;}
-  #plumpy-{{ uid }} .pl-footer__col a:hover{color:#fff;}
-  #plumpy-{{ uid }} .pl-footer__bar{max-width:1180px;margin:44px auto 0;padding:22px 24px 0;border-top:1px solid var(--line-dark);
+  #pumply-{{ uid }} .pl-footer{background:var(--dark);color:#c9c0b8;padding:64px 0 28px;}
+  #pumply-{{ uid }} .pl-footer__grid{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;gap:34px;grid-template-columns:1fr;}
+  #pumply-{{ uid }} .pl-footer__mark{font-family:var(--font-serif);font-weight:700;font-size:1.5rem;letter-spacing:.3em;color:#fff;margin:0 0 8px;padding-left:.3em;}
+  #pumply-{{ uid }} .pl-footer__tag{color:var(--gold-light);font-size:.86rem;letter-spacing:.06em;}
+  #pumply-{{ uid }} .pl-footer__col h4{font-family:var(--font-sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:#8f8880;margin:0 0 14px;font-weight:600;}
+  #pumply-{{ uid }} .pl-footer__col ul{display:grid;gap:10px;font-size:.9rem;list-style:none;margin:0;padding:0;}
+  #pumply-{{ uid }} .pl-footer__col a{color:#c9c0b8;text-decoration:none;transition:color .2s;}
+  #pumply-{{ uid }} .pl-footer__col a:hover{color:#fff;}
+  #pumply-{{ uid }} .pl-footer__bar{max-width:1180px;margin:44px auto 0;padding:22px 24px 0;border-top:1px solid var(--line-dark);
     display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.78rem;color:#8f8880;}
 
   /* Sticky mobile */
-  #plumpy-{{ uid }} .pl-mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;gap:14px;
+  #pumply-{{ uid }} .pl-mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;gap:14px;
     padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));background:rgba(255,255,255,.95);
     -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line);box-shadow:0 -6px 24px -14px rgba(0,0,0,.3);}
-  #plumpy-{{ uid }} .pl-mobilebar__info{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
-  #plumpy-{{ uid }} .pl-mobilebar__info strong{font-family:var(--font-serif);letter-spacing:.16em;font-size:.95rem;}
-  #plumpy-{{ uid }} .pl-mobilebar__info span{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  #plumpy-{{ uid }} .pl-mobilebar__price{color:var(--ink);font-weight:700;}
-  #plumpy-{{ uid }} .pl-mobilebar .btn{margin-left:auto;flex:0 0 auto;}
+  #pumply-{{ uid }} .pl-mobilebar__info{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+  #pumply-{{ uid }} .pl-mobilebar__info strong{font-family:var(--font-serif);letter-spacing:.16em;font-size:.95rem;}
+  #pumply-{{ uid }} .pl-mobilebar__info span{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #pumply-{{ uid }} .pl-mobilebar__price{color:var(--ink);font-weight:700;}
+  #pumply-{{ uid }} .pl-mobilebar .btn{margin-left:auto;flex:0 0 auto;}
 
   /* Toast */
-  #plumpy-{{ uid }} .pl-toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(16px);z-index:80;background:var(--ink);color:#fff;
+  #pumply-{{ uid }} .pl-toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(16px);z-index:80;background:var(--ink);color:#fff;
     font-size:.9rem;padding:13px 20px;border-radius:999px;box-shadow:0 16px 34px -14px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s var(--ease);max-width:88vw;text-align:center;}
-  #plumpy-{{ uid }} .pl-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  #pumply-{{ uid }} .pl-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   @media (prefers-reduced-motion:reduce){
-    #plumpy-{{ uid }}.plumpy-anim .reveal{opacity:1;transform:none;transition:none;}
+    #pumply-{{ uid }}.pumply-anim .reveal{opacity:1;transform:none;transition:none;}
   }
   @media (min-width:560px){
-    #plumpy-{{ uid }} .pl-usp__list{grid-template-columns:1fr 1fr;}
-    #plumpy-{{ uid }} .pl-guar__grid{grid-template-columns:repeat(3,1fr);}
-    #plumpy-{{ uid }} .pl-steps{grid-template-columns:repeat(3,1fr);}
-    #plumpy-{{ uid }} .pl-footer__grid{grid-template-columns:1.6fr 1fr 1fr;}
+    #pumply-{{ uid }} .pl-usp__list{grid-template-columns:1fr 1fr;}
+    #pumply-{{ uid }} .pl-guar__grid{grid-template-columns:repeat(3,1fr);}
+    #pumply-{{ uid }} .pl-steps{grid-template-columns:repeat(3,1fr);}
+    #pumply-{{ uid }} .pl-footer__grid{grid-template-columns:1.6fr 1fr 1fr;}
   }
   @media (min-width:768px){
-    #plumpy-{{ uid }} .pl-science__grid{grid-template-columns:1fr 1fr;}
-    #plumpy-{{ uid }} .pl-buy__grid{grid-template-columns:1fr 1fr;}
+    #pumply-{{ uid }} .pl-science__grid{grid-template-columns:1fr 1fr;}
+    #pumply-{{ uid }} .pl-buy__grid{grid-template-columns:1fr 1fr;}
   }
   @media (max-width:767.98px){
-    #plumpy-{{ uid }} .pl-mobilebar{display:flex;}
+    #pumply-{{ uid }} .pl-mobilebar{display:flex;}
   }
   @media (min-width:920px){
-    #plumpy-{{ uid }} .pl-usp__list{grid-template-columns:repeat(4,1fr);}
-    #plumpy-{{ uid }} .pl-hero__inner{grid-template-columns:1.05fr .95fr;gap:40px;padding:64px 24px 76px;}
-    #plumpy-{{ uid }} .pl-hero__media{order:2;}
-    #plumpy-{{ uid }} .pl-product__grid{grid-template-columns:1fr 1fr;gap:56px;}
-    #plumpy-{{ uid }} .pl-product__media{order:-1;}
+    #pumply-{{ uid }} .pl-usp__list{grid-template-columns:repeat(4,1fr);}
+    #pumply-{{ uid }} .pl-hero__inner{grid-template-columns:1.05fr .95fr;gap:40px;padding:64px 24px 76px;}
+    #pumply-{{ uid }} .pl-hero__media{order:2;}
+    #pumply-{{ uid }} .pl-product__grid{grid-template-columns:1fr 1fr;gap:56px;}
+    #pumply-{{ uid }} .pl-product__media{order:-1;}
   }
   @media (max-width:440px){
-    #plumpy-{{ uid }} .pl-field{flex-direction:column;}
-    #plumpy-{{ uid }} .pl-field .btn{width:100%;}
-    #plumpy-{{ uid }} .pl-hero__cta .btn{width:100%;}
+    #pumply-{{ uid }} .pl-field{flex-direction:column;}
+    #pumply-{{ uid }} .pl-field .btn{width:100%;}
+    #pumply-{{ uid }} .pl-hero__cta .btn{width:100%;}
   }
 {%- endstyle -%}
 
-<div id="plumpy-{{ uid }}" class="plumpy" data-plumpy-root>
+<div id="pumply-{{ uid }}" class="pumply" data-pumply-root>
 
-  <script type="application/json" data-plumpy-config>
+  <script type="application/json" data-pumply-config>
     {
       "klaviyo": {
         "companyId": {{ section.settings.klaviyo_company_id | json }},
@@ -310,21 +310,21 @@
           {%- if prod != blank -%}
             <a class="btn light" href="{{ cart_single }}">{{ section.settings.hero_cta_label | escape }}</a>
           {%- else -%}
-            <button class="btn light" type="button" data-plumpy-scroll>{{ section.settings.hero_cta_label | escape }}</button>
+            <button class="btn light" type="button" data-pumply-scroll>{{ section.settings.hero_cta_label | escape }}</button>
           {%- endif -%}
           {%- if section.settings.hero_secondary_label != blank -%}
-            <button class="btn ghost" type="button" data-plumpy-scroll>{{ section.settings.hero_secondary_label | escape }}</button>
+            <button class="btn ghost" type="button" data-pumply-scroll>{{ section.settings.hero_secondary_label | escape }}</button>
           {%- endif -%}
         </div>
         {%- if section.settings.hero_micro != blank -%}<p class="pl-hero__micro">{{ section.settings.hero_micro | escape }}</p>{%- endif -%}
       </div>
       <div class="pl-hero__media reveal">
         {%- if section.settings.hero_image != blank -%}
-          {{ section.settings.hero_image | image_url: width: 1120 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'plumpy__hero-img', alt: section.settings.hero_image_alt, widths: '360,440,620,880,1120' }}
+          {{ section.settings.hero_image | image_url: width: 1120 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'pumply__hero-img', alt: section.settings.hero_image_alt, widths: '360,440,620,880,1120' }}
         {%- elsif section.settings.hero_image_asset != blank -%}
-          <img class="plumpy__hero-img" src="{{ section.settings.hero_image_asset | asset_url }}" width="1120" height="1480" loading="eager" fetchpriority="high" alt="{{ section.settings.hero_image_alt | escape }}">
+          <img class="pumply__hero-img" src="{{ section.settings.hero_image_asset | asset_url }}" width="1120" height="1480" loading="eager" fetchpriority="high" alt="{{ section.settings.hero_image_alt | escape }}">
         {%- else -%}
-          <div class="plumpy__hero-img" style="aspect-ratio:1120/1480;background:radial-gradient(circle at 50% 30%,#2a2320,#0E0B0D);" role="img" aria-label="{{ section.settings.hero_image_alt | escape }}"></div>
+          <div class="pumply__hero-img" style="aspect-ratio:1120/1480;background:radial-gradient(circle at 50% 30%,#2a2320,#0E0B0D);" role="img" aria-label="{{ section.settings.hero_image_alt | escape }}"></div>
         {%- endif -%}
       </div>
     </div>
@@ -359,26 +359,26 @@
       {%- if section.settings.ba_lead != blank -%}<p class="lead reveal">{{ section.settings.ba_lead | escape }}</p>{%- endif -%}
     </div>
     <div class="pl-wrap narrow">
-      <div class="pl-ba reveal" style="--pos:50" data-plumpy-ba aria-label="Confronto prima e dopo l'uso del siero">
+      <div class="pl-ba reveal" style="--pos:50" data-pumply-ba aria-label="Confronto prima e dopo l'uso del siero">
         {%- if section.settings.ba_after_image != blank -%}
           {{ section.settings.ba_after_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'pl-ba__img', alt: section.settings.ba_after_label, widths: '500,760,1000' }}
         {%- elsif section.settings.ba_after_asset != blank -%}
-          <img class="pl-ba__img" src="{{ section.settings.ba_after_asset | asset_url }}" width="1000" height="1250" loading="lazy" alt="Dopo l'uso del siero PLUMPY">
+          <img class="pl-ba__img" src="{{ section.settings.ba_after_asset | asset_url }}" width="1000" height="1250" loading="lazy" alt="Dopo l'uso del siero PUMPLY">
         {%- else -%}
           <div class="pl-ba__img" style="background:linear-gradient(#e79ec0,#d67ea4);" aria-hidden="true"></div>
         {%- endif -%}
-        <div class="pl-ba__before" data-plumpy-ba-before>
+        <div class="pl-ba__before" data-pumply-ba-before>
           {%- if section.settings.ba_before_image != blank -%}
             {{ section.settings.ba_before_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'pl-ba__img', alt: section.settings.ba_before_label, widths: '500,760,1000' }}
           {%- elsif section.settings.ba_before_asset != blank -%}
-            <img class="pl-ba__img" src="{{ section.settings.ba_before_asset | asset_url }}" width="1000" height="1250" loading="lazy" alt="Prima dell'uso del siero PLUMPY">
+            <img class="pl-ba__img" src="{{ section.settings.ba_before_asset | asset_url }}" width="1000" height="1250" loading="lazy" alt="Prima dell'uso del siero PUMPLY">
           {%- else -%}
             <div class="pl-ba__img" style="background:linear-gradient(#e8cdbc,#d9b19c);" aria-hidden="true"></div>
           {%- endif -%}
         </div>
         <span class="pl-ba__tag before" aria-hidden="true">{{ section.settings.ba_before_label | escape }}</span>
         <span class="pl-ba__tag after" aria-hidden="true">{{ section.settings.ba_after_label | escape }}</span>
-        <button class="pl-ba__handle" type="button" data-plumpy-ba-handle role="slider"
+        <button class="pl-ba__handle" type="button" data-pumply-ba-handle role="slider"
                 aria-label="Trascina per confrontare prima e dopo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6M15 6l5 6-5 6"/></svg>
         </button>
@@ -389,7 +389,7 @@
 
   {%- comment -%} ---------- LA SCIENZA (blocchi) ---------- {%- endcomment -%}
   {%- assign sci_blocks = section.blocks | where: 'type', 'science' -%}
-  <section class="pl-sec pl-science" id="plumpy-scienza-{{ uid }}">
+  <section class="pl-sec pl-science" id="pumply-scienza-{{ uid }}">
     <div class="pl-wrap center">
       {%- if section.settings.science_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.science_eyebrow | escape }}</p>{%- endif -%}
       <h2 class="reveal">{{ section.settings.science_title | escape }}</h2>
@@ -427,7 +427,7 @@
   {%- endif -%}
 
   {%- comment -%} ---------- PRODOTTO ---------- {%- endcomment -%}
-  <section class="pl-sec pl-product" id="plumpy-prodotto-{{ uid }}">
+  <section class="pl-sec pl-product" id="pumply-prodotto-{{ uid }}">
     <div class="pl-wrap pl-product__grid">
       <div class="pl-product__media reveal">
         {%- if section.settings.product_image != blank -%}
@@ -435,7 +435,7 @@
         {%- elsif section.settings.product_asset != blank -%}
           <img src="{{ section.settings.product_asset | asset_url }}" width="1200" height="1200" loading="lazy" alt="{{ section.settings.product_image_alt | escape }}">
         {%- else -%}
-          <div class="plumpy__img-ph" style="aspect-ratio:1/1;background:linear-gradient(135deg,#efdccf,#e3c4b2);" role="img" aria-label="{{ section.settings.product_image_alt | escape }}"></div>
+          <div class="pumply__img-ph" style="aspect-ratio:1/1;background:linear-gradient(135deg,#efdccf,#e3c4b2);" role="img" aria-label="{{ section.settings.product_image_alt | escape }}"></div>
         {%- endif -%}
       </div>
       <div class="pl-product__copy reveal">
@@ -450,14 +450,14 @@
         {%- if prod != blank -%}
           <a class="btn dark" href="{{ cart_single }}">{{ section.settings.product_cta_label | escape }}</a>
         {%- else -%}
-          <button class="btn dark" type="button" data-plumpy-scroll>{{ section.settings.product_cta_label | escape }}</button>
+          <button class="btn dark" type="button" data-pumply-scroll>{{ section.settings.product_cta_label | escape }}</button>
         {%- endif -%}
       </div>
     </div>
   </section>
 
   {%- comment -%} ---------- ACQUISTO ---------- {%- endcomment -%}
-  <section class="pl-sec pl-buy" data-plumpy-buy id="plumpy-offerta-{{ uid }}">
+  <section class="pl-sec pl-buy" data-pumply-buy id="pumply-offerta-{{ uid }}">
     <div class="pl-wrap center">
       {%- if section.settings.buy_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.buy_eyebrow | escape }}</p>{%- endif -%}
       <h2 class="reveal">{{ section.settings.buy_title | escape }}</h2>
@@ -480,7 +480,7 @@
         {%- if prod != blank -%}
           <a class="btn dark block" href="{{ cart_single }}">{{ section.settings.card1_cta | escape }}</a>
         {%- else -%}
-          <button class="btn dark block" type="button" data-plumpy-scroll>{{ section.settings.card1_cta | escape }}</button>
+          <button class="btn dark block" type="button" data-pumply-scroll>{{ section.settings.card1_cta | escape }}</button>
         {%- endif -%}
       </article>
       <article class="pl-buy-card featured reveal">
@@ -502,7 +502,7 @@
         {%- if prod != blank -%}
           <a class="btn gold block" href="{{ cart_duo }}">{{ section.settings.card2_cta | escape }}</a>
         {%- else -%}
-          <button class="btn gold block" type="button" data-plumpy-scroll>{{ section.settings.card2_cta | escape }}</button>
+          <button class="btn gold block" type="button" data-pumply-scroll>{{ section.settings.card2_cta | escape }}</button>
         {%- endif -%}
       </article>
     </div>
@@ -510,15 +510,15 @@
   </section>
 
   {%- comment -%} ---------- LISTA D'ATTESA (Klaviyo) ---------- {%- endcomment -%}
-  <section class="pl-sec pl-waitlist" id="plumpy-lista-{{ uid }}">
+  <section class="pl-sec pl-waitlist" id="pumply-lista-{{ uid }}">
     <div class="pl-wrap narrow center">
       {%- if section.settings.wl_eyebrow != blank -%}<p class="eyebrow gold">{{ section.settings.wl_eyebrow | escape }}</p>{%- endif -%}
       <h2 class="reveal">{{ section.settings.wl_title | escape }}</h2>
       {%- if section.settings.wl_text != blank -%}<p class="lead reveal">{{ section.settings.wl_text | escape }}</p>{%- endif -%}
-      <form class="reveal" data-plumpy-waitlist novalidate>
+      <form class="reveal" data-pumply-waitlist novalidate>
         <div class="pl-field">
-          <label class="pl-sr-only" for="plumpy-wl-{{ uid }}" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Indirizzo email</label>
-          <input id="plumpy-wl-{{ uid }}" name="email" type="email" inputmode="email" autocomplete="email" placeholder="La tua email" required>
+          <label class="pl-sr-only" for="pumply-wl-{{ uid }}" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Indirizzo email</label>
+          <input id="pumply-wl-{{ uid }}" name="email" type="email" inputmode="email" autocomplete="email" placeholder="La tua email" required>
           <button class="btn light" type="submit">{{ section.settings.wl_button | escape }}</button>
         </div>
         <p class="pl-wl-msg" role="status" aria-live="polite"></p>
@@ -571,7 +571,7 @@
   {%- comment -%} ---------- FAQ (blocchi) ---------- {%- endcomment -%}
   {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
   {%- if faq_blocks.size > 0 -%}
-    <section class="pl-sec pl-faq" id="plumpy-faq-{{ uid }}">
+    <section class="pl-sec pl-faq" id="pumply-faq-{{ uid }}">
       <div class="pl-wrap narrow">
         {%- if section.settings.faq_eyebrow != blank -%}<p class="eyebrow center">{{ section.settings.faq_eyebrow | escape }}</p>{%- endif -%}
         <h2 class="center reveal">{{ section.settings.faq_title | escape }}</h2>
@@ -596,10 +596,10 @@
         {%- if prod != blank -%}
           <a class="btn light" href="{{ cart_single }}">{{ section.settings.final_cta_label | escape }}</a>
         {%- else -%}
-          <button class="btn light" type="button" data-plumpy-scroll>{{ section.settings.final_cta_label | escape }}</button>
+          <button class="btn light" type="button" data-pumply-scroll>{{ section.settings.final_cta_label | escape }}</button>
         {%- endif -%}
         {%- if section.settings.final_cta_secondary != blank -%}
-          <a class="btn ghost" href="#plumpy-lista-{{ uid }}">{{ section.settings.final_cta_secondary | escape }}</a>
+          <a class="btn ghost" href="#pumply-lista-{{ uid }}">{{ section.settings.final_cta_secondary | escape }}</a>
         {%- endif -%}
       </div>
     </div>
@@ -616,10 +616,10 @@
         <div class="pl-footer__col">
           <h4>{{ section.settings.footer_col1_title | escape }}</h4>
           <ul>
-            {%- if section.settings.footer_l1 != blank -%}<li><a href="#plumpy-prodotto-{{ uid }}">{{ section.settings.footer_l1 | escape }}</a></li>{%- endif -%}
-            {%- if section.settings.footer_l2 != blank -%}<li><a href="#plumpy-scienza-{{ uid }}">{{ section.settings.footer_l2 | escape }}</a></li>{%- endif -%}
-            {%- if section.settings.footer_l3 != blank -%}<li><a href="#plumpy-faq-{{ uid }}">{{ section.settings.footer_l3 | escape }}</a></li>{%- endif -%}
-            {%- if section.settings.footer_l4 != blank -%}<li><a href="#plumpy-lista-{{ uid }}">{{ section.settings.footer_l4 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l1 != blank -%}<li><a href="#pumply-prodotto-{{ uid }}">{{ section.settings.footer_l1 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l2 != blank -%}<li><a href="#pumply-scienza-{{ uid }}">{{ section.settings.footer_l2 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l3 != blank -%}<li><a href="#pumply-faq-{{ uid }}">{{ section.settings.footer_l3 | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.footer_l4 != blank -%}<li><a href="#pumply-lista-{{ uid }}">{{ section.settings.footer_l4 | escape }}</a></li>{%- endif -%}
           </ul>
         </div>
         <div class="pl-footer__col">
@@ -647,23 +647,23 @@
     {%- if prod != blank -%}
       <a class="btn gold sm" href="{{ cart_single }}">{{ section.settings.sticky_cta | escape }}</a>
     {%- else -%}
-      <button class="btn gold sm" type="button" data-plumpy-scroll>{{ section.settings.sticky_cta | escape }}</button>
+      <button class="btn gold sm" type="button" data-pumply-scroll>{{ section.settings.sticky_cta | escape }}</button>
     {%- endif -%}
   </div>
 
-  <div class="pl-toast" role="status" aria-live="polite" data-plumpy-toast></div>
+  <div class="pl-toast" role="status" aria-live="polite" data-pumply-toast></div>
 </div>
 
 {%- comment -%} ---------- JS (vanilla, scoped per istanza) ---------- {%- endcomment -%}
 <script>
   (function () {
-    var roots = document.querySelectorAll('[data-plumpy-root]');
+    var roots = document.querySelectorAll('[data-pumply-root]');
     roots.forEach(function (root) {
-      if (root.dataset.plumpyReady) return;
-      root.dataset.plumpyReady = '1';
+      if (root.dataset.pumplyReady) return;
+      root.dataset.pumplyReady = '1';
 
       var cfg = {};
-      try { cfg = JSON.parse(root.querySelector('[data-plumpy-config]').textContent); } catch (e) {}
+      try { cfg = JSON.parse(root.querySelector('[data-pumply-config]').textContent); } catch (e) {}
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var q = function (s) { return root.querySelector(s); };
       var qa = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
@@ -672,7 +672,7 @@
          solo qui, e un failsafe mostra comunque tutto dopo 1,5s. */
       var reveals = qa('.reveal');
       if (!reduce && 'IntersectionObserver' in window) {
-        root.classList.add('plumpy-anim');
+        root.classList.add('pumply-anim');
         var seen = new Map();
         reveals.forEach(function (el) {
           var p = el.parentElement, i = seen.get(p) || 0;
@@ -687,9 +687,9 @@
       }
 
       /* Slider prima/dopo */
-      var ba = q('[data-plumpy-ba]');
+      var ba = q('[data-pumply-ba]');
       if (ba) {
-        var handle = q('[data-plumpy-ba-handle]');
+        var handle = q('[data-pumply-ba-handle]');
         var dragging = false;
         var setPos = function (pct) {
           var p = Math.max(0, Math.min(100, pct));
@@ -714,7 +714,7 @@
       }
 
       /* Toast */
-      var toastEl = q('[data-plumpy-toast]'), toastT;
+      var toastEl = q('[data-pumply-toast]'), toastT;
       var toast = function (msg) {
         if (!toastEl) return;
         toastEl.textContent = msg;
@@ -724,16 +724,16 @@
       };
 
       /* Scroll fallback (senza prodotto collegato) */
-      qa('[data-plumpy-scroll]').forEach(function (btn) {
+      qa('[data-pumply-scroll]').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          var target = q('[data-plumpy-buy]');
+          var target = q('[data-pumply-buy]');
           if (target) target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
           if (!cfg.hasProduct) toast('Collega un prodotto nel Theme Editor per attivare il carrello.');
         });
       });
 
       /* Form Klaviyo */
-      var form = q('[data-plumpy-waitlist]');
+      var form = q('[data-pumply-waitlist]');
       if (form) {
         var input = form.querySelector('input[type="email"]');
         var msg = form.querySelector('.pl-wl-msg');
@@ -780,9 +780,9 @@
 
 {% schema %}
 {
-  "name": "PLUMPY — Landing",
+  "name": "PUMPLY — Landing",
   "tag": "section",
-  "class": "plumpy-landing-section",
+  "class": "pumply-landing-section",
   "max_blocks": 50,
   "settings": [
     { "type": "header", "content": "Aspetto" },
@@ -806,7 +806,7 @@
     { "type": "text", "id": "hero_micro", "label": "Microcopy", "default": "Vegan · Cruelty-free · Con peptidi GHK-Cu" },
     { "type": "image_picker", "id": "hero_image", "label": "Foto flacone (hero)" },
     { "type": "text", "id": "hero_image_asset", "label": "…oppure nome file in Assets", "info": "Es. hero.jpg — usato se non selezioni un'immagine sopra.", "default": "hero.jpg" },
-    { "type": "text", "id": "hero_image_alt", "label": "Alt hero", "default": "Flacone PLUMPY, siero rimpolpante labbra, su fondo nero" },
+    { "type": "text", "id": "hero_image_alt", "label": "Alt hero", "default": "Flacone PUMPLY, siero rimpolpante labbra, su fondo nero" },
 
     { "type": "header", "content": "Prima / Dopo" },
     { "type": "text", "id": "ba_eyebrow", "label": "Occhiello", "default": "Il risultato" },
@@ -835,7 +835,7 @@
     { "type": "richtext", "id": "product_lead", "label": "Testo", "default": "<p>Una texture setosa che avvolge le labbra e si assorbe in fretta, per un finish naturale e luminoso. Nessun eccesso, solo l'essenziale che serve.</p>" },
     { "type": "image_picker", "id": "product_image", "label": "Foto texture" },
     { "type": "text", "id": "product_asset", "label": "…oppure nome file in Assets", "default": "texture.jpg" },
-    { "type": "text", "id": "product_image_alt", "label": "Alt texture", "default": "Texture del siero PLUMPY: gel rosato e luminoso sulla pelle" },
+    { "type": "text", "id": "product_image_alt", "label": "Alt texture", "default": "Texture del siero PUMPLY: gel rosato e luminoso sulla pelle" },
     { "type": "text", "id": "product_b1", "label": "Bullet 1", "default": "Peptidi GHK-Cu (Copper Tripeptide-1)" },
     { "type": "text", "id": "product_b2", "label": "Bullet 2", "default": "Acido Ialuronico idratante" },
     { "type": "text", "id": "product_b3", "label": "Bullet 3", "default": "Formula vegana e cruelty-free" },
@@ -843,7 +843,7 @@
 
     { "type": "header", "content": "Acquisto" },
     { "type": "text", "id": "buy_eyebrow", "label": "Occhiello", "default": "Scegli il tuo formato" },
-    { "type": "text", "id": "buy_title", "label": "Titolo", "default": "Porta a casa PLUMPY" },
+    { "type": "text", "id": "buy_title", "label": "Titolo", "default": "Porta a casa PUMPLY" },
     { "type": "text", "id": "card1_title", "label": "Card 1 · titolo", "default": "Il Siero" },
     { "type": "textarea", "id": "card1_desc", "label": "Card 1 · descrizione", "default": "Un flacone. Il gesto quotidiano per labbra piene, morbide e idratate." },
     { "type": "text", "id": "card1_f1", "label": "Card 1 · voce 1", "default": "1× siero rimpolpante" },
@@ -889,8 +889,8 @@
     { "type": "text", "id": "final_cta_secondary", "label": "Etichetta CTA secondaria", "default": "Entra nella lista d'attesa" },
 
     { "type": "header", "content": "Footer" },
-    { "type": "checkbox", "id": "show_footer", "label": "Mostra il footer PLUMPY", "info": "Disattivalo se preferisci usare solo il footer del tuo tema.", "default": true },
-    { "type": "text", "id": "footer_brand", "label": "Wordmark", "default": "PLUMPY" },
+    { "type": "checkbox", "id": "show_footer", "label": "Mostra il footer PUMPLY", "info": "Disattivalo se preferisci usare solo il footer del tuo tema.", "default": true },
+    { "type": "text", "id": "footer_brand", "label": "Wordmark", "default": "PUMPLY" },
     { "type": "text", "id": "footer_tagline", "label": "Tagline", "default": "Lip Plumping Peptide Serum" },
     { "type": "text", "id": "footer_col1_title", "label": "Colonna 1 · titolo", "default": "Prodotto" },
     { "type": "text", "id": "footer_l1", "label": "Colonna 1 · link 1 (va al Prodotto)", "default": "Il siero" },
@@ -904,12 +904,12 @@
     { "type": "url", "id": "footer_s2_url", "label": "Colonna 2 · link 2 · destinazione" },
     { "type": "text", "id": "footer_s3", "label": "Colonna 2 · link 3", "default": "Contatti" },
     { "type": "url", "id": "footer_s3_url", "label": "Colonna 2 · link 3 · destinazione" },
-    { "type": "text", "id": "footer_copyright", "label": "Copyright", "default": "© 2026 PLUMPY. Tutti i diritti riservati." },
+    { "type": "text", "id": "footer_copyright", "label": "Copyright", "default": "© 2026 PUMPLY. Tutti i diritti riservati." },
     { "type": "text", "id": "footer_note", "label": "Nota a destra", "default": "Vegan · Cruelty-free" },
 
 
     { "type": "header", "content": "Sticky mobile" },
-    { "type": "text", "id": "sticky_title", "label": "Titolo", "default": "PLUMPY" },
+    { "type": "text", "id": "sticky_title", "label": "Titolo", "default": "PUMPLY" },
     { "type": "text", "id": "sticky_sub", "label": "Sottotitolo", "default": "Siero rimpolpante labbra" },
     { "type": "text", "id": "sticky_cta", "label": "Etichetta CTA", "default": "Aggiungi al carrello" }
   ],
@@ -971,7 +971,7 @@
   ],
   "presets": [
     {
-      "name": "PLUMPY — Landing",
+      "name": "PUMPLY — Landing",
       "blocks": [
         { "type": "usp", "settings": { "icon": "volume", "title": "Volume visibile", "text": "Labbra otticamente più piene e definite." } },
         { "type": "usp", "settings": { "icon": "hydra", "title": "Idrata a fondo", "text": "Comfort e morbidezza con Acido Ialuronico." } },
@@ -985,10 +985,10 @@
         { "type": "guarantee", "settings": { "icon": "peptide", "title": "Peptidi GHK-Cu", "text": "Copper Tripeptide-1 e Acido Ialuronico." } },
         { "type": "guarantee", "settings": { "icon": "pay", "title": "Pagamenti sicuri", "text": "Transazioni crittografate." } },
         { "type": "guarantee", "settings": { "icon": "formula", "title": "Vegan & cruelty-free", "text": "Senza test sugli animali." } },
-        { "type": "faq", "settings": { "question": "Cosa sono i peptidi GHK-Cu?", "answer": "GHK-Cu (Copper Tripeptide-1) è un peptide di rame molto usato in cosmetica per l'affinità con la pelle. In PLUMPY accompagna un gesto di cura mirato per le labbra." } },
+        { "type": "faq", "settings": { "question": "Cosa sono i peptidi GHK-Cu?", "answer": "GHK-Cu (Copper Tripeptide-1) è un peptide di rame molto usato in cosmetica per l'affinità con la pelle. In PUMPLY accompagna un gesto di cura mirato per le labbra." } },
         { "type": "faq", "settings": { "question": "L'effetto è immediato?", "answer": "Comfort e idratazione si percepiscono fin da subito. L'effetto volume, otticamente più pieno, si apprezza al meglio con l'uso costante nel tempo: è un risultato progressivo." } },
         { "type": "faq", "settings": { "question": "È appiccicoso?", "answer": "No. La texture è setosa e a rapido assorbimento, per un finish naturale e piacevole sulle labbra." } },
-        { "type": "faq", "settings": { "question": "La formula è vegana?", "answer": "Sì: PLUMPY è vegano e cruelty-free, formulato con peptidi GHK-Cu (Copper Tripeptide-1) e Acido Ialuronico." } }
+        { "type": "faq", "settings": { "question": "La formula è vegana?", "answer": "Sì: PUMPLY è vegano e cruelty-free, formulato con peptidi GHK-Cu (Copper Tripeptide-1) e Acido Ialuronico." } }
       ]
     }
   ]

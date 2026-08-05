@@ -1,11 +1,11 @@
-# PLUMPY su Shopify — guida passo-passo
+# PUMPLY su Shopify — guida passo-passo
 
-Questa guida ti porta dalla sezione `sections/plumpy-landing.liquid` a una
+Questa guida ti porta dalla sezione `sections/pumply-landing.liquid` a una
 pagina prodotto **pubblicata**, con carrello e lista d'attesa Klaviyo
 funzionanti. Tempo stimato: ~20 minuti.
 
 > La sezione è **Online Store 2.0**, solo HTML/CSS/JS vanilla, con CSS e JS
-> già "scoped" su `#plumpy-<id>` per non collidere col tema. Validata con
+> già "scoped" su `#pumply-<id>` per non collidere col tema. Validata con
 > **Shopify Theme Check: 0 errori**.
 
 ---
@@ -38,19 +38,19 @@ Carica: `hero.webp`, `before.webp`, `after.webp`, `texture.webp`.
 ## 2) Incolla la sezione nel tema
 
 1. **Temi → ⋯ → Modifica codice**.
-2. Cartella **Sections → Aggiungi una nuova sezione** → nome `plumpy-landing`.
+2. Cartella **Sections → Aggiungi una nuova sezione** → nome `pumply-landing`.
 3. Cancella il contenuto generato e **incolla tutto** il contenuto di
-   `sections/plumpy-landing.liquid`. Salva.
+   `sections/pumply-landing.liquid`. Salva.
 
 ---
 
 ## 3) Crea la pagina e aggiungi la sezione
 
-1. **Contenuti → Pagine → Aggiungi pagina**. Titolo es. "PLUMPY". Salva.
+1. **Contenuti → Pagine → Aggiungi pagina**. Titolo es. "PUMPLY". Salva.
 2. A destra, in **Tema modello**, crea un nuovo modello: **Crea modello** →
-   nome `plumpy` (basato su "page"). Salva.
+   nome `pumply` (basato su "page"). Salva.
 3. **Personalizza** (apre il Theme Editor sulla pagina).
-4. Nella colonna sinistra: **Aggiungi sezione → PLUMPY — Landing**.
+4. Nella colonna sinistra: **Aggiungi sezione → PUMPLY — Landing**.
    La sezione arriva **già popolata** con tutti i testi e i 16 blocchi
    (4 USP, 2 scienza, 3 step, 3 garanzie, 4 FAQ).
 5. (Opzionale) Rimuovi le sezioni di default del template "page" se non le vuoi.
@@ -62,7 +62,7 @@ Carica: `hero.webp`, `before.webp`, `after.webp`, `texture.webp`.
 
 ## 4) Collega il prodotto (carrello)
 
-Nel Theme Editor, seleziona la sezione **PLUMPY — Landing** → gruppo
+Nel Theme Editor, seleziona la sezione **PUMPLY — Landing** → gruppo
 **"Prodotto & carrello"** → **Prodotto da collegare** → scegli il tuo prodotto.
 
 - Con un prodotto selezionato, **tutti i pulsanti** "Aggiungi al carrello"
@@ -78,7 +78,7 @@ Nel Theme Editor, seleziona la sezione **PLUMPY — Landing** → gruppo
 
 ## 5) Collega Klaviyo (lista d'attesa)
 
-Nel Theme Editor, sezione **PLUMPY — Landing** → gruppo **"Lista d'attesa
+Nel Theme Editor, sezione **PUMPLY — Landing** → gruppo **"Lista d'attesa
 (Klaviyo)"**:
 
 - **Public API Key (Site ID)** → in Klaviyo: **Settings → API keys →

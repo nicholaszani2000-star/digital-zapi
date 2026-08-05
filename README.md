@@ -1,4 +1,4 @@
-# PLUMPY — Siero Rimpolpante Labbra
+# PUMPLY — Siero Rimpolpante Labbra
 
 Landing page di prodotto ultra-premium (bianco, minimal, luxury; hero e CTA su
 fondo nero cinematografico) + sezione **Shopify Online Store 2.0**, in italiano,
@@ -14,11 +14,11 @@ index.html                      Landing (apri in un browser o pubblica)
 styles.css                      Design system + tutte le sezioni
 script.js                       Interazioni (slider, form -15%, sticky, reveal)
 assets/                         Immagini finali del prodotto
-  hero.webp                     Flacone PLUMPY (hero, si sfuma nel fondo scuro)
+  hero.webp                     Flacone PUMPLY (hero, si sfuma nel fondo scuro)
   before.webp · after.webp      Prima / Dopo (slider comparativo)
   texture.webp                  Swatch del siero
   og.jpg · favicon.*            Social + favicon
-sections/plumpy-landing.liquid  Sezione Shopify OS 2.0 (Theme Check VALID)
+sections/pumply-landing.liquid  Sezione Shopify OS 2.0 (Theme Check VALID)
 SHOPIFY.md                      Guida passo-passo per pubblicare su Shopify
 ```
 
@@ -41,7 +41,7 @@ La sezione "Offerta di lancio" raccoglie l'email e sblocca uno sconto del 15%.
 ## Pubblicare su Shopify
 
 Segui **`SHOPIFY.md`**: carichi le immagini negli Assets del tema, incolli
-`sections/plumpy-landing.liquid`, crei la pagina e la sezione (già popolata),
+`sections/pumply-landing.liquid`, crei la pagina e la sezione (già popolata),
 colleghi il prodotto e Klaviyo.
 
 ## Qualità
