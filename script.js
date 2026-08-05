@@ -42,6 +42,7 @@
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
       menu.hidden = !open;
+      header?.classList.toggle('is-open', open);
     };
     toggle.addEventListener('click', () => setMenu(menu.hidden));
     $$('a,button', menu).forEach((el) => el.addEventListener('click', () => setMenu(false)));

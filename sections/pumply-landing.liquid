@@ -79,8 +79,40 @@
   /* Announcement */
   #pumply-{{ uid }} .pl-announce{background:var(--ink);color:#efe7dd;text-align:center;font-size:.8rem;letter-spacing:.03em;padding:9px 16px;}
 
+  /* Header */
+  #pumply-{{ uid }} .pl-header{position:relative;z-index:50;transition:background var(--dur),box-shadow var(--dur);}
+  {%- if section.settings.header_sticky -%}
+  #pumply-{{ uid }} .pl-header{position:sticky;top:0;}
+  {%- endif -%}
+  #pumply-{{ uid }} .pl-header__inner{max-width:1180px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  #pumply-{{ uid }} .pl-wordmark{font-family:var(--font-serif);font-weight:700;font-size:1.35rem;letter-spacing:.32em;color:#fff;padding-left:.32em;text-decoration:none;white-space:nowrap;}
+  #pumply-{{ uid }} .pl-nav{display:none;gap:30px;}
+  #pumply-{{ uid }} .pl-nav a{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.88);text-decoration:none;position:relative;padding:6px 0;white-space:nowrap;}
+  #pumply-{{ uid }} .pl-nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:currentColor;transition:right .25s var(--ease);}
+  #pumply-{{ uid }} .pl-nav a:hover::after,#pumply-{{ uid }} .pl-nav a:focus-visible::after{right:0;}
+  #pumply-{{ uid }} .pl-header__actions{display:flex;align-items:center;gap:12px;}
+  #pumply-{{ uid }} .pl-header.is-scrolled{background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);}
+  {%- comment -%} col menu aperto il fondo è bianco: testo e hamburger devono diventare scuri {%- endcomment -%}
+  #pumply-{{ uid }} .pl-header.is-open{background:#fff;}
+  #pumply-{{ uid }} .pl-header.is-scrolled .pl-wordmark,#pumply-{{ uid }} .pl-header.is-scrolled .pl-nav a,
+  #pumply-{{ uid }} .pl-header.is-open .pl-wordmark,#pumply-{{ uid }} .pl-header.is-open .pl-nav a{color:var(--ink);}
+  #pumply-{{ uid }} .pl-header.is-scrolled .pl-navtoggle span,#pumply-{{ uid }} .pl-header.is-open .pl-navtoggle span{background:var(--ink);}
+  #pumply-{{ uid }} .pl-navtoggle{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0 9px;background:none;border:0;cursor:pointer;}
+  #pumply-{{ uid }} .pl-navtoggle span{height:2px;width:100%;background:#fff;border-radius:2px;transition:transform .25s var(--ease),opacity .2s;}
+  #pumply-{{ uid }} .pl-navtoggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  #pumply-{{ uid }} .pl-navtoggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  #pumply-{{ uid }} .pl-navtoggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  #pumply-{{ uid }} .pl-mobilemenu{display:flex;flex-direction:column;padding:14px 24px 22px;background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:49;}
+  #pumply-{{ uid }} .pl-mobilemenu a{padding:13px 4px;font-weight:500;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;}
+  #pumply-{{ uid }} .pl-mobilemenu .btn{margin-top:14px;}
+  #pumply-{{ uid }} .pl-mobilemenu[hidden]{display:none;}
+
   /* Hero */
   #pumply-{{ uid }} .pl-hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;isolation:isolate;}
+  {%- if section.settings.show_header -%}
+  {%- comment -%} l'hero risale sotto l'header trasparente {%- endcomment -%}
+  #pumply-{{ uid }} .pl-hero{margin-top:-64px;padding-top:64px;}
+  {%- endif -%}
   #pumply-{{ uid }} .pl-hero__glow{position:absolute;inset:0;z-index:-1;pointer-events:none;
     background:radial-gradient(60% 50% at 72% 30%,rgba(199,154,106,.28),transparent 70%),radial-gradient(50% 40% at 50% 0%,rgba(231,169,194,.12),transparent 70%);}
   #pumply-{{ uid }} .pl-hero__inner{max-width:1180px;margin:0 auto;padding:52px 24px 60px;display:grid;gap:16px;align-items:center;}
@@ -260,9 +292,14 @@
   @media (min-width:768px){
     #pumply-{{ uid }} .pl-science__grid{grid-template-columns:1fr 1fr;}
     #pumply-{{ uid }} .pl-buy__grid{grid-template-columns:1fr 1fr;}
+    #pumply-{{ uid }} .pl-nav{display:flex;}
+    #pumply-{{ uid }} .pl-navtoggle{display:none;}
+    #pumply-{{ uid }} .pl-mobilemenu{display:none !important;}
   }
   @media (max-width:767.98px){
     #pumply-{{ uid }} .pl-mobilebar{display:flex;}
+    /* su mobile la CTA dell'header è ridondante: c'è la barra fissa in basso */
+    #pumply-{{ uid }} .pl-header__actions .btn{display:none;}
   }
   @media (min-width:920px){
     #pumply-{{ uid }} .pl-usp__list{grid-template-columns:repeat(4,1fr);}
@@ -293,6 +330,42 @@
 
   {%- if section.settings.show_announcement and section.settings.announcement_text != blank -%}
     <div class="pl-announce">{{ section.settings.announcement_text | escape }}</div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- HEADER ---------- {%- endcomment -%}
+  {%- if section.settings.show_header -%}
+    <header class="pl-header" data-pumply-header>
+      <div class="pl-header__inner">
+        <a class="pl-wordmark" href="#pumply-{{ uid }}">{{ section.settings.header_brand | escape }}</a>
+        <nav class="pl-nav" aria-label="Navigazione PUMPLY">
+          {%- if section.settings.nav1 != blank -%}<a href="#pumply-prodotto-{{ uid }}">{{ section.settings.nav1 | escape }}</a>{%- endif -%}
+          {%- if section.settings.nav2 != blank -%}<a href="#pumply-scienza-{{ uid }}">{{ section.settings.nav2 | escape }}</a>{%- endif -%}
+          {%- if section.settings.nav3 != blank -%}<a href="#pumply-lista-{{ uid }}">{{ section.settings.nav3 | escape }}</a>{%- endif -%}
+          {%- if section.settings.nav4 != blank -%}<a href="#pumply-faq-{{ uid }}">{{ section.settings.nav4 | escape }}</a>{%- endif -%}
+        </nav>
+        <div class="pl-header__actions">
+          {%- if prod != blank -%}
+            <a class="btn dark sm" href="{{ cart_single }}">{{ section.settings.header_cta | escape }}</a>
+          {%- else -%}
+            <button class="btn dark sm" type="button" data-pumply-scroll>{{ section.settings.header_cta | escape }}</button>
+          {%- endif -%}
+          <button class="pl-navtoggle" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="pumply-menu-{{ uid }}" data-pumply-navtoggle>
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div class="pl-mobilemenu" id="pumply-menu-{{ uid }}" data-pumply-menu hidden>
+        {%- if section.settings.nav1 != blank -%}<a href="#pumply-prodotto-{{ uid }}">{{ section.settings.nav1 | escape }}</a>{%- endif -%}
+        {%- if section.settings.nav2 != blank -%}<a href="#pumply-scienza-{{ uid }}">{{ section.settings.nav2 | escape }}</a>{%- endif -%}
+        {%- if section.settings.nav3 != blank -%}<a href="#pumply-lista-{{ uid }}">{{ section.settings.nav3 | escape }}</a>{%- endif -%}
+        {%- if section.settings.nav4 != blank -%}<a href="#pumply-faq-{{ uid }}">{{ section.settings.nav4 | escape }}</a>{%- endif -%}
+        {%- if prod != blank -%}
+          <a class="btn dark" href="{{ cart_single }}">{{ section.settings.header_cta | escape }}</a>
+        {%- else -%}
+          <button class="btn dark" type="button" data-pumply-scroll>{{ section.settings.header_cta | escape }}</button>
+        {%- endif -%}
+      </div>
+    </header>
   {%- endif -%}
 
   {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
@@ -686,6 +759,34 @@
         setTimeout(function () { reveals.forEach(function (el) { el.classList.add('is-visible'); }); }, 1500);
       }
 
+      /* Header: sfondo bianco + blur quando si scrolla */
+      var hdr = q('[data-pumply-header]');
+      if (hdr) {
+        var onScroll = function () {
+          var top = root.getBoundingClientRect().top;
+          hdr.classList.toggle('is-scrolled', top < -30);
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      /* Menu mobile a tendina */
+      var navToggle = q('[data-pumply-navtoggle]');
+      var navMenu = q('[data-pumply-menu]');
+      if (navToggle && navMenu) {
+        var setMenu = function (open) {
+          navToggle.setAttribute('aria-expanded', String(open));
+          navToggle.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+          navMenu.hidden = !open;
+          if (hdr) hdr.classList.toggle('is-open', open);
+        };
+        navToggle.addEventListener('click', function () { setMenu(navMenu.hidden); });
+        qa('[data-pumply-menu] a,[data-pumply-menu] button').forEach(function (el) {
+          el.addEventListener('click', function () { setMenu(false); });
+        });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+      }
+
       /* Slider prima/dopo */
       var ba = q('[data-pumply-ba]');
       if (ba) {
@@ -791,6 +892,16 @@
 
     { "type": "header", "content": "Prodotto & carrello" },
     { "type": "product", "id": "product", "label": "Prodotto da collegare", "info": "I pulsanti aggiungono al carrello la prima variante di questo prodotto. Senza prodotto fanno scroll alla sezione acquisto." },
+
+    { "type": "header", "content": "Header (nome brand + menu)" },
+    { "type": "checkbox", "id": "show_header", "label": "Mostra l'header PUMPLY", "info": "Disattivalo se preferisci usare solo l'header del tuo tema.", "default": true },
+    { "type": "checkbox", "id": "header_sticky", "label": "Header fisso allo scroll", "info": "Disattivalo se il tuo tema ha già un header fisso, per evitare due barre sovrapposte.", "default": true },
+    { "type": "text", "id": "header_brand", "label": "Nome del brand", "default": "PUMPLY" },
+    { "type": "text", "id": "nav1", "label": "Menu · voce 1 (va al Prodotto)", "default": "Prodotto" },
+    { "type": "text", "id": "nav2", "label": "Menu · voce 2 (va alla Scienza)", "default": "La scienza" },
+    { "type": "text", "id": "nav3", "label": "Menu · voce 3 (va all'offerta)", "default": "Lista d'attesa" },
+    { "type": "text", "id": "nav4", "label": "Menu · voce 4 (va alle FAQ)", "default": "FAQ" },
+    { "type": "text", "id": "header_cta", "label": "Pulsante header", "default": "Aggiungi al carrello" },
 
     { "type": "header", "content": "Barra annuncio" },
     { "type": "checkbox", "id": "show_announcement", "label": "Mostra barra annuncio", "default": true },

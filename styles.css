@@ -130,6 +130,10 @@ h3{font-size:1.22rem;}
 .header.is-scrolled .wordmark{color:var(--ink);}
 .header.is-scrolled .nav a{color:var(--ink);}
 .header.is-scrolled .nav-toggle span{background:var(--ink);}
+/* col menu aperto il fondo è bianco: testo e hamburger devono restare leggibili */
+.header.is-open{background:#fff;}
+.header.is-open .wordmark,.header.is-open .nav a{color:var(--ink);}
+.header.is-open .nav-toggle span{background:var(--ink);}
 
 /* Hamburger */
 .nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0 9px;background:none;border:0;cursor:pointer;}
